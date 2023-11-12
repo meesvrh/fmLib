@@ -8,24 +8,47 @@
 --]]
 
 local callbacks = {}
+local requests = {}
 
 local function getRandomReqId(e)
     local reqId
     repeat
-        reqId = ('reqId_%s_%f'):format(e, math.random(0, 100000))
-    until not callbacks[reqId]
+        reqId = ('reqId_%s_%s'):format(e, math.random(0, 100000))
+    until not requests[reqId]
     return reqId
 end
 
 FM.callback = {
-    sync = function(e, cbF, ...)
+    register = function(e, cbF)
+        callbacks[e] = cbF
+    end,
+
+    async = function(e, f, ...)
         local reqId = getRandomReqId(e)
-        callbacks[reqId] = cbF
-        TriggerServerEvent('fmLib:server:callback', e, reqId, ...)
-    end
+        requests[reqId] = f
+        TriggerServerEvent('fmLib:server:callback:request', e, reqId, ...)
+    end,
+
+    sync = function(e, ...)
+        local reqId = getRandomReqId(e)
+        local cb = promise.new()
+        
+        requests[reqId] = function(...)
+            cb:resolve({...})
+        end
+
+        TriggerServerEvent('fmLib:server:callback:request', e, reqId, ...)
+
+        return table.unpack(Citizen.Await(cb))
+    end,
 }
 
-RegisterNetEvent('fmLib:client:callback', function(reqId, ...)
-    callbacks[reqId](...)
-    callbacks[reqId] = nil
+RegisterNetEvent('fmLib:client:callback:listener', function(reqId, ...)
+    requests[reqId](...)
+    requests[reqId] = nil
+end)
+
+RegisterNetEvent('fmLib:client:callback:request', function(e, reqId, ...)
+    if not callbacks[e] then return Err("No callback found for %s", e) end
+    TriggerServerEvent('fmLib:server:callback:listener', reqId, callbacks[e](...))
 end)
