@@ -12,6 +12,7 @@
 --]]
     Settings = {
         ignoreResourceNotFoundErrors = false,
+        debug = true,
     }
 
 --[[
