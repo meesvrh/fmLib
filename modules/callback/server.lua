@@ -19,16 +19,26 @@ local function getRandomReqId(e)
 end
 
 FM.callback = {
+    ---@param e string -- event name
+    ---@param cbF function -- callback function
     register = function(e, cbF)
         callbacks[e] = cbF
     end,
 
+    ---@param e string -- event name
+    ---@param src number -- source
+    ---@param f function -- response function
+    ---@param ... any -- arguments
     async = function(e, src, f, ...)
         local reqId = getRandomReqId(e)
         requests[reqId] = f
         TriggerClientEvent('fmLib:client:callback:request', src, e, reqId, ...)
     end,
 
+    ---@param e string -- event name
+    ---@param src number -- source
+    ---@param ... any -- arguments
+    ---@return ... any -- response arguments
     sync = function(e, src, ...)
         local reqId = getRandomReqId(e)
         local cb = promise.new()
