@@ -19,7 +19,7 @@ local function getPlayerByIdentifier(identifier)
     return ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
 end
  
----@param p table|number|string table: player, number: src, string: identifier
+---@param p table|number|string table: player, number: src, string: identifier 
 function FM.player.get(p)
     if not p then return end
     return type(p) == 'number' and getPlayerBySrc(p) or type(p) == 'string' and getPlayerByIdentifier(p) or type(p) == 'table' and p or nil
@@ -161,4 +161,44 @@ function FM.player.removeItem(p, item, amount)
 
     if ESX then p.removeInventoryItem(item, amount)
     elseif QB then p.Functions.RemoveItem(item, amount) end
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
+---@return string firstName
+function FM.player.getFirstName(p)
+    p = FM.player.get(p)
+    if not p then return end
+
+    if ESX then return p.getName().split(' ')[1]
+    elseif QB then return p.PlayerData.charinfo.firstname end
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
+---@return string lastName
+function FM.player.getLastName(p)
+    p = FM.player.get(p)
+    if not p then return end
+
+    if ESX then return p.getName().split(' ')[2]
+    elseif QB then return p.PlayerData.charinfo.lastname end
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
+---@return string fullName
+function FM.player.getFullName(p)
+    p = FM.player.get(p)
+    if not p then return end
+
+    if ESX then return p.getName()
+    elseif QB then return p.PlayerData.charinfo.firstname .. ' ' .. p.PlayerData.charinfo.lastname end
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
+---@return string identifier
+function FM.player.getIdentifier(p)
+    p = FM.player.get(p)
+    if not p then return end
+
+    if ESX then return p.getIdentifier()
+    elseif QB then return p.PlayerData.citizenid end
 end
