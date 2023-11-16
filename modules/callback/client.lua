@@ -21,6 +21,7 @@ end
 FM.callback = {
     ---@param e string -- event name
     ---@param cbF function -- callback function
+    ---Register a callback
     register = function(e, cbF)
         callbacks[e] = cbF
     end,
@@ -28,6 +29,8 @@ FM.callback = {
     ---@param e string -- event name
     ---@param f function -- response function
     ---@param ... any -- arguments
+    ---@async
+    ---Perform an asynchronous callback request
     async = function(e, f, ...)
         local reqId = getRandomReqId(e)
         requests[reqId] = f
@@ -37,6 +40,7 @@ FM.callback = {
     ---@param e string -- event name
     ---@param ... any -- arguments
     ---@return ... any -- response arguments
+    ---Perform a synchronous callback request
     sync = function(e, ...)
         local reqId = getRandomReqId(e)
         local cb = promise.new()

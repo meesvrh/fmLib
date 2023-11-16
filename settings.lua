@@ -12,6 +12,7 @@
 --]]
     Settings = {
         ignoreResourceNotFoundErrors = false,
+        ignoreResourceInitializedLogs = false,
         debug = true,
     }
 

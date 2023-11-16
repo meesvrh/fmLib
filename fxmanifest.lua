@@ -19,6 +19,7 @@ shared_script {
   'settings.lua',
   'init.lua',
   'modules/**/shared.lua',
+  'autodetect.lua',
 }
 
 client_scripts {
