@@ -18,8 +18,9 @@ version '1.0.0'
 shared_script {
   'settings.lua',
   'init.lua',
-  'modules/**/shared.lua',
+  'modules/console/shared.lua',
   'autodetect.lua',
+  'modules/**/shared.lua',
 }
 
 client_scripts {
