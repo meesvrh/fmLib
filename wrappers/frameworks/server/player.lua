@@ -7,6 +7,8 @@
     Store: https://store.rxscripts.xyz/
 --]]
 
+FM.player = {}
+
 local function getPlayerBySrc(src)
     if not src then return end
     return ESX and ESX.GetPlayerFromId(src) or QB and QB.Functions.GetPlayer(src) or nil
@@ -18,7 +20,7 @@ local function getPlayerByIdentifier(identifier)
 end
  
 ---@param p table|number|string table: player, number: src, string: identifier
-function FM.getPlayer(p)
+function FM.player.get(p)
     if not p then return end
     return type(p) == 'number' and getPlayerBySrc(p) or type(p) == 'string' and getPlayerByIdentifier(p) or type(p) == 'table' and p or nil
 end
@@ -26,8 +28,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param moneyType? string default: Defaults.MONEY
 ---@param amount number
-function FM.addMoney(p, moneyType, amount)
-    p = FM.getPlayer(p)
+function FM.player.addMoney(p, moneyType, amount)
+    p = FM.player.get(p)
     moneyType = moneyType or Defaults.MONEY
     if not p or not amount then return end
 
@@ -38,8 +40,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param moneyType? string default: Defaults.MONEY
 ---@param amount number
-function FM.removeMoney(p, moneyType, amount)
-    p = FM.getPlayer(p)
+function FM.player.removeMoney(p, moneyType, amount)
+    p = FM.player.get(p)
     moneyType = moneyType or Defaults.MONEY
     if not p or not amount then return end
 
@@ -50,8 +52,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param moneyType? string default: Defaults.MONEY
 ---@return number amount
-function FM.getMoney(p, moneyType)
-    p = FM.getPlayer(p)
+function FM.player.getMoney(p, moneyType)
+    p = FM.player.get(p)
     moneyType = moneyType or Defaults.MONEY
     if not p then return end
 
@@ -61,8 +63,8 @@ end
 
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@return { name: string, label: string, grade: number, gradeLabel: string } job
-function FM.getJob(p)
-    p = FM.getPlayer(p)
+function FM.player.getJob(p)
+    p = FM.player.get(p)
     if not p then return end
 
     if ESX then
@@ -84,8 +86,8 @@ end
 
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@return { name: string, label: string, grade: number, gradeLabel: string } gang
-function FM.getGang(p)
-    p = FM.getPlayer(p)
+function FM.player.getGang(p)
+    p = FM.player.get(p)
     if not p then return end
 
     if ESX then return FM.getJob(p)
@@ -101,11 +103,11 @@ end
 
 ---@param src number
 ---@return boolean
-function FM.isAdmin(src)
+function FM.player.isAdmin(src)
     if not src then return end
 
     if ESX then
-        return FM.getPlayer(src).getGroup() == "admin"
+        return FM.player.get(src).getGroup() == "admin"
     elseif QB then
         return QB.Functions.HasPermission(src, "god")
     end
@@ -114,8 +116,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param item string
 ---@return { name: string, label: string, amount: number } item
-function FM.getItem(p, item)
-    p = FM.getPlayer(p)
+function FM.player.getItem(p, item)
+    p = FM.player.get(p)
     if not p or not item then return end
 
     if ESX then
@@ -142,8 +144,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param item string
 ---@param amount number
-function FM.addItem(p, item, amount)
-    p = FM.getPlayer(p)
+function FM.player.addItem(p, item, amount)
+    p = FM.player.get(p)
     if not p or not item or not amount then return end
 
     if ESX then p.addInventoryItem(item, amount)
@@ -153,8 +155,8 @@ end
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param item string
 ---@param amount number
-function FM.removeItem(p, item, amount)
-    p = FM.getPlayer(p)
+function FM.player.removeItem(p, item, amount)
+    p = FM.player.get(p)
     if not p or not item or not amount then return end
 
     if ESX then p.removeInventoryItem(item, amount)

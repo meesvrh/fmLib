@@ -10,15 +10,16 @@
 --[[
     SETTINGS
 --]]
-    Settings = {
-        ignoreResourceNotFoundErrors = false,
-        ignoreResourceInitializedLogs = false,
-        debug = true,
-    }
+Settings = {
+    ignoreResourceNotFoundErrors = false,
+    ignoreResourceInitializedLogs = false,
+    debug = true,
+}
 
 --[[
     ENUMS
 --]]
+---@enum
 Defaults = {
     MONEY = 'money',
 }
