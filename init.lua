@@ -8,6 +8,7 @@
 --]]
 
 FM = {}
+
 function FM:construct()
     setmetatable({}, self)
     self.__index = self

@@ -67,8 +67,9 @@ FM.console.suc = FM.console.success
 
 ---@param message string
 ---@param ... string[]
-function FM.console.error(message, ...)
+function FM.console.error(message, traceback, ...)
     local strF = ... and string.format(message, ...) or message
     print("^7(^1ERROR^7) ^0"..strF.."^7")
+    if traceback then print(debug.traceback()) end
 end
 FM.console.err = FM.console.error

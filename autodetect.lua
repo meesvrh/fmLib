@@ -23,8 +23,8 @@ elseif GetResourceState(Resources.QB or 'qb-core') ~= 'missing' then
         FM.console.suc("Initialized QB-Core")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No core found for %s", GetCurrentResourceName())
-    FM.console.err('Did you rename a resource? Go to fmLib/init.lua:8')
+    FM.console.err("No core found for %s", true, GetCurrentResourceName())
+    FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
 if GetResourceState(Resources.OXTarget or 'ox_target') ~= 'missing' then
@@ -40,8 +40,8 @@ elseif GetResourceState(Resources.QBTarget or 'qb-target') ~= 'missing' then
         FM.console.suc("Initialized QB-Target")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No target found for %s", GetCurrentResourceName())
-    FM.console.err('Did you rename a resource? Go to fmLib/init.lua:8')
+    FM.console.err("No target found for %s", true, GetCurrentResourceName())
+    FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
 if GetResourceState(Resources.OXInv or 'ox_inventory') ~= 'missing' then
@@ -57,6 +57,6 @@ elseif GetResourceState(Resources.QBInv or 'qb-inventory') ~= 'missing' then
         FM.console.suc("Initialized QB-Inventory")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No inventory found for %s", GetCurrentResourceName())
-    FM.console.err('Did you rename a resource? Go to fmLib/init.lua:8')
+    FM.console.err("No inventory found for %s", true, GetCurrentResourceName())
+    FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
