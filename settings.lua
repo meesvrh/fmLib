@@ -20,8 +20,7 @@ Defaults = {
     MONEY = 'money',
 }
 
----@enum Resources
----Only change these if you know what you're doing!
+---@type table Only change these if you know what you're doing!
 Resources = {
     ESX = 'es_extended',
     QB = 'qb-core',

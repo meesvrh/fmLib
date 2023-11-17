@@ -134,6 +134,17 @@ end
 
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param item string
+---@return boolean
+function FM.player.hasItem(p, item)
+    p = FM.player.get(p)
+    if not p or not item then return end
+
+    item = FM.player.getItem(p, item)
+    return item and item.amount > 0 or false
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
+---@param item string
 ---@param amount number
 function FM.player.addItem(p, item, amount)
     p = FM.player.get(p)

@@ -23,9 +23,11 @@ end
 
 CreateThread(function()
     local resource = GetCurrentResourceName()
+    local author = GetResourceMetadata(resource, 'author', 0)
+    local repo = GetResourceMetadata(resource, 'repository', 0)
     local cVer = GetResourceMetadata(resource, 'version', 0)
 
-    PerformHttpRequest('https://api.github.com/repos/meesvrh/fmLib/releases/latest', function(status, res)
+    PerformHttpRequest(string.format('https://api.github.com/repos/%s/%s/releases/latest', author, repo), function(status, res)
         if status ~= 200 or not res then return FM.console.err('Unable to check for updates') end
         res = json.decode(res)
 
@@ -34,8 +36,10 @@ CreateThread(function()
         if isVersionOlder(cVer, res.tag_name) then
             FM.console.update("You're running an outdated version of %s (current version: %s)!", resource, cVer)
             FM.console.update("Download the latest version (%s) here: %s", res.tag_name, res.html_url)
+            return
         else
-            FM.console.update('%s is up to date!', resource)
+            FM.console.suc('%s is up to date!', resource)
+            return
         end
     end, 'GET')
 end)
