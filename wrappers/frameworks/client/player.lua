@@ -1,7 +1,7 @@
 FM.player = {}
 
 ---@return boolean
-function FM.player.isPlayerLoaded(src)
+function FM.player.isLoggedIn(src)
     if not src then return end
 
     if ESX then 
