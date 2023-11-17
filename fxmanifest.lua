@@ -3,24 +3,21 @@
 
     || *-> Author
     GitHub: https://github.com/meesvrh
-    Discord: http://discord.rxscripts.xyz/
-    Store: https://store.rxscripts.xyz/
 --]]
 
 fx_version 'cerulean'
 games { 'gta5' }
 
-author 'meesvrh (Rejox) | rxscripts.xyz'
+author 'meesvrh (Rejox)'
 
 description 'A library for FiveM developers that wraps multiple frameworks, resources and modules.'
-version '1.0.0'
+version '0.0.1'
 
 shared_script {
   'settings.lua',
   'init.lua',
-  'modules/console/shared.lua',
-  'autodetect.lua',
   'modules/**/shared.lua',
+  'autodetect.lua',
 }
 
 client_scripts {
@@ -29,6 +26,7 @@ client_scripts {
 }
 
 server_scripts {
+  'versioncontrol.lua',
   'modules/**/server.lua',
   'wrappers/**/server/*.lua',
 }

@@ -3,28 +3,26 @@
 
     || *-> Author
     GitHub: https://github.com/meesvrh
-    Discord: http://discord.rxscripts.xyz/
-    Store: https://store.rxscripts.xyz/
 --]]
 
---[[
-    SETTINGS
---]]
 Settings = {
-    ignoreResourceNotFoundErrors = false,
-    ignoreResourceInitializedLogs = false,
+    ---@type boolean Whether or not to print debug messages
     debug = true,
+    ---@type boolean Whether or not to ignore resource not found errors
+    ignoreResourceNotFoundErrors = false,
+    ---@type boolean Whether or not to ignore resource initialized logs
+    ignoreResourceInitializedLogs = false,
 }
 
---[[
-    ENUMS
---]]
----@enum
+---@enum Defaults
+---Fallbacks for when you don't specify a value
 Defaults = {
     MONEY = 'money',
 }
 
-Resources = { -- ONLY CHANGE IF YOU HAVE RENAMED A RESOURCE
+---@enum Resources
+---Only change these if you know what you're doing!
+Resources = {
     ESX = 'es_extended',
     QB = 'qb-core',
     OXTarget = 'ox_target',

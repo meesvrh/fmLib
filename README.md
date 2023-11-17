@@ -31,7 +31,7 @@ Coming soon.
 
 fmLib extends its gratitude to the following frameworks, resources, or other open-source projects that it integrates with:
 
-- [ESX Framework](https://github.com/esx-framework):
-- [QBCore Framework](https://github.com/qbcore-framework):
+- [ESX Framework](https://github.com/esx-framework)
+- [QBCore Framework](https://github.com/qbcore-framework)
 
 Thank you to the entire open-source community for fostering an environment of collaboration and shared knowledge.

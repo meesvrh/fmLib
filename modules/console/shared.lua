@@ -1,12 +1,3 @@
---[[
-    fmLib - A library for FiveM developers
-
-    || *-> Author
-    GitHub: https://github.com/meesvrh
-    Discord: http://discord.rxscripts.xyz/
-    Store: https://store.rxscripts.xyz/
---]]
-
 FM.console = {}
 
 ---@param name? string
@@ -40,7 +31,7 @@ function FM.console.debug(data)
     for k, v in pairs(data) do
         local valueType = type(v)
         if lines == 0 then print("^7(^3DEBUG^7) --------------------------------------------") end
-        if k == number then print("^7(^3DEBUG^7) ^0["..string.upper(tostring(k)).."] ^7(^5"..valueType.."^7)") end
+        print("^7(^3DEBUG^7) ^0["..string.upper(tostring(k)).."] ^7("..valueType.."^7)")
         if valueType ~= "table" then print("^7(^3DEBUG^7) ^5"..tostring(v).."^7")
         else
             printTable(nil, v, 0)
@@ -73,3 +64,8 @@ function FM.console.error(message, traceback, ...)
     if traceback then print(debug.traceback()) end
 end
 FM.console.err = FM.console.error
+
+function FM.console.update(message, ...)
+    local strF = ... and string.format(message, ...) or message
+    print("^7(^6UPDATE^7) ^0"..strF.."^7")
+end
