@@ -204,3 +204,5 @@ function FM.player.getIdentifier(p)
     if ESX then return p.getIdentifier()
     elseif QB then return p.PlayerData.citizenid end
 end
+
+FM.p = FM.player

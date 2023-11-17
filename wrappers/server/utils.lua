@@ -1,7 +1,9 @@
+FM.utils = {}
+
 ---@param src number
 ---@param msg string
 ---@param type? 'error'|'success'
-function FM.notify(src, msg, type)
+function FM.utils.notify(src, msg, type)
     if not src then return end
     if not msg then return end
 

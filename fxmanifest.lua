@@ -22,13 +22,13 @@ shared_script {
 
 client_scripts {
   'modules/**/client.lua',
-  'wrappers/**/client/*.lua',
+  'wrappers/client/*.lua',
 }
 
 server_scripts {
   'versioncontrol.lua',
   'modules/**/server.lua',
-  'wrappers/**/server/*.lua',
+  'wrappers/server/*.lua',
 }
 
 lua54 'yes'
