@@ -166,6 +166,35 @@ function FM.player.removeItem(p, item, amount)
 end
 
 ---@param p table|number|string table: player, number: src, string: identifier
+---@return { [string]: { amount: number, label: string } } inventory
+function FM.player.getInventoryItems(p)
+    p = FM.player.get(p)
+    if not p then return end
+
+    local inventory = {}
+
+    if ESX then
+        local items = p.getInventory()
+        for _, v in pairs(items) do
+            inventory[v.name] = {
+                amount = v.count,
+                label = v.label,
+            }
+        end
+    elseif QB then
+        local items = p.PlayerData.items
+        for _, v in pairs(items) do
+            inventory[v.name] = {
+                amount = v.amount,
+                label = v.label,
+            }
+        end
+    end
+
+    return inventory
+end
+
+---@param p table|number|string table: player, number: src, string: identifier
 ---@return string firstName
 function FM.player.getFirstName(p)
     p = FM.player.get(p)
