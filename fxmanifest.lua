@@ -31,4 +31,12 @@ server_scripts {
   'wrappers/server/*.lua',
 }
 
+ui_page 'web/build/index.html'
+
+files {
+  'web/build/index.html',
+  'web/img/*.*',
+  'web/build/**/*',
+}
+
 lua54 'yes'
