@@ -22,6 +22,7 @@ shared_script {
 
 client_scripts {
   'modules/**/client.lua',
+  'modules/web/client/*.lua',
   'wrappers/client/*.lua',
 }
 

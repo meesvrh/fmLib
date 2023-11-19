@@ -13,7 +13,7 @@ export const useNuiEvent = <T = any>(
   handler: (data: T) => void
 ) => {
   const savedHandler: MutableRefObject<NuiHandlerSignature<T>> = useRef(noop);
-
+  
   useEffect(() => {
     savedHandler.current = handler;
   }, [handler]);

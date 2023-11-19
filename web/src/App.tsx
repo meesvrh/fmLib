@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import Loading from './components/Loading';
 
 // debugData([
 //   {
@@ -12,6 +13,6 @@ import Alert from '@mui/material/Alert';
 export default function App() {
 
   return (
-    <Alert severity="error">This is an error alert — check it out!</Alert>
+    <Loading />
   );
 }
