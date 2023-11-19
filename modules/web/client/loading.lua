@@ -4,19 +4,19 @@ local loadRes
 FM.loading = {}
 
 ---@class LoadingProps
----@field time? number stops automaticlally after x s | default: until stopped
+---@field linear? boolean linear animation | default: false (circle)
+---@field time? number stops automaticlally after x ms | default: until stopped
 ---@field focus? boolean focus the NUI | default: true
 ---@field cursor? boolean show the cursor | default: false
 ---@field keepInput? boolean keep input | default: false
 
----@param props? LoadingProps
----@return LoadingProps propsWithDefaults
 local function setDefaultProps(props)
     if not props then props = {} end
     props.time = props.time or nil
     props.focus = props.focus or true
     props.cursor = props.cursor or false
     props.keepInput = props.keepInput or false
+    props.linear = props.linear or false
 
     return props
 end
@@ -26,6 +26,7 @@ end
 ---@param cb function
 function FM.loading.start(props, cb)
     if loadRes then return FM.console.err('Loading already active') end
+    
     props = setDefaultProps(props)
     loadRes = promise.new()
     
@@ -34,9 +35,7 @@ function FM.loading.start(props, cb)
 
     SendNUIMessage({
         action = 'startLoading',
-        data = {
-            time = props.time
-        }
+        data = props
     })
 
     cb(Citizen.Await(loadRes))
@@ -78,10 +77,11 @@ end)
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startload', function (source, args, raw)
     FM.loading.start({
-        time = 5,
+        linear = false,
+        time = 5000,
         focus = true,
         cursor = false,
-        input = false
+        input = false,
     }, function(success)
         FM.console.debug({success})
     end)

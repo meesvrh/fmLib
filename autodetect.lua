@@ -13,7 +13,7 @@ elseif GetResourceState(Resources.QB or 'qb-core') == 'started' then
         FM.console.suc("Initialized QB-Core")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No core found for %s", true, GetCurrentResourceName())
+    FM.console.err("No core found for "..GetCurrentResourceName(), true)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
@@ -30,7 +30,7 @@ elseif GetResourceState(Resources.QBTarget or 'qb-target') == 'started' then
         FM.console.suc("Initialized QB-Target")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No target found for %s", true, GetCurrentResourceName())
+    FM.console.err("No target found for "..GetCurrentResourceName(), true)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
@@ -47,6 +47,6 @@ elseif GetResourceState(Resources.QBInv or 'qb-inventory') == 'started' then
         FM.console.suc("Initialized QB-Inventory")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No inventory found for %s", true, GetCurrentResourceName())
+    FM.console.err("No inventory found for "..GetCurrentResourceName(), true)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end

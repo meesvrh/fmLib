@@ -42,30 +42,23 @@ function FM.console.debug(data)
 end
 
 ---@param message string
----@param ... string[]
-function FM.console.log(message, ...)
-    local strF = ... and string.format(message, ...) or message
-    print("^7(^5LOG^7) ^0"..strF.."^7")
+function FM.console.log(message)
+    print("^7(^5LOG^7) ^0"..message.."^7")
 end
 
 ---@param message string
----@param ... string[]
-function FM.console.success(message, ...)
-    local strF = ... and string.format(message, ...) or message
-    print("^7(^2SUCCESS^7) ^0"..strF.."^7")
+function FM.console.success(message)
+    print("^7(^2SUCCESS^7) ^0"..message.."^7")
 end
 FM.console.suc = FM.console.success
 
 ---@param message string
----@param ... string[]
-function FM.console.error(message, traceback, ...)
-    local strF = ... and string.format(message, ...) or message
-    print("^7(^1ERROR^7) ^0"..strF.."^7")
+function FM.console.error(message, traceback)
+    print("^7(^1ERROR^7) ^0"..message.."^7")
     if traceback then print(debug.traceback()) end
 end
 FM.console.err = FM.console.error
 
-function FM.console.update(message, ...)
-    local strF = ... and string.format(message, ...) or message
-    print("^7(^6UPDATE^7) ^0"..strF.."^7")
+function FM.console.update(message)
+    print("^7(^6UPDATE^7) ^0"..message.."^7")
 end

@@ -33,5 +33,6 @@ fmLib extends its gratitude to the following frameworks, resources, or other ope
 
 - [ESX Framework](https://github.com/esx-framework)
 - [QBCore Framework](https://github.com/qbcore-framework)
+- [Material UI](https://mui.com/)
 
 Thank you to the entire open-source community for fostering an environment of collaboration and shared knowledge.
