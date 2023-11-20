@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
 import Loading from './components/Loading';
+import { Button } from "@material-tailwind/react";
 
 // debugData([
 //   {
@@ -13,6 +12,8 @@ import Loading from './components/Loading';
 export default function App() {
 
   return (
-    <Loading />
+    <>
+      <Loading />
+    </>
   );
 }

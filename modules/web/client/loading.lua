@@ -4,11 +4,12 @@ local loadRes
 FM.loading = {}
 
 ---@class LoadingProps
----@field linear? boolean linear animation | default: false (circle)
 ---@field time? number stops automaticlally after x ms | default: until stopped
 ---@field focus? boolean focus the NUI | default: true
 ---@field cursor? boolean show the cursor | default: false
 ---@field keepInput? boolean keep input | default: false
+---@field size? number pixel size | default: 64
+---@field color? string color (https://www.material-tailwind.com/docs/react/colors) | default: orange
 
 local function setDefaultProps(props)
     if not props then props = {} end
@@ -16,7 +17,8 @@ local function setDefaultProps(props)
     props.focus = props.focus or true
     props.cursor = props.cursor or false
     props.keepInput = props.keepInput or false
-    props.linear = props.linear or false
+    props.size = props.size or 64
+    props.color = props.color or 'orange'
 
     return props
 end
@@ -77,7 +79,6 @@ end)
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startload', function (source, args, raw)
     FM.loading.start({
-        linear = false,
         time = 5000,
         focus = true,
         cursor = false,

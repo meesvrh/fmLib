@@ -1,23 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNuiEvent } from '../hooks/useNuiEvent';
 import { fetchNui } from '../utils/fetchNui';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import LinearProgress from '@mui/material/LinearProgress';
+import { Spinner } from '@material-tailwind/react';
+import { colors } from '@material-tailwind/react/types/generic';
 
 const Loading = () => {
+    console.log('Loading component loaded')
     let timerInterval = useRef<null | NodeJS.Timeout>(null);
-    const [linear, setLinear] = useState<boolean>(false);
+    const [color, setColor] = useState<colors>('orange');
+    const [size, setSize] = useState<number>(64);
     const [visible, setVisible] = useState(false);
     
     const stopLoading = (success: boolean) => {
-        fetchNui('loadingStopped', success).then((stopped) => {
+        fetchNui('loadingStopped', success).then(() => {
             setVisible(false);
         })
     }
     
     useNuiEvent('startLoading', (data) => {
-        setLinear(data.linear);
+        setColor(data.color as colors);
+        setSize(data.size);
+    
         setVisible(true);
         
         if (data.time === null) return
@@ -37,13 +40,13 @@ const Loading = () => {
         setVisible(visible);
     })
 
-    return (
-        <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={visible}
-        >
-            {linear ? <LinearProgress color="inherit"></LinearProgress> : <CircularProgress color="inherit" />}
-        </Backdrop>
+    return (visible && 
+    <div className='w-screen h-screen flex justify-center items-center bg-black/50'>
+        <Spinner
+            color={color}
+            className={`w-[${size.toString()}px] h-[${size.toString()}px] text-dark`}
+        />
+    </div>
     );
 }
 
