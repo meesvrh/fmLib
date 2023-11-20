@@ -4,12 +4,12 @@ local loadRes
 FM.loading = {}
 
 ---@class LoadingProps
----@field time? number stops automaticlally after x ms | default: until stopped
----@field focus? boolean focus the NUI | default: true
----@field cursor? boolean show the cursor | default: false
----@field keepInput? boolean keep input | default: false
----@field size? number pixel size | default: 64
----@field color? string color (https://www.material-tailwind.com/docs/react/colors) | default: orange
+---@field time? number
+---@field focus? boolean
+---@field cursor? boolean
+---@field keepInput? boolean
+---@field size? number
+---@field color? string
 
 local function setDefaultProps(props)
     if not props then props = {} end
@@ -46,35 +46,29 @@ end
 ---@param success boolean
 function FM.loading.stop(success)
     if not loadRes then return FM.console.err('No loading active') end
-
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-
+    
     SendNUIMessage({
         action = 'stopLoading',
-        data = false
+        data = success
     })
-
-    loadRes:resolve(success)
-    loadRes = nil
-end
-
----@return boolean
-function FM.loading.isBusy()
-    return loadRes ~= nil
 end
 
 RegisterNUICallback('loadingStopped', function(success, cb)
+    SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
+
     if loadRes then
-        SetNuiFocus(false, false)
-        SetNuiFocusKeepInput(false)
-        
         loadRes:resolve(success)
         loadRes = nil
     end
 
     cb(true)
 end)
+
+---@return boolean
+function FM.loading.isBusy()
+    return loadRes ~= nil
+end
 
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startload', function (source, args, raw)

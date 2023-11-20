@@ -11,10 +11,10 @@ const Loading = () => {
     const [size, setSize] = useState<number>(64);
     const [visible, setVisible] = useState(false);
     
-    const stopLoading = (success: boolean) => {
-        fetchNui('loadingStopped', success).then(() => {
-            setVisible(false);
-        })
+    const handleStopLoading = (success: boolean) => {
+        setVisible(false);
+        if (timerInterval.current) clearInterval(timerInterval.current)
+        fetchNui('loadingStopped', success)
     }
     
     useNuiEvent('startLoading', (data) => {
@@ -30,15 +30,12 @@ const Loading = () => {
             timeLeft -= 1000
             if (timeLeft <= 0) {
                 if (timerInterval.current) clearInterval(timerInterval.current)
-                stopLoading(true)
+                handleStopLoading(true)
             }
         }, 1000)
     })
 
-    useNuiEvent('stopLoading', (visible) => {
-        if (timerInterval.current) clearInterval(timerInterval.current)
-        setVisible(visible);
-    })
+    useNuiEvent('stopLoading', handleStopLoading)
 
     return (visible && 
     <div className='w-screen h-screen flex justify-center items-center bg-black/50'>
