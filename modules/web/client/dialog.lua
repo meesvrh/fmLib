@@ -72,7 +72,7 @@ RegisterCommand('opendialog', function (source, args, raw)
         title = 'Test',
         message = 'This is a test dialog',
     })
-    FM.console.debug({ result })
+    FM.console.debug(result)
 end)
 
 RegisterCommand('closedialog', function (source, args, raw)

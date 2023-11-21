@@ -77,7 +77,7 @@ RegisterCommand('startload', function (source, args, raw)
         cursor = false,
         input = false,
     }, function(success)
-        FM.console.debug({success})
+        FM.console.debug(success)
     end)
 end)
 
