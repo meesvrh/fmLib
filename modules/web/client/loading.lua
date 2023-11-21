@@ -73,7 +73,6 @@ end
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startload', function (source, args, raw)
     FM.loading.start({
-        time = 5000,
         focus = true,
         cursor = false,
         input = false,

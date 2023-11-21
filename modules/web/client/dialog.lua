@@ -12,8 +12,11 @@ FM.dialog = {}
 
 local function setDefaultProps(props)
     if not props then props = {} end
+    props.title = props.title or ''
+    props.message = props.message or ''
     props.confirmLabel = props.confirmLabel or 'Confirm'
     props.cancelLabel = props.cancelLabel or 'Cancel'
+    props.keepInput = props.keepInput or false
 
     return props
 end
@@ -65,7 +68,10 @@ end
 
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('opendialog', function (source, args, raw)
-    local result = FM.dialog.open()
+    local result = FM.dialog.open({
+        title = 'Test',
+        message = 'This is a test dialog',
+    })
     FM.console.debug({ result })
 end)
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
-import { Spinner } from "@chakra-ui/react";
+import CircularProgress from '@mui/joy/CircularProgress';
 
 const Loading = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
@@ -33,7 +33,7 @@ const Loading = () => {
   return (
     visible && (
       <div className="w-screen h-screen flex justify-center items-center bg-black/50">
-        <Spinner thickness="4px" speed="0.65s" color="primary.500" size="xl" />
+        <CircularProgress variant="soft" color="primary" size="md" />
       </div>
     )
   );
