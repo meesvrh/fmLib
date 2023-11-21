@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.scss';
-import { ThemeProvider } from '@material-tailwind/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+
+const theme = extendTheme({
+  colors: {
+    primary: {
+      500: '#2D3748',
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ChakraProvider theme={theme}>
       <App />
-    </ThemeProvider>
+    </ChakraProvider>
   </React.StrictMode>,
 );

@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Loading from './components/Loading';
-import { Button } from "@material-tailwind/react";
+import { debugData } from './utils/debugData';
 
-// debugData([
-//   {
-//     action: 'setVisible',
-//     data: true,
-//   }
-// ])
+debugData([
+  {
+    action: 'startLoading',
+    data: {},
+  }
+])
 
 export default function App() {
 
