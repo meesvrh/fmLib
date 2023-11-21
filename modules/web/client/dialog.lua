@@ -8,6 +8,7 @@ FM.dialog = {}
 ---@field message? string
 ---@field confirmLabel? string
 ---@field cancelLabel? string
+---@field size? 'sm' | 'md' | 'lg'
 ---@field keepInput? boolean
 
 local function setDefaultProps(props)
@@ -17,6 +18,7 @@ local function setDefaultProps(props)
     props.confirmLabel = props.confirmLabel or 'Confirm'
     props.cancelLabel = props.cancelLabel or 'Cancel'
     props.keepInput = props.keepInput or false
+    props.size = props.size or 'md'
 
     return props
 end
@@ -71,6 +73,7 @@ RegisterCommand('opendialog', function (source, args, raw)
     local result = FM.dialog.open({
         title = 'Test',
         message = 'This is a test dialog',
+        size = 'md'
     })
     FM.console.debug(result)
 end)

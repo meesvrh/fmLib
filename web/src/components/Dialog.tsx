@@ -16,8 +16,9 @@ const Dialog = () => {
   const [message, setMessage] = useState<string>("");
   const [cancelLabel, setCancelLabel] = useState<string>("Cancel");
   const [confirmLabel, setConfirmLabel] = useState<string>("Confirm");
+  const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
 
-  const handleCloseDialog = (res: boolean) => {
+  const handleCloseDialog = (res: 'cancel' | 'confirm') => {
     setVisible(false);
     fetchNui("dialogClosed", res);
   };
@@ -27,6 +28,7 @@ const Dialog = () => {
     setMessage(data.message);
     setCancelLabel(data.cancelLabel);
     setConfirmLabel(data.confirmLabel);
+    setSize(data.size);
 
     setVisible(true);
   });
@@ -39,7 +41,7 @@ const Dialog = () => {
         <Modal
           keepMounted
           open={!["exited", "exiting"].includes(state)}
-          onClose={() => handleCloseDialog(false)}
+          onClose={() => handleCloseDialog('cancel')}
           hideBackdrop
           disableEscapeKeyDown
           sx={{
@@ -49,6 +51,7 @@ const Dialog = () => {
           <ModalDialog
             variant="soft"
             role="alertdialog"
+            size={size}
             sx={{
               opacity: 0,
               transition: `opacity 300ms`,
@@ -64,14 +67,14 @@ const Dialog = () => {
             <DialogActions>
               <Button
                 variant="solid"
-                onClick={() => handleCloseDialog(true)}
+                onClick={() => handleCloseDialog('confirm')}
               >
                 {confirmLabel}
               </Button>
               <Button
                 variant="plain"
                 color="danger"
-                onClick={() => handleCloseDialog(false)}
+                onClick={() => handleCloseDialog('cancel')}
               >
                 {cancelLabel}
               </Button>

@@ -1,86 +1,73 @@
 ---@type Promise<boolean> | nil
-local loadRes
+local progressRes
 
-FM.loading = {}
+FM.progress = {}
 
----@class LoadingProps
+---@class ProgressProps
+---@field label? string
 ---@field time? number
----@field focus? boolean
----@field cursor? boolean
----@field keepInput? boolean
----@field size? number
----@field color? string
+---@field type? 'linear' | 'circle'
 
 local function setDefaultProps(props)
     if not props then props = {} end
-    props.time = props.time or nil
-    props.focus = props.focus or true
-    props.cursor = props.cursor or false
-    props.keepInput = props.keepInput or false
-    props.size = props.size or 64
-    props.color = props.color or 'orange'
+    props.time = props.time or 3000
+    props.type = props.type or 'linear'
 
     return props
 end
 
 ---@async
----@param props LoadingProps | nil
----@param cb function
-function FM.loading.start(props, cb)
-    if loadRes then return FM.console.err('Loading already active') end
+---@param props ProgressProps | nil
+function FM.progress.start(props)
+    if progressRes then return FM.console.err('Progress already active') end
     
     props = setDefaultProps(props)
-    loadRes = promise.new()
-    
-    SetNuiFocus(props.focus, props.cursor)
-    SetNuiFocusKeepInput(props.keepInput)
+    progressRes = promise.new()
 
     SendNUIMessage({
-        action = 'startLoading',
+        action = 'startProgress',
         data = props
     })
-
-    cb(Citizen.Await(loadRes))
+    
+    return Citizen.Await(progressRes)
 end
 
 ---@param success boolean
-function FM.loading.stop(success)
-    if not loadRes then return FM.console.err('No loading active') end
+function FM.progress.stop(success)
+    if not progressRes then return FM.console.err('No progress active') end
     
     SendNUIMessage({
-        action = 'stopLoading',
+        action = 'stopProgress',
         data = success
     })
 end
 
-RegisterNUICallback('loadingStopped', function(success, cb)
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-
-    if loadRes then
-        loadRes:resolve(success)
-        loadRes = nil
+RegisterNUICallback('progressStopped', function(success, cb)
+    if progressRes then
+        progressRes:resolve(success)
+        progressRes = nil
     end
 
     cb(true)
 end)
 
 ---@return boolean
-function FM.loading.isBusy()
-    return loadRes ~= nil
+function FM.progress.isActive()
+    return progressRes ~= nil
 end
 
 --[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('startload', function (source, args, raw)
-    FM.loading.start({
-        focus = true,
-        cursor = false,
-        input = false,
-    }, function(success)
-        FM.console.debug(success)
-    end)
+RegisterCommand('startprogress', function (source, args, raw)
+    if FM.progress.start({
+        label = 'Testing progress',
+        type = 'circle'
+    }) then
+        FM.console.suc('Progress success')
+    else
+        FM.console.err('Progress failed')
+    end
 end)
 
-RegisterCommand('stopload', function (source, args, raw)
-    FM.loading.stop(args[1] or false)
+RegisterCommand('stopprogress', function (source, args, raw)
+    FM.progress.stop(false)
 end)

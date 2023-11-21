@@ -8,8 +8,6 @@ FM.loading = {}
 ---@field focus? boolean
 ---@field cursor? boolean
 ---@field keepInput? boolean
----@field size? number
----@field color? string
 
 local function setDefaultProps(props)
     if not props then props = {} end
@@ -17,8 +15,6 @@ local function setDefaultProps(props)
     props.focus = props.focus or true
     props.cursor = props.cursor or false
     props.keepInput = props.keepInput or false
-    props.size = props.size or 64
-    props.color = props.color or 'orange'
 
     return props
 end
@@ -66,7 +62,7 @@ RegisterNUICallback('loadingStopped', function(success, cb)
 end)
 
 ---@return boolean
-function FM.loading.isBusy()
+function FM.loading.isActive()
     return loadRes ~= nil
 end
 
