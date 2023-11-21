@@ -6,13 +6,6 @@ declare module '@mui/joy/styles' {
 }
 
 const theme = extendTheme({
-  components: {
-    JoyDialogTitle: {
-      defaultProps: {
-        color: 'primary'
-      }
-    },
-  },
   colorSchemes: {
     light: {
       palette: {}

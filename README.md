@@ -1,3 +1,5 @@
+![ForgeM](web/img/forgem.png)
+
 # fmLib - A Multi-Framework Utility Library
 
 fmLib is a versatile library designed to streamline your scripting experience by consolidating various frameworks, resources, and utilities into a single, cohesive package. The goal of fmLib is to provide a convenient wrapper that simplifies the integration of commonly used tools and functionalities.
