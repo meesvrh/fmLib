@@ -7,11 +7,16 @@ FM.progress = {}
 ---@field label? string
 ---@field time? number
 ---@field type? 'linear' | 'circle'
+---@field canCancel? boolean
+
+---@type ProgressProps | nil
+local currProps
 
 local function setDefaultProps(props)
     if not props then props = {} end
     props.time = props.time or 3000
     props.type = props.type or 'linear'
+    props.canCancel = props.canCancel or true
 
     return props
 end
@@ -21,12 +26,12 @@ end
 function FM.progress.start(props)
     if progressRes then return FM.console.err('Progress already active') end
     
-    props = setDefaultProps(props)
+    currProps = setDefaultProps(props)
     progressRes = promise.new()
 
     SendNUIMessage({
         action = 'startProgress',
-        data = props
+        data = currProps
     })
     
     return Citizen.Await(progressRes)
@@ -46,6 +51,7 @@ RegisterNUICallback('progressStopped', function(success, cb)
     if progressRes then
         progressRes:resolve(success)
         progressRes = nil
+        currProps = nil
     end
 
     cb(true)
@@ -56,9 +62,16 @@ function FM.progress.isActive()
     return progressRes ~= nil
 end
 
+RegisterCommand('cancelprogress', function (source, args, raw)
+    if not progressRes or not currProps or not currProps.canCancel then return end
+    FM.progress.stop(false)
+end)
+RegisterKeyMapping('cancelprogress', 'Cancel Progress', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
+
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startprogress', function (source, args, raw)
     if FM.progress.start({
+        time = 10000,
         label = 'Testing progress',
         type = 'circle'
     }) then
@@ -68,6 +81,3 @@ RegisterCommand('startprogress', function (source, args, raw)
     end
 end)
 
-RegisterCommand('stopprogress', function (source, args, raw)
-    FM.progress.stop(false)
-end)

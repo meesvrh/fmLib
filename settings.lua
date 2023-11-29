@@ -29,3 +29,9 @@ Resources = {
     OXInv = 'ox_inventory',
     QBInv = 'qb-inventory',
 }
+
+---@enum KeyMappings
+---Key mappings for the library
+KeyMappings = {
+    CANCEL = { mapper = 'keyboard', key = 'x' },
+}

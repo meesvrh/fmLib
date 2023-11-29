@@ -14,7 +14,7 @@ import Progress from './components/Progress';
 export default function App() {
 
   return (
-      <div className='w-screen h-screen flex items-center justify-center p-8'>
+      <div className='w-screen h-screen flex items-center justify-center'>
         <Dialog />
         <Loading />
         <Progress />
