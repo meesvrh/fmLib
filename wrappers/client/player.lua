@@ -1,9 +1,7 @@
 FM.player = {}
 
 ---@return boolean
-function FM.player.isLoggedIn(src)
-    if not src then return end
-
+function FM.player.isLoggedIn()
     if ESX then 
         local playerData = ESX.GetPlayerData()
         return playerData ~= nil and playerData.identifier ~= nil
