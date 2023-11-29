@@ -7,6 +7,8 @@ FM.progress = {}
 ---@field label? string
 ---@field time? number
 ---@field type? 'linear' | 'circle'
+---@field failedLabel? string
+---@field completedLabel? string
 ---@field canCancel? boolean
 
 ---@type ProgressProps | nil
@@ -17,6 +19,8 @@ local function setDefaultProps(props)
     props.time = props.time or 3000
     props.type = props.type or 'linear'
     props.canCancel = props.canCancel ~= nil and props.canCancel or true
+    props.completedLabel = props.completedLabel or 'Completed'
+    props.failedLabel = props.failedLabel or 'Failed'
 
     return props
 end
@@ -71,7 +75,7 @@ RegisterKeyMapping('cancelprogress', 'Cancel Progress', KeyMappings.CANCEL.mappe
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startprogress', function (source, args, raw)
     if FM.progress.start({
-        time = 10000,
+        time = 3000,
         label = 'Testing progress',
         type = 'circle'
     }) then
