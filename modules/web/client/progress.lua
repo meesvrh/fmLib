@@ -16,7 +16,7 @@ local function setDefaultProps(props)
     if not props then props = {} end
     props.time = props.time or 3000
     props.type = props.type or 'linear'
-    props.canCancel = props.canCancel or true
+    props.canCancel = props.canCancel ~= nil and props.canCancel or true
 
     return props
 end

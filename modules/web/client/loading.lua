@@ -16,10 +16,10 @@ local currProps
 local function setDefaultProps(props)
     if not props then props = {} end
     props.time = props.time or nil
-    props.focus = props.focus or true
-    props.cursor = props.cursor or false
-    props.keepInput = props.keepInput or false
-    props.canCancel = props.canCancel or false
+    props.focus = props.focus ~= nil and props.focus or true
+    props.cursor = props.cursor ~= nil and props.cursor or false
+    props.keepInput = props.keepInput ~= nil and props.keepInput or false
+    props.canCancel = props.canCancel ~= nil and props.canCancel or false
 
     return props
 end
