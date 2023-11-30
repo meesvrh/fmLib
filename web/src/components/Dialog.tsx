@@ -10,7 +10,7 @@ import DialogActions from "@mui/joy/DialogActions";
 import Button from "@mui/joy/Button";
 import Divider from "@mui/joy/Divider";
 
-export const Dialog = () => {
+const Dialog = () => {
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -85,3 +85,5 @@ export const Dialog = () => {
     </Transition>
   );
 };
+
+export default Dialog;

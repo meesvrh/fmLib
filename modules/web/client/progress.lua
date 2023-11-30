@@ -82,9 +82,9 @@ RegisterCommand('startprogress', function (source, args, raw)
         completedLabel = 'Progress Completed!',
         canCancel = true
     }) then
-        FM.console.suc('Progress success')
+        FM.console.debug('Progress success')
     else
-        FM.console.err('Progress failed')
+        FM.console.debug('Progress failed')
     end
 end)
 

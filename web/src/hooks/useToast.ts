@@ -15,7 +15,7 @@ interface ToastProps {
     progress?: 0 | 1 | undefined;
 }
 
-export const useToast = () => {
+const useToast = () => {
     const sendToast = ({type, msg, position, theme, autoClose, hideProgressBar, closeOnClick, pauseOnHover, draggable, progress}: ToastProps) => {
         const params = {
             position: position || 'top-right',
@@ -54,3 +54,5 @@ export const useToast = () => {
         sendToast
     };
 }
+
+export default useToast;

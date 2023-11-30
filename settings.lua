@@ -6,8 +6,10 @@
 --]]
 
 Settings = {
-    ---@type boolean Whether or not to print debug messages
+    ---@type boolean Whether or not to print console.debug messages
     debug = true,
+    ---@type boolean Whether or not to use sfx for web modules (overrides sfx = true in modules)
+    useSfx = true,
     ---@type boolean Whether or not to ignore resource not found errors
     ignoreResourceNotFoundErrors = false,
     ---@type boolean Whether or not to ignore resource initialized logs
