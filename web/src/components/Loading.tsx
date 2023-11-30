@@ -6,12 +6,12 @@ import useSfx from "../hooks/useSfx";
 
 const Loading = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
-  const { play } = useSfx();
+  const { playSfx } = useSfx();
   const [visible, setVisible] = useState(false);
 
   const handleStopLoading = (success: boolean) => {
-    if (success) play('success');
-    else play('fail');
+    if (success) playSfx('success');
+    else playSfx('fail');
 
     setVisible(false);
     if (timerInterval.current) clearInterval(timerInterval.current);

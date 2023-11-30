@@ -6,7 +6,7 @@ import useSfx from "../hooks/useSfx";
 
 const Progress = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
-  const { play } = useSfx();
+  const { playSfx } = useSfx();
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string>("");
   const [type, setType] = useState<"linear" | "circle">("linear");
@@ -17,8 +17,8 @@ const Progress = () => {
 
   const handleStopProgress = (success: boolean) => {
     if (timerInterval.current) clearInterval(timerInterval.current);
-    if (success) play('success');
-    else play('fail');
+    if (success) playSfx('success');
+    else playSfx('fail');
     setLabel(success ? completedLabel : failedLabel);
     setColor(success ? "success" : "danger");
 
