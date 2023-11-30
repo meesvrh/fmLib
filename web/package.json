@@ -22,7 +22,8 @@
     "react-transition-group": "^4.4.5",
     "sass": "^1.68.0",
     "sass-loader": "^13.3.2",
-    "stylus": "^0.60.0"
+    "stylus": "^0.60.0",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.25",

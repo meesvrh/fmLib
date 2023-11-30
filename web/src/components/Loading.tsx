@@ -2,12 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useSfx } from "../hooks/useSfx";
 
-const Loading = () => {
+export const Loading = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const { playSuccess, playFail } = useSfx();
   const [visible, setVisible] = useState(false);
 
   const handleStopLoading = (success: boolean) => {
+    if (success) playSuccess();
+    else playFail();
+
     setVisible(false);
     if (timerInterval.current) clearInterval(timerInterval.current);
     fetchNui("loadingStopped", success);
@@ -38,5 +43,3 @@ const Loading = () => {
     )
   );
 };
-
-export default Loading;

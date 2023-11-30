@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
-import { CircularProgress, LinearProgress, Typography } from "@mui/joy";
+import { CircularProgress, LinearProgress } from "@mui/joy";
+import { useSfx } from "../hooks/useSfx";
 
-const Progress = () => {
+export const Progress = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const { playSuccess, playFail } = useSfx();
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string>("");
   const [type, setType] = useState<"linear" | "circle">("linear");
@@ -15,6 +17,8 @@ const Progress = () => {
 
   const handleStopProgress = (success: boolean) => {
     if (timerInterval.current) clearInterval(timerInterval.current);
+    if (success) playSuccess();
+    else playFail();
     setLabel(success ? completedLabel : failedLabel);
     setColor(success ? "success" : "danger");
 
@@ -129,5 +133,3 @@ const Progress = () => {
     )
   );
 };
-
-export default Progress;

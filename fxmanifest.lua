@@ -38,6 +38,7 @@ files {
   'web/build/index.html',
   'web/img/*.*',
   'web/build/**/*',
+  'web/sounds/*.*',
 }
 
 lua54 'yes'
