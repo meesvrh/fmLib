@@ -11,13 +11,14 @@ const Progress = () => {
   const [progress, setProgress] = useState<number>(0);
   const [completedLabel, setCompletedLabel] = useState<string>("COMPLETED");
   const [failedLabel, setFailedLabel] = useState<string>("FAILED");
+  const [color, setColor] = useState<"primary" | "success" | "danger">("primary");
 
   const handleStopProgress = (success: boolean) => {
     if (timerInterval.current) clearInterval(timerInterval.current);
+    setLabel(success ? completedLabel : failedLabel);
+    setColor(success ? "success" : "danger");
 
     const stop = () => {
-      setLabel(success ? completedLabel : failedLabel);
-
       setTimeout(() => {
         setVisible(false);
         fetchNui("progressStopped", success);
@@ -25,8 +26,6 @@ const Progress = () => {
     };
 
     if (success && progress < 100) {
-      setLabel(completedLabel);
-
       const setProgressInterval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
@@ -38,8 +37,6 @@ const Progress = () => {
         });
       }, 10);
     } else if (!success && progress > 0) {
-      setLabel(failedLabel);
-
       const setProgressInterval = setInterval(() => {
         setProgress((prev) => {
           if (prev <= 0) {
@@ -60,6 +57,7 @@ const Progress = () => {
     setCompletedLabel(data.completedLabel.toUpperCase());
     setFailedLabel(data.failedLabel.toUpperCase());
     setType(data.type);
+    setColor('primary');
     setProgress(0);
 
     setVisible(true);
@@ -95,6 +93,7 @@ const Progress = () => {
                 variant="soft"
                 determinate
                 value={progress}
+                color={color}
                 sx={{
                   "--CircularProgress-size": "80px",
                   "--CircularProgress-thickness": "8px",
@@ -116,6 +115,7 @@ const Progress = () => {
             size="lg"
             determinate
             value={progress}
+            color={color}
             sx={{
               "--LinearProgress-thickness": "24px",
             }}
