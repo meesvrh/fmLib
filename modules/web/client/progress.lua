@@ -76,8 +76,8 @@ RegisterKeyMapping('cancelprogress', 'Cancel Progress', KeyMappings.CANCEL.mappe
 RegisterCommand('startprogress', function (source, args, raw)
     if FM.progress.start({
         label = 'Testing progress',
-        time = 3000,
-        type = 'linear',
+        time = 10000,
+        type = 'circle',
         failedLabel = 'Progress Failed!',
         completedLabel = 'Progress Completed!',
         canCancel = true

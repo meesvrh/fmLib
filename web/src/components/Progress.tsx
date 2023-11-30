@@ -99,13 +99,13 @@ const Progress = () => {
                   "--CircularProgress-thickness": "8px",
                 }}
               >
-                <Typography level="title-md">
+                <span className="font-semibold text-white">
                   {Math.round(progress)}%
-                </Typography>
+                </span>
               </CircularProgress>
-              <Typography level="title-md" textColor="common.white">
+              <span className="font-semibold text-white">
                 {label && label}
-              </Typography>
+              </span>
             </div>
           </>
         )}
@@ -120,13 +120,9 @@ const Progress = () => {
               "--LinearProgress-thickness": "24px",
             }}
           >
-            <Typography
-              level="title-md"
-              textColor="primary.500"
-              sx={{ mixBlendMode: "difference" }}
-            >
+            <span className="font-semibold mix-blend-difference">
               {label && label} {Math.round(progress)}%
-            </Typography>
+            </span>
           </LinearProgress>
         )}
       </div>
