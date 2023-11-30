@@ -17,8 +17,8 @@ local function setDefaultProps(props)
     props.message = props.message or ''
     props.confirmLabel = props.confirmLabel or 'Confirm'
     props.cancelLabel = props.cancelLabel or 'Cancel'
-    props.keepInput = props.keepInput ~= nil and props.keepInput or false
     props.size = props.size or 'md'
+    if props.keepInput == nil then props.keepInput = false end
 
     return props
 end

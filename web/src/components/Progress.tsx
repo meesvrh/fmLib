@@ -6,6 +6,7 @@ import useSfx from "../hooks/useSfx";
 
 const Progress = () => {
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  let sfxEnabled = useRef<boolean>(true);
   const { playSfx } = useSfx();
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string>("");
@@ -17,8 +18,10 @@ const Progress = () => {
 
   const handleStopProgress = (success: boolean) => {
     if (timerInterval.current) clearInterval(timerInterval.current);
-    if (success) playSfx('success');
-    else playSfx('fail');
+    if (sfxEnabled.current) {
+      if (success) playSfx('success');
+      else playSfx('fail');
+    }
     setLabel(success ? completedLabel : failedLabel);
     setColor(success ? "success" : "danger");
 
@@ -57,6 +60,7 @@ const Progress = () => {
   };
 
   useNuiEvent("startProgress", (data) => {
+    sfxEnabled.current = data.useSfx;
     setLabel(data.label.toUpperCase());
     setCompletedLabel(data.completedLabel.toUpperCase());
     setFailedLabel(data.failedLabel.toUpperCase());

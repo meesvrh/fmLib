@@ -5,13 +5,16 @@ import CircularProgress from '@mui/joy/CircularProgress';
 import useSfx from "../hooks/useSfx";
 
 const Loading = () => {
+  let sfxEnabled = useRef<boolean>(true);
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
   const { playSfx } = useSfx();
   const [visible, setVisible] = useState(false);
 
   const handleStopLoading = (success: boolean) => {
-    if (success) playSfx('success');
-    else playSfx('fail');
+    if (sfxEnabled.current) {
+      if (success) playSfx('success');
+      else playSfx('fail');
+    }
 
     setVisible(false);
     if (timerInterval.current) clearInterval(timerInterval.current);
@@ -19,6 +22,7 @@ const Loading = () => {
   };
 
   useNuiEvent("startLoading", (data) => {
+    sfxEnabled.current = data.useSfx;
     setVisible(true);
 
     if (data.time === null) return;

@@ -9,17 +9,18 @@ FM.loading = {}
 ---@field cursor? boolean
 ---@field keepInput? boolean
 ---@field canCancel? boolean
+---@field useSfx? boolean
 
 ---@type LoadingProps | nil
 local currProps
 
 local function setDefaultProps(props)
     if not props then props = {} end
-    props.time = props.time or nil
-    props.focus = props.focus ~= nil and props.focus or true
-    props.cursor = props.cursor ~= nil and props.cursor or false
-    props.keepInput = props.keepInput ~= nil and props.keepInput or false
-    props.canCancel = props.canCancel ~= nil and props.canCancel or false
+    if props.focus == nil then props.focus = true end
+    if props.cursor == nil then props.cursor = false end
+    if props.keepInput == nil then props.keepInput = false end
+    if props.canCancel == nil then props.canCancel = false end
+    if props.useSfx == nil then props.useSfx = true end
 
     return props
 end
@@ -81,9 +82,11 @@ RegisterKeyMapping('cancelload', 'Cancel Loading', KeyMappings.CANCEL.mapper, Ke
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('startload', function (source, args, raw)
     FM.loading.start({
+        time = 5000,
         focus = true,
         cursor = false,
         input = false,
+        useSfx = true,
     }, function(success)
         FM.console.debug(success)
     end)
