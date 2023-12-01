@@ -3,6 +3,17 @@ local progressRes
 
 FM.progress = {}
 
+---@class Anim
+---@field anim string
+---@field dict string
+---@field position? vector3
+---@field rotation? vector3
+---@field enterSpeed? number
+---@field exitSpeed? number
+---@field duration? number
+---@field flag? number
+---@field animTime? number
+
 ---@class ProgressProps
 ---@field label? string
 ---@field time? number
@@ -10,6 +21,7 @@ FM.progress = {}
 ---@field failedLabel? string
 ---@field completedLabel? string
 ---@field canCancel? boolean
+---@field anim? Anim
 ---@field useSfx? boolean
 
 ---@type ProgressProps | nil
@@ -39,6 +51,10 @@ function FM.progress.start(props)
         action = 'startProgress',
         data = currProps
     })
+
+    if props.anim then
+        FM.anim.play(props.anim)
+    end
     
     return Citizen.Await(progressRes)
 end
@@ -57,6 +73,12 @@ RegisterNUICallback('progressStopped', function(success, cb)
     if progressRes then
         progressRes:resolve(success)
         progressRes = nil
+
+        if currProps.anim then
+            ClearPedTasks(PlayerPedId())
+            RemoveAnimDict(currProps.anim.dict)
+        end
+
         currProps = nil
     end
 
@@ -79,10 +101,11 @@ RegisterCommand('startprogress', function (source, args, raw)
     if FM.progress.start({
         label = 'Testing progress',
         time = 10000,
+        canCancel = true,
         type = 'circle',
         failedLabel = 'Progress Failed!',
         completedLabel = 'Progress Completed!',
-        canCancel = true
+        anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" }
     }) then
         FM.console.debug('Progress success')
     else

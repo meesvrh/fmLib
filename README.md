@@ -10,7 +10,7 @@ fmLib is an WiP (Work in Progress) project developed for personal use, containin
 
 ## Features
 
-- **Framework Wrappers:** fmLib wraps various frameworks, providing a unified interface for easier access and manipulation.
+- **Wrappers:** fmLib wraps various frameworks, providing a unified interface for easier access and manipulation.
 
 - **Modules:** fmLib includes a set of modules that can be used to enhance your scripts. These modules are designed to be as lightweight as possible, and can be used independently of the framework wrappers.
 
