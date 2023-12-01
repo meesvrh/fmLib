@@ -5,9 +5,9 @@ import CircularProgress from '@mui/joy/CircularProgress';
 import useSfx from "../hooks/useSfx";
 
 const Loading = () => {
-  let sfxEnabled = useRef<boolean>(true);
-  let timerInterval = useRef<NodeJS.Timeout | null>(null);
   const { playSfx } = useSfx();
+  let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const sfxEnabled = useRef<boolean>(true);
   const [visible, setVisible] = useState(false);
 
   const handleStopLoading = (success: boolean) => {

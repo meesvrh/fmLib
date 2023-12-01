@@ -9,8 +9,11 @@ import DialogContent from "@mui/joy/DialogContent";
 import DialogActions from "@mui/joy/DialogActions";
 import Button from "@mui/joy/Button";
 import Divider from "@mui/joy/Divider";
+import useSfx from "../hooks/useSfx";
 
 const Dialog = () => {
+  const { playSfx } = useSfx();
+  const sfxEnabled = useRef<boolean>(true);
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -19,11 +22,13 @@ const Dialog = () => {
   const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
 
   const handleCloseDialog = (res: 'cancel' | 'confirm') => {
+    if (sfxEnabled.current) playSfx('click');
     setVisible(false);
     fetchNui("dialogClosed", res);
   };
 
   useNuiEvent("openDialog", (data) => {
+    sfxEnabled.current = data.useSfx;
     setTitle(data.title);
     setMessage(data.message);
     setCancelLabel(data.cancelLabel);

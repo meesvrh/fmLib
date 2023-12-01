@@ -5,9 +5,9 @@ import { CircularProgress, LinearProgress } from "@mui/joy";
 import useSfx from "../hooks/useSfx";
 
 const Progress = () => {
-  let timerInterval = useRef<NodeJS.Timeout | null>(null);
-  let sfxEnabled = useRef<boolean>(true);
   const { playSfx } = useSfx();
+  let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const sfxEnabled = useRef<boolean>(true);
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string>("");
   const [type, setType] = useState<"linear" | "circle">("linear");

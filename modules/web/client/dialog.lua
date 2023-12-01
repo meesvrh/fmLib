@@ -10,6 +10,7 @@ FM.dialog = {}
 ---@field cancelLabel? string
 ---@field size? 'sm' | 'md' | 'lg'
 ---@field keepInput? boolean
+---@field useSfx? boolean
 
 local function setDefaultProps(props)
     if not props then props = {} end
@@ -19,6 +20,7 @@ local function setDefaultProps(props)
     props.cancelLabel = props.cancelLabel or 'Cancel'
     props.size = props.size or 'md'
     if props.keepInput == nil then props.keepInput = false end
+    if props.useSfx == nil then props.useSfx = true end
 
     return props
 end
