@@ -27,6 +27,15 @@ FM.progress = {}
 ---@type ProgressProps | nil
 local currProps
 
+local function stopCurrentAnim()
+    if currProps.anim and currProps.anim.anim and currProps.anim.dict then
+        if IsEntityPlayingAnim(PlayerPedId(), currProps.anim.dict, currProps.anim.anim, 3) then
+            ClearPedTasks(PlayerPedId())
+        end
+        RemoveAnimDict(currProps.anim.dict)
+    end
+end
+
 local function setDefaultProps(props)
     if not props then props = {} end
     props.time = props.time or 3000
@@ -74,10 +83,7 @@ RegisterNUICallback('progressStopped', function(success, cb)
         progressRes:resolve(success)
         progressRes = nil
 
-        if currProps.anim then
-            ClearPedTasks(PlayerPedId())
-            RemoveAnimDict(currProps.anim.dict)
-        end
+        if currProps.anim then stopCurrentAnim() end
 
         currProps = nil
     end
@@ -90,14 +96,14 @@ function FM.progress.isActive()
     return progressRes ~= nil
 end
 
-RegisterCommand('cancelprogress', function (source, args, raw)
+RegisterCommand('cancelprogress', function(source, args, raw)
     if not progressRes or not currProps or not currProps.canCancel then return end
     FM.progress.stop(false)
 end)
 RegisterKeyMapping('cancelprogress', 'Cancel Progress', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
 
 --[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('startprogress', function (source, args, raw)
+RegisterCommand('startprogress', function(source, args, raw)
     if FM.progress.start({
         label = 'Testing progress',
         time = 10000,
