@@ -1,5 +1,5 @@
----@type Promise<boolean> | nil
 local loadRes
+local isStopping = false
 
 FM.loading = {}
 
@@ -33,7 +33,8 @@ function FM.loading.start(props, cb)
     
     currProps = setDefaultProps(props)
     loadRes = promise.new()
-    
+    isStopping = false
+
     SetNuiFocus(currProps.focus, currProps.cursor)
     SetNuiFocusKeepInput(currProps.keepInput)
 
@@ -47,7 +48,8 @@ end
 
 ---@param success boolean
 function FM.loading.stop(success)
-    if not loadRes then return FM.console.err('No loading active') end
+    if not loadRes or isStopping then return FM.console.err('No loading active') end
+    isStopping = true
     
     SendNUIMessage({
         action = 'stopLoading',
@@ -65,6 +67,7 @@ RegisterNUICallback('loadingStopped', function(success, cb)
         currProps = nil
     end
 
+    isStopping = false
     cb(true)
 end)
 

@@ -1,4 +1,3 @@
----@type Promise<boolean> | nil
 local dialogRes
 
 FM.dialog = {}

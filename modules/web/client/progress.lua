@@ -1,5 +1,5 @@
----@type Promise<boolean> | nil
 local progressRes
+local isStopping = false
 
 FM.progress = {}
 
@@ -55,6 +55,7 @@ function FM.progress.start(props)
     
     currProps = setDefaultProps(props)
     progressRes = promise.new()
+    isStopping = false
 
     SendNUIMessage({
         action = 'startProgress',
@@ -70,7 +71,7 @@ end
 
 ---@param success boolean
 function FM.progress.stop(success)
-    if not progressRes then return FM.console.err('No progress active') end
+    if not progressRes or isStopping then return FM.console.err('No progress active') end
     
     SendNUIMessage({
         action = 'stopProgress',
@@ -88,6 +89,7 @@ RegisterNUICallback('progressStopped', function(success, cb)
         currProps = nil
     end
 
+    isStopping = false
     cb(true)
 end)
 
