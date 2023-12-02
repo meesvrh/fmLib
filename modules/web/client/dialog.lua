@@ -1,5 +1,5 @@
----@type Promise<boolean> | nil
 local dialogRes
+local isClosing = false
 
 FM.dialog = {}
 
@@ -31,6 +31,7 @@ function FM.dialog.open(props)
     
     props = setDefaultProps(props)
     dialogRes = promise.new()
+    isClosing = false
     
     SetNuiFocus(true, true)
     SetNuiFocusKeepInput(props.keepInput)
@@ -45,7 +46,8 @@ end
 
 ---@param result 'cancel' | 'confirm'
 function FM.dialog.close(result)
-    if not dialogRes then return FM.console.err('No dialog open') end
+    if not dialogRes or isClosing then return FM.console.err('No dialog open') end
+    isClosing = true
 
     SendNUIMessage({
         action = 'closeDialog',
@@ -62,6 +64,7 @@ RegisterNUICallback('dialogClosed', function(res, cb)
         dialogRes = nil
     end
 
+    isClosing = false
     cb(true)
 end)
 
