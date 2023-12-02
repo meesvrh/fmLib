@@ -110,7 +110,7 @@ RegisterCommand('startprogress', function(source, args, raw)
         label = 'Testing progress',
         time = 10000,
         canCancel = true,
-        type = 'circle',
+        type = 'linear',
         failedLabel = 'Progress Failed!',
         completedLabel = 'Progress Completed!',
         anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" }

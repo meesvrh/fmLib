@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
+import { Transition } from "react-transition-group";
 import { CircularProgress, LinearProgress } from "@mui/joy";
 import useSfx from "../hooks/useSfx";
 
@@ -29,7 +30,7 @@ const Progress = () => {
       setTimeout(() => {
         setVisible(false);
         fetchNui("progressStopped", success);
-      }, 1000);
+      }, 500);
     };
 
     if (success && progress < 100) {
@@ -92,49 +93,57 @@ const Progress = () => {
   useNuiEvent("stopProgress", handleStopProgress);
 
   return (
-    visible && (
-      <div className="w-1/3 h-full flex justify-center items-end pb-8">
-        {type === "circle" && (
-          <>
-            <div className="flex flex-col gap-2 items-center justify-center">
-              <CircularProgress
-                variant="soft"
-                determinate
-                value={progress}
-                color={color}
-                sx={{
-                  "--CircularProgress-size": "80px",
-                  "--CircularProgress-thickness": "8px",
-                }}
-              >
+    <Transition in={visible} timeout={0}>
+      {(state: string) => (
+        <div className={`w-1/3 h-full flex justify-center items-end pb-8 transition-opacity duration-300 ease-in-out opacity-0`} 
+          style={{
+            ...{
+              entering: { opacity: 1 },
+              entered: { opacity: 1 },
+            }[state],
+        }}>
+          {type === "circle" && (
+            <>
+              <div className="flex flex-col gap-2 items-center justify-center">
+                <CircularProgress
+                  variant="soft"
+                  determinate
+                  value={progress}
+                  color={color}
+                  sx={{
+                    "--CircularProgress-size": "80px",
+                    "--CircularProgress-thickness": "8px",
+                  }}
+                >
+                  <span className="font-semibold text-white">
+                    {Math.round(progress)}%
+                  </span>
+                </CircularProgress>
                 <span className="font-semibold text-white">
-                  {Math.round(progress)}%
+                  {label && label}
                 </span>
-              </CircularProgress>
-              <span className="font-semibold text-white">
-                {label && label}
+              </div>
+            </>
+          )}
+          {type === "linear" && (
+            <LinearProgress
+              variant="soft"
+              size="lg"
+              determinate
+              value={progress}
+              color={color}
+              sx={{
+                "--LinearProgress-thickness": "24px",
+              }}
+            >
+              <span className="font-semibold mix-blend-difference">
+                {label && label} {Math.round(progress)}%
               </span>
-            </div>
-          </>
-        )}
-        {type === "linear" && (
-          <LinearProgress
-            variant="soft"
-            size="lg"
-            determinate
-            value={progress}
-            color={color}
-            sx={{
-              "--LinearProgress-thickness": "24px",
-            }}
-          >
-            <span className="font-semibold mix-blend-difference">
-              {label && label} {Math.round(progress)}%
-            </span>
-          </LinearProgress>
-        )}
-      </div>
-    )
+            </LinearProgress>
+          )}
+        </div>
+      )}
+    </Transition>
   );
 };
 

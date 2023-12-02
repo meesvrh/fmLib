@@ -74,7 +74,7 @@ RegisterCommand('opendialog', function (source, args, raw)
     local result = FM.dialog.open({
         title = 'Test',
         message = 'This is a test dialog',
-        size = 'md'
+        size = 'lg'
     })
     FM.console.debug(result)
 end)
