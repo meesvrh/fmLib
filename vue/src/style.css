@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.v-progress-linear, .v-progress-circular__overlay {
+    transition: none !important;
+}
