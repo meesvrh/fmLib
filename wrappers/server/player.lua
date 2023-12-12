@@ -134,13 +134,14 @@ end
 
 ---@param p table|number|string table: player, number: src, string: identifier
 ---@param item string
+---@param amount number
 ---@return boolean
-function FM.player.hasItem(p, item)
+function FM.player.hasItemAmount(p, item, amount)
     p = FM.player.get(p)
     if not p or not item then return end
 
     item = FM.player.getItem(p, item)
-    return item and item.amount > 0 or false
+    return item and item.amount >= amount or false
 end
 
 ---@param p table|number|string table: player, number: src, string: identifier
