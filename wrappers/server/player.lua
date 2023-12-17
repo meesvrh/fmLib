@@ -10,9 +10,9 @@ local function getPlayerByIdentifier(identifier)
     return ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
 end
 
----@param p number|string number: src, string: identifier 
-function FM.player.get(p)
-    p = type(p) == 'number' and getPlayerBySrc(p) or type(p) == 'string' and getPlayerByIdentifier(p) or nil
+---@param id number|string number: src, string: identifier 
+function FM.player.get(id)
+    local p = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
     if not p or type(p) ~= 'table' then return end
     
     return setmetatable({ _fwp = p }, { __index = FM.player })
