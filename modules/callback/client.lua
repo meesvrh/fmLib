@@ -12,20 +12,20 @@ local function getRandomReqId(e)
 end
 
 ---@param e string -- event name
----@param cbF function -- callback function
+---@param cb function -- callback function
 ---Register a callback
-function FM.callback.register(e, cbF)
-    callbacks[e] = cbF
+function FM.callback.register(e, cb)
+    callbacks[e] = cb
 end
 
 ---@param e string -- event name
----@param f function -- response function
+---@param cb function -- response function
 ---@param ... any -- arguments
 ---@async
 ---Perform an asynchronous callback request
-function FM.callback.async(e, f, ...)
+function FM.callback.async(e, cb, ...)
     local reqId = getRandomReqId(e)
-    requests[reqId] = f
+    requests[reqId] = cb
     TriggerServerEvent('fmLib:server:callback:request', e, reqId, ...)
 end
 
