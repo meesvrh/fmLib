@@ -5,6 +5,7 @@
     GitHub: https://github.com/meesvrh
 --]]
 
+---@class Settings
 Settings = {
     ---@type boolean Whether or not to print console.debug messages
     debug = true,
@@ -22,6 +23,12 @@ Defaults = {
     MONEY = 'money',
 }
 
+---@enum KeyMappings
+---Key mappings for the library
+KeyMappings = {
+    CANCEL = { mapper = 'keyboard', key = 'x' },
+}
+
 ---@type table Only change these if you know what you're doing!
 Resources = {
     ESX = 'es_extended',
@@ -30,10 +37,4 @@ Resources = {
     QBTarget = 'qb-target',
     OXInv = 'ox_inventory',
     QBInv = 'qb-inventory',
-}
-
----@enum KeyMappings
----Key mappings for the library
-KeyMappings = {
-    CANCEL = { mapper = 'keyboard', key = 'x' },
 }

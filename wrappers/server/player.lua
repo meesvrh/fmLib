@@ -10,16 +10,8 @@ local function getPlayerByIdentifier(identifier)
     return ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
 end
 
----@param id number|string number: src, string: identifier 
-function FM.player.get(id)
-    local p = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
-    if not p or type(p) ~= 'table' then return end
-    
-    return setmetatable({ _fwp = p }, { __index = FM.player })
-end
-
 ---@param amount number
----@param moneyType? string default: Defaults.MONEY
+---@param moneyType? string
 function FM.player:addMoney(amount, moneyType)
     moneyType = moneyType or Defaults.MONEY
     if not amount then return end
@@ -29,7 +21,7 @@ function FM.player:addMoney(amount, moneyType)
 end
 
 ---@param amount number
----@param moneyType? string default: Defaults.MONEY
+---@param moneyType? string
 function FM.player:removeMoney(amount, moneyType)
     moneyType = moneyType or Defaults.MONEY
     if not amount then return end
@@ -38,7 +30,7 @@ function FM.player:removeMoney(amount, moneyType)
     elseif QB then self._fwp.Functions.RemoveMoney(moneyType, amount) end
 end
 
----@param moneyType? string default: Defaults.MONEY
+---@param moneyType? string
 ---@return number amount
 function FM.player:getMoney(moneyType)
     moneyType = moneyType or Defaults.MONEY
@@ -189,6 +181,31 @@ end
 function FM.player:getIdentifier()
     if ESX then return self._fwp.getIdentifier()
     elseif QB then return self._fwp.PlayerData.citizenid end
+end
+
+---@param id number|string
+function FM.player:get(id)
+    local p = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
+    if not p or type(p) ~= 'table' then return end
+
+    return {
+        addMoney = self.addMoney,
+        addItem = self.addItem,
+        getJob = self.getJob,
+        getGang = self.getGang,
+        getMoney = self.getMoney,
+        getItem = self.getItem,
+        getInventoryItems = self.getInventoryItems,
+        getFirstName = self.getFirstName,
+        getLastName = self.getLastName,
+        getFullName = self.getFullName,
+        getIdentifier = self.getIdentifier,
+        hasItemAmount = self.hasItemAmount,
+        isAdmin = self.isAdmin,
+        removeMoney = self.removeMoney,
+        removeItem = self.removeItem,
+        _fwp = p
+    }
 end
 
 FM.p = FM.player

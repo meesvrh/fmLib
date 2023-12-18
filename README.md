@@ -2,37 +2,27 @@
 
 # fmLib - A Multi-Framework Utility Library
 
-fmLib is a versatile library designed to streamline your scripting experience by consolidating various frameworks, resources, and utilities into a single, cohesive package. The goal of fmLib is to provide a convenient wrapper that simplifies the integration of commonly used tools and functionalities. fmLib also provides a set of modules that can be used to enhance your scripts.
+This versatile library is designed to simplify your scripting experience by consolidating various frameworks, resources, and utilities into a cohesive package. 
+Whether you're a seasoned developer or just getting started, fmLib aims to provide a convenient wrapper to streamline the integration of commonly used tools and functionalities in your scripts.
 
 ## Overview
 
-fmLib is an WiP (Work in Progress) project developed for personal use, containing a collection of modules and wrappers that the author finds valuable for creating scripts in FiveM. While it may not encompass every possible resource or framework, it aims to cover a broad spectrum of commonly used tools, making it a valuable asset for developers.
+fmLib is a Work in Progress (WiP) project developed for personal use, offering a collection of modules and wrappers designed to enhance scripting in FiveM.
+While it may not cover every possible resource or framework, fmLib strives to encompass a broad spectrum of commonly used tools, making it a valuable asset for developers.
 
 ## Features
 
-- **Wrappers:** fmLib wraps various frameworks, providing a unified interface for easier access and manipulation.
+- **Wrappers:** Simplify your development process with fmLib's wrappers to make your scripts work on multiple frameworks and resources combined.
 
-- **Modules:** fmLib includes a set of modules that can be used to enhance your scripts. These modules are designed to be as lightweight as possible, and can be used independently of the framework wrappers.
+- **Modules:** Enhance your scripts with lightweight modules designed to be used independently of the framework wrappers.
 
-- **WiP:** fmLib is a WiP project, and will continue to be updated with new features and modules.
+- **WiP:** fmLib is an evolving project, with ongoing updates introducing new features and modules.
 
-- **Documentation:** fmLib includes a comprehensive documentation that covers all of its features and modules.
+- **Documentation:** A comprehensive documentation is available to guide you through fmLib's features and modules.
 
-## Documentation
+## [Documentation](https://forgem.gitbook.io/)
 
-Coming soon.
-
-## Installation
-
-1. Download the latest release from the [releases](https://github.com/meesvrh/fmLib/releases) page.
-2. Extract the archive to your resources folder.
-3. Add ```ensure fmLib``` to your server.cfg.
-4. Make sure to add ```ensure fmLib``` after any framework resources that you want to use fmLib with (such as ESX or QBCore).
-5. Make sure to add ```ensure fmLib``` before any resources that depend on fmLib.
-6. Restart your server.
-
-## Usage
-```FM = exports['fmLib']:new()```
+## [Getting Started](https://forgem.gitbook.io/forgem/fmlib/getting-started)
 
 ## Credits
 

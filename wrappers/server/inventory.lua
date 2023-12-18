@@ -1,7 +1,7 @@
 FM.inventory = {}
 
----@param itemName string item name
----@param cb function callback(src, item)
+---@param itemName string
+---@param cb function
 function FM.inventory.registerUsableItem(itemName, cb)
     if ESX then
         ESX.RegisterUsableItem(itemName, function(src, item)

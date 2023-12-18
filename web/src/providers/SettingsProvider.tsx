@@ -1,5 +1,6 @@
 import React, {Context, createContext, useContext, useEffect, useState } from "react";
 import { fetchNui } from "../utils/fetchNui";
+import { useNuiEvent } from "../hooks/useNuiEvent";
 
 const SettingsCtx = createContext<SettingsProviderValue | null>(null)
 
