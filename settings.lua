@@ -21,6 +21,8 @@ Settings = {
 ---Fallbacks for when you don't specify a value
 Defaults = {
     MONEY = 'money',
+    ADMIN_ESX = 'admin',
+    ADMIN_QB = 'god',
 }
 
 ---@enum KeyMappings
