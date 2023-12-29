@@ -13,7 +13,7 @@ end
 ---@param id number|string
 function FM.player.get(id)
     local _fwp = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
-    if not _fwp or type(p) ~= 'table' then return end
+    if not _fwp or type(_fwp) ~= 'table' then return end
 
     local p = {}
 
