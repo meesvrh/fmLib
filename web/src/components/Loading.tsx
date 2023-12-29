@@ -39,12 +39,10 @@ const Loading = () => {
 
   useNuiEvent("stopLoading", handleStopLoading);
 
-  return (
-    visible && (
-      <div className="w-full h-full flex justify-center items-center bg-black/50">
-        <CircularProgress variant="soft" color="primary" size="md" />
-      </div>
-    )
+  return (visible &&
+    <div className="w-full h-full flex justify-center items-center bg-black/50">
+      <CircularProgress variant="soft" color="primary" size="md" />
+    </div>
   );
 };
 

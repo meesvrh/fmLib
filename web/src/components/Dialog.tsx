@@ -14,6 +14,7 @@ import useSfx from "../hooks/useSfx";
 const Dialog = () => {
   const { playSfx } = useSfx();
   const sfxEnabled = useRef<boolean>(true);
+  const [transition, setTransition] = useState(false);
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -21,10 +22,23 @@ const Dialog = () => {
   const [confirmLabel, setConfirmLabel] = useState<string>("Confirm");
   const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
 
+  useEffect(() => {
+    if (visible) {
+      setTimeout(() => {
+        setTransition(true);
+      }, 100);
+    }
+  }, [visible]);
+
   const handleCloseDialog = (res: 'cancel' | 'confirm') => {
     if (sfxEnabled.current) playSfx('click');
-    setVisible(false);
-    fetchNui("dialogClosed", res);
+
+    setTransition(false);
+
+    setTimeout(() => {
+      setVisible(false);
+      fetchNui("dialogClosed", res);
+    }, 300);
   };
 
   useNuiEvent("openDialog", (data) => {
@@ -40,54 +54,41 @@ const Dialog = () => {
 
   useNuiEvent("closeDialog", handleCloseDialog);
 
-  return (
-    <Transition in={visible} timeout={400}>
-      {(state: string) => (
-        <Modal
-          keepMounted
-          open={!["exited", "exiting"].includes(state)}
-          onClose={() => handleCloseDialog('cancel')}
-          hideBackdrop
-          disableEscapeKeyDown
-          sx={{
-            visibility: state === "exited" ? "hidden" : "visible",
-          }}
+  return (visible &&
+      <Modal
+        keepMounted
+        open={visible}
+        onClose={() => handleCloseDialog('cancel')}
+        hideBackdrop
+        disableEscapeKeyDown
+      >
+      <div className={`w-full h-full transition-opacity duration-300 ease-in-out ${transition ? 'opacity-100' : 'opacity-0'} `}>
+        <ModalDialog
+          variant="soft"
+          role="alertdialog"
+          size={size}
         >
-          <ModalDialog
-            variant="soft"
-            role="alertdialog"
-            size={size}
-            sx={{
-              opacity: 0,
-              transition: `opacity 300ms`,
-              ...{
-                entering: { opacity: 1 },
-                entered: { opacity: 1 },
-              }[state],
-            }}
-          >
-            <DialogTitle>{title}</DialogTitle>
-            <Divider />
-            <DialogContent>{message}</DialogContent>
-            <DialogActions>
-              <Button
-                variant="solid"
-                onClick={() => handleCloseDialog('confirm')}
-              >
-                {confirmLabel}
-              </Button>
-              <Button
-                variant="plain"
-                color="danger"
-                onClick={() => handleCloseDialog('cancel')}
-              >
-                {cancelLabel}
-              </Button>
-            </DialogActions>
-          </ModalDialog>
-        </Modal>
-      )}
-    </Transition>
+          <DialogTitle>{title}</DialogTitle>
+          <Divider />
+          <DialogContent>{message}</DialogContent>
+          <DialogActions>
+            <Button
+              variant="solid"
+              onClick={() => handleCloseDialog('confirm')}
+            >
+              {confirmLabel}
+            </Button>
+            <Button
+              variant="plain"
+              color="danger"
+              onClick={() => handleCloseDialog('cancel')}
+            >
+              {cancelLabel}
+            </Button>
+          </DialogActions>
+        </ModalDialog>
+      </div>
+    </Modal>
   );
 };
 
