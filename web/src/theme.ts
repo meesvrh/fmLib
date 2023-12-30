@@ -26,7 +26,26 @@ const theme = extendTheme({
         },
       }
     }
-  }
+  },
+  components: {
+    JoyButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          transition: 'all',
+          transitionDuration: '0.3s',
+          transitionTimingFunction: 'ease-in-out',
+          ...(ownerState.variant === 'outlined' && {
+            color: theme.palette.primary[400],
+            borderColor: theme.palette.primary[400],
+            '&:hover': {
+              backgroundColor: theme.palette.primary[400],
+              color: theme.palette.common.black,
+            },
+          }),
+        }),
+      },
+    },
+  },
 })
 
 export default theme;

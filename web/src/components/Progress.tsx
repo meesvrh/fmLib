@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
-import { Transition } from "react-transition-group";
 import { CircularProgress, LinearProgress } from "@mui/joy";
 import useSfx from "../hooks/useSfx";
 

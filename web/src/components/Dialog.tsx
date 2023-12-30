@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 import { fetchNui } from "../utils/fetchNui";
-import { Transition } from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
@@ -73,7 +72,7 @@ const Dialog = () => {
           <DialogContent>{message}</DialogContent>
           <DialogActions>
             <Button
-              variant="solid"
+              variant="outlined"
               onClick={() => handleCloseDialog('confirm')}
             >
               {confirmLabel}
