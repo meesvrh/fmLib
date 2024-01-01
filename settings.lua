@@ -35,8 +35,8 @@ KeyMappings = {
 Resources = {
     ESX = 'es_extended',
     QB = 'qb-core',
-    OXTarget = 'ox_target',
-    QBTarget = 'qb-target',
-    OXInv = 'ox_inventory',
-    QBInv = 'qb-inventory',
+    -- OXTarget = 'ox_target',
+    -- QBTarget = 'qb-target',
+    -- OXInv = 'ox_inventory',
+    -- QBInv = 'qb-inventory',
 }

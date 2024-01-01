@@ -14,6 +14,12 @@ FM.progress = {}
 ---@field flag? number
 ---@field animTime? number
 
+---@class Prop
+---@field model string | number
+---@field position vector3
+---@field rotation vector3
+---@field bone? number
+
 ---@class ProgressProps
 ---@field label? string
 ---@field time? number
@@ -22,6 +28,7 @@ FM.progress = {}
 ---@field completedLabel? string
 ---@field canCancel? boolean
 ---@field anim? Anim
+---@field prop? Prop
 ---@field useSfx? boolean
 
 ---@type ProgressProps | nil
@@ -34,6 +41,27 @@ local function stopCurrentAnim()
         end
         RemoveAnimDict(currProps.anim.dict)
     end
+end
+
+local function createProp(prop)
+    if type(prop.position) ~= 'vector3' and type(prop.position) ~= 'table' then FM.console.err('Invalid position') return end
+    if type(prop.rotation) ~= 'vector3' and type(prop.rotation) ~= 'table' then FM.console.err('Invalid rotation') return end
+    if not tonumber(prop.model) then prop.model = joaat(prop.model) end
+    if not IsModelValid(prop.model) then FM.console.err('Invalid model: '..prop.model) return end
+
+    if not HasModelLoaded(prop.model) then
+        RequestModel(prop.model)
+        while not HasModelLoaded(prop.model) do Wait(200) end
+    end
+
+    local ped = PlayerPedId()
+    local pCoords = GetEntityCoords(ped)
+    local obj = CreateObject(prop.model, pCoords, true, true, true)
+
+    AttachEntityToEntity(obj, ped, GetPedBoneIndex(ped, prop.bone or 60309), prop.position, prop.rotation, true, true, false, true, 0, true)
+    SetModelAsNoLongerNeeded(prop.model)
+
+    return obj
 end
 
 local function setDefaultProps(props)
@@ -62,9 +90,8 @@ function FM.progress.start(props)
         data = currProps
     })
 
-    if props.anim then
-        FM.anim.play(props.anim)
-    end
+    if currProps.anim then FM.anim.play(currProps.anim) end
+    if currProps.prop then currProps.prop = createProp(currProps.prop) end
     
     return Citizen.Await(progressRes)
 end
@@ -85,6 +112,7 @@ RegisterNUICallback('progressStopped', function(success, cb)
         progressRes = nil
 
         if currProps.anim then stopCurrentAnim() end
+        if currProps.prop then DeleteEntity(currProps.prop) end
 
         currProps = nil
     end

@@ -69,7 +69,8 @@ const Dialog = () => {
         >
           <DialogTitle>{title}</DialogTitle>
           <Divider />
-          <DialogContent>{message}</DialogContent>
+          <DialogContent>{message}
+          </DialogContent>
           <DialogActions>
             <Button
               variant="outlined"
