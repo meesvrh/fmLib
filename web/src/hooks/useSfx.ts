@@ -1,7 +1,7 @@
 import useSound from "use-sound";
-import successSfx from "../../sounds/success.wav";
-import failSfx from "../../sounds/fail.wav";
-import clickSfx from "../../sounds/button.mp3";
+import successSfx from "../assets/sounds/success.wav";
+import failSfx from "../assets/sounds/fail.wav";
+import clickSfx from "../assets/sounds/button.mp3";
 import { useSettings } from '../providers/SettingsProvider';
 import { useMemo } from 'react';
 
