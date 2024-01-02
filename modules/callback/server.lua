@@ -58,7 +58,7 @@ end)
 
 RegisterNetEvent('fmLib:server:callback:request', function(e, reqId, ...)
     local src = source
-    if not callbacks[e] then return FM.console.err("No callback found for %s", e) end
+    if not callbacks[e] then return FM.console.err("No callback found for "..e, false) end
     TriggerClientEvent('fmLib:client:callback:listener', src, reqId, callbacks[e](src, ...))
 end)
 

@@ -171,6 +171,16 @@ function FM.player.get(id)
         end
     end
 
+    -- NEEDS DOCUMENTATION IMPLEMENTATION
+    ---@param msg string
+    ---@param type? 'error'|'success'
+    p.notify = function(msg, type)
+        if not msg then return end
+
+        if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, msg, type)
+        elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, msg, type) end
+    end
+
     ---@param item string
     ---@param amount number
     p.removeItem = function(item, amount)
