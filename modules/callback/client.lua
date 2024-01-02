@@ -15,6 +15,9 @@ end
 ---@param cb function -- callback function
 ---Register a callback
 function FM.callback.register(e, cb)
+    if callbacks[e] then FM.console.err("Callback %s already exists", e) return end
+    if type(cb) ~= 'function' then FM.console.err("Callback %s must be a function", e) return end
+
     callbacks[e] = cb
 end
 
@@ -52,7 +55,7 @@ RegisterNetEvent('fmLib:client:callback:listener', function(reqId, ...)
 end)
 
 RegisterNetEvent('fmLib:client:callback:request', function(e, reqId, ...)
-    if not callbacks[e] then return Err("No callback found for %s", e) end
+    if not callbacks[e] then return FM.console.err("No callback found for %s", e) end
     TriggerServerEvent('fmLib:server:callback:listener', reqId, callbacks[e](...))
 end)
 
