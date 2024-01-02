@@ -11,7 +11,7 @@ games { 'gta5' }
 author 'meesvrh'
 repository 'fmLib'
 description 'A library for FiveM developers that wraps multiple frameworks, resources and modules.'
-version '0.0.1'
+version '0.1.0'
 
 shared_script {
   'settings.lua',

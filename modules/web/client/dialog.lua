@@ -26,7 +26,7 @@ end
 
 ---@param props DialogProps | nil
 function FM.dialog.open(props)
-    if dialogRes then return FM.console.err('Dialog already open') end
+    if dialogRes then FM.console.err('Dialog already open') return end
     
     props = setDefaultProps(props)
     dialogRes = promise.new()
@@ -44,7 +44,7 @@ end
 
 ---@param result 'cancel' | 'confirm'
 function FM.dialog.close(result)
-    if not dialogRes then return FM.console.err('No dialog open') end
+    if not dialogRes then FM.console.err('No dialog open') return end
 
     SendNUIMessage({
         action = 'closeDialog',

@@ -29,7 +29,7 @@ end
 ---@param props LoadingProps | nil
 ---@param cb function
 function FM.loading.start(props, cb)
-    if loadRes then return FM.console.err('Loading already active') end
+    if loadRes then FM.console.err('Loading already active') return end
     
     currProps = setDefaultProps(props)
     loadRes = promise.new()
@@ -48,7 +48,7 @@ end
 
 ---@param success boolean
 function FM.loading.stop(success)
-    if not loadRes or isStopping then return FM.console.err('No loading active') end
+    if not loadRes or isStopping then FM.console.err('No loading active') return end
     isStopping = true
     
     SendNUIMessage({
