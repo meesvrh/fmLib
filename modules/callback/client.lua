@@ -15,8 +15,6 @@ end
 ---@param cb function -- callback function
 ---Register a callback
 function FM.callback.register(e, cb)
-    if callbacks[e] then FM.console.err("Callback "..e.." already exists", false) return end
-
     callbacks[e] = cb
 end
 
