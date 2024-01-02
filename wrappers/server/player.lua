@@ -171,14 +171,13 @@ function FM.player.get(id)
         end
     end
 
-    -- NEEDS DOCUMENTATION IMPLEMENTATION
-    ---@param msg string
-    ---@param type? 'error'|'success'
-    p.notify = function(msg, type)
-        if not msg then return end
+    ---@param message string
+    ---@param type? 'success'|'error'
+    p.notify = function(message, type)
+        if not message then return end
 
-        if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, msg, type)
-        elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, msg, type) end
+        if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, message, type)
+        elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, message, type) end
     end
 
     ---@param item string

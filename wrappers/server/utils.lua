@@ -1,12 +1,12 @@
 FM.utils = {}
 
 ---@param src number
----@param msg string
----@param type? 'error'|'success'
-function FM.utils.notify(src, msg, type)
+---@param message string
+---@param type? 'success'|'error'
+function FM.utils.notify(src, message, type)
     if not src then return end
-    if not msg then return end
+    if not message then return end
 
-    if ESX then TriggerClientEvent('esx:showNotification', src, msg, type)
-    elseif QB then TriggerClientEvent('QBCore:Notify', src, msg, type) end
+    if ESX then TriggerClientEvent('esx:showNotification', src, message, type)
+    elseif QB then TriggerClientEvent('QBCore:Notify', src, message, type) end
 end

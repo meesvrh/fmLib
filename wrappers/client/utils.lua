@@ -1,10 +1,10 @@
 FM.utils = {}
 
----@param msg string
+---@param message string
 ---@param type? 'error'|'success'
-function FM.utils.notify(msg, type)
-    if not msg then return end
+function FM.utils.notify(message, type)
+    if not message then return end
 
-    if ESX then ESX.ShowNotification(msg, type)
-    elseif QB then QBCore.Functions.Notify(msg, type) end
+    if ESX then ESX.ShowNotification(message, type)
+    elseif QB then QBCore.Functions.Notify(message, type) end
 end

@@ -22,6 +22,8 @@ While it may not cover every possible resource or framework, fmLib strives to en
 
 ## [Documentation](https://forgem.gitbook.io/)
 
+## [Download](https://github.com/meesvrh/fmLib/releases/latest/download/fmLib.zip)
+
 ## [Getting Started](https://forgem.gitbook.io/forgem/fmlib/getting-started)
 
 ## Credits
