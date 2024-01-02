@@ -52,7 +52,7 @@ end
 FM.console.suc = FM.console.success
 
 ---@param message string
----@param traceback boolean
+---@param traceback? boolean
 function FM.console.error(message, traceback)
     print("^7(^1ERROR^7) ^0"..message.."^7")
     if traceback then print(debug.traceback()) end
