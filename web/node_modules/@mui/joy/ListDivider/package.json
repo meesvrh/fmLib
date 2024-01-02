@@ -1,0 +1,6 @@
+{
+  "sideEffects": false,
+  "module": "./index.js",
+  "main": "../node/ListDivider/index.js",
+  "types": "./index.d.ts"
+}

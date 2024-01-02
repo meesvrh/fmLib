@@ -1,4 +1,4 @@
-![ForgeM](web/img/forgem.png)
+![ForgeM](web/src/assets/images/forgem.png)
 
 # fmLib - A Multi-Framework Utility Library
 
