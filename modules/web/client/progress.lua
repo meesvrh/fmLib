@@ -29,6 +29,7 @@ FM.progress = {}
 ---@field canCancel? boolean
 ---@field anim? Anim
 ---@field prop? Prop
+---@field scenario? { name: string, position?: vector3, heading?: number, duration?: number, sitting?: boolean, teleport?: boolean }
 ---@field useSfx? boolean
 
 ---@type ProgressProps | nil
@@ -40,6 +41,8 @@ local function stopCurrentAnim()
             ClearPedTasks(PlayerPedId())
         end
         RemoveAnimDict(currProps.anim.dict)
+    elseif currProps.scenario and IsPedUsingScenario(PlayerPedId(), currProps.scenario.name) then
+        ClearPedTasks(PlayerPedId())
     end
 end
 
@@ -66,12 +69,20 @@ end
 
 local function setDefaultProps(props)
     if not props then props = {} end
+    props.label = props.label or 'Progress'
     props.time = props.time or 3000
     props.type = props.type or 'linear'
     props.completedLabel = props.completedLabel or 'Completed'
     props.failedLabel = props.failedLabel or 'Failed'
     if props.canCancel == nil then props.canCancel = true end
     if props.useSfx == nil then props.useSfx = true end
+    if not props.anim and props.scenario then
+        props.scenario.position = props.scenario.position or GetEntityCoords(PlayerPedId())
+        props.scenario.heading = props.scenario.heading or GetEntityHeading(PlayerPedId())
+        props.scenario.duration = props.scenario.duration or -1
+        if props.scenario.sitting == nil then props.scenario.sitting = false end
+        if props.scenario.teleport == nil then props.scenario.teleport = false end
+    end
 
     return props
 end
@@ -90,7 +101,9 @@ function FM.progress.start(props)
         data = currProps
     })
 
-    if currProps.anim then FM.anim.play(currProps.anim) end
+    if currProps.anim then FM.anim.play(currProps.anim) elseif
+    currProps.scenario then TaskStartScenarioAtPosition(PlayerPedId(), currProps.scenario.name, currProps.scenario.position, currProps.scenario.heading, currProps.scenario.duration, currProps.scenario.sitting, currProps.scenario.teleport) end
+
     if currProps.prop then currProps.prop = createProp(currProps.prop) end
     
     return Citizen.Await(progressRes)
@@ -111,7 +124,7 @@ RegisterNUICallback('progressStopped', function(success, cb)
         progressRes:resolve(success)
         progressRes = nil
 
-        if currProps.anim then stopCurrentAnim() end
+        if currProps.anim or currProps.scenario then stopCurrentAnim() end
         if currProps.prop then DeleteEntity(currProps.prop) end
 
         currProps = nil
@@ -141,7 +154,8 @@ RegisterCommand('startprogress', function(source, args, raw)
         type = 'linear',
         failedLabel = 'Progress Failed!',
         completedLabel = 'Progress Completed!',
-        anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" }
+        anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" },
+        prop = { model = 'prop_tool_broom', position = vector3(0.0, 0.0, 0.0), rotation = vector3(0.0, 0.0, 0.0), bone = 60309 },
     }) then
         FM.console.debug('Progress success')
     else
