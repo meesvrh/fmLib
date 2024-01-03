@@ -11,7 +11,7 @@ games { 'gta5' }
 author 'meesvrh'
 repository 'fmLib'
 description 'A library for FiveM developers that wraps multiple frameworks, resources and modules.'
-version '0.1.0'
+version '1.0.1'
 
 shared_script {
   'settings.lua',
@@ -36,9 +36,7 @@ ui_page 'web/build/index.html'
 
 files {
   'web/build/index.html',
-  'web/img/*.*',
-  'web/build/**/*',
-  'web/sounds/*.*',
+  'web/assets/**/*',
 }
 
 lua54 'yes'
