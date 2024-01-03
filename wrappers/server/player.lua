@@ -2,12 +2,16 @@ FM.player = {}
 
 local function getPlayerBySrc(src)
     if not src then return end
-    return ESX and ESX.GetPlayerFromId(src) or QB and QB.Functions.GetPlayer(src) or nil
+    local _fwp = ESX and ESX.GetPlayerFromId(src) or QB and QB.Functions.GetPlayer(src) or nil
+    _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
+    return _fwp
 end
 
 local function getPlayerByIdentifier(identifier)
     if not identifier then return end
-    return ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
+    local _fwp = ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
+    _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
+    return _fwp
 end
 
 ---@param id number|string
@@ -176,6 +180,7 @@ function FM.player.get(id)
     p.notify = function(message, type)
         if not message then return end
 
+        print(_fwp.source, message, type)
         if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, message, type)
         elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, message, type) end
     end
