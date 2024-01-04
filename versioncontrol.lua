@@ -34,11 +34,11 @@ CreateThread(function()
         if res.draft or res.prerelease or not res.tag_name then return end
 
         if isVersionOlder(cVer, res.tag_name) then
-            FM.console.update("You're running an outdated version of %s (current version: %s)!", resource, cVer)
-            FM.console.update("Download the latest version (%s) here: %s", res.tag_name, res.html_url)
+            FM.console.update(string.format("You're running an outdated version of %s (current version: %s)!", resource, cVer))
+            FM.console.update(string.format("Download the latest version (%s) here: %s", res.tag_name, res.html_url))
             return
         else
-            FM.console.suc('%s is up to date!', resource)
+            FM.console.suc(string.format('%s is up to date!', resource))
             return
         end
     end, 'GET')
