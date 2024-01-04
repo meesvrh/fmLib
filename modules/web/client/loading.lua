@@ -34,7 +34,7 @@ function FM.loading.start(props, cb)
     currProps = setDefaultProps(props)
     loadRes = promise.new()
     isStopping = false
-
+    
     SetNuiFocus(currProps.focus, currProps.cursor)
     SetNuiFocusKeepInput(currProps.keepInput)
 
