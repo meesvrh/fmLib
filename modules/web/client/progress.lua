@@ -87,7 +87,6 @@ local function setDefaultProps(props)
     return props
 end
 
----@async
 ---@param props ProgressProps | nil
 function FM.progress.start(props)
     if progressRes then return FM.console.err('Progress already active') end
