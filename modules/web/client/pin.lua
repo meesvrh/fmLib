@@ -16,7 +16,7 @@ local function setDefaultProps(props)
     if props.useSfx == nil then props.useSfx = true end
     if props.reactiveUI then
         props.reactiveUI = props.reactiveUI.correctPin and props.reactiveUI or nil
-        if props.reactiveUI and props.reactiveUI.closeOnWrong == nil then props.reactiveUI.closeOnWrong = false end
+        if props.reactiveUI and props.reactiveUI.closeOnWrong == nil then props.reactiveUI.closeOnWrong = true end
     end
     if props.canClose == nil then props.canClose = true end
 
@@ -25,7 +25,7 @@ end
 
 ---@param props PinProps | nil
 function FM.pin.open(props)
-    if pinRes then FM.console.err('Pin already active') return end
+    if pinRes then FM.console.err('Pin already open') return end
     
     props = setDefaultProps(props)
     pinRes = promise.new()
@@ -42,7 +42,7 @@ function FM.pin.open(props)
 end
 
 function FM.pin.close()
-    if not pinRes then FM.console.err('No pin active') return end
+    if not pinRes then FM.console.err('No pin open') return end
 
     SendNUIMessage({
         action = 'closePin',
@@ -62,7 +62,7 @@ RegisterNUICallback('pinClosed', function(res, cb)
 end)
 
 ---@return boolean
-function FM.pin.isActive()
+function FM.pin.isOpen()
     return pinRes ~= nil
 end
 
