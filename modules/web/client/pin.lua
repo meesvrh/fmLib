@@ -6,12 +6,19 @@ FM.pin = {}
 ---@field title? string
 ---@field subtitle? string
 ---@field maxNumbers? number
+---@field canClose? boolean
 ---@field useSfx? boolean
+---@field reactiveUI? { correctPin: number, closeOnWrong?: boolean }
 
 local function setDefaultProps(props)
     if not props then props = {} end
     props.maxNumbers = (props.maxNumbers and props.maxNumbers <= 8 and props.maxNumbers > 0) and props.maxNumbers or 4
     if props.useSfx == nil then props.useSfx = true end
+    if props.reactiveUI then
+        props.reactiveUI = props.reactiveUI.correctPin and props.reactiveUI or nil
+        if props.reactiveUI and props.reactiveUI.closeOnWrong == nil then props.reactiveUI.closeOnWrong = false end
+    end
+    if props.canClose == nil then props.canClose = true end
 
     return props
 end
@@ -61,14 +68,21 @@ end
 
 --[[ EXAMPLE FOR NOW HERE ]]
 RegisterCommand('openpin', function (source, args, raw)
-    local result = FM.pin.open({
+    local pin = FM.pin.open({
         title = 'Vault Pin',
         subtitle = 'Enter the vault code.',
         maxNumbers = 4,
+        reactiveUI = {
+            correctPin = 4444,
+        },
     })
 
-    if result then
-        FM.console.debug(result)
+    if pin then
+        if pin == 4444 then
+            FM.console.success('Correct Pin: '..pin)
+        else
+            FM.console.error('Wrong Pin: '..pin)
+        end
     else
         FM.console.error('No pin inserted!')
     end
