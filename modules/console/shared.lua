@@ -42,23 +42,23 @@ end
 
 ---@param message string
 function FM.console.log(message)
-    print("^7(^5LOG^7) ^0"..message.."^7")
+    print("^7(^5LOG^7) ^7"..message)
 end
 
 ---@param message string
 function FM.console.success(message)
-    print("^7(^2SUCCESS^7) ^0"..message.."^7")
+    print("^7(^2SUCCESS^7) ^7"..message)
 end
 FM.console.suc = FM.console.success
 
 ---@param message string
 ---@param traceback? boolean
 function FM.console.error(message, traceback)
-    print("^7(^1ERROR^7) ^0"..message.."^7")
+    print("^7(^1ERROR^7) ^7"..message)
     if traceback then print(debug.traceback()) end
 end
 FM.console.err = FM.console.error
 
 function FM.console.update(message)
-    print("^7(^6UPDATE^7) ^0"..message.."^7")
+    print("^7(^6UPDATE^7) ^7"..message)
 end
