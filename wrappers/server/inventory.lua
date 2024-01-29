@@ -24,7 +24,7 @@ function FM.inventory.getItemLabel(item)
         if cachedItemLabels[item] then return cachedItemLabels[item]
         else
             for itemName, v in pairs(OXInv:Items()) do
-                cachedItemLabels[itemName] = data.label
+                cachedItemLabels[itemName] = v.label
             end
 
             return cachedItemLabels[item]
