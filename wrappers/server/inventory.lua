@@ -14,12 +14,22 @@ function FM.inventory.registerUsableItem(itemName, cb)
     end
 end
 
+local cachedItemLabels = {}
 ---@param item string
 ---@return string label
 function FM.inventory.getItemLabel(item)
     if not item then return end
 
-    if ESX then return ESX.GetItemLabel(item)
+    if OXInv then
+        if cachedItemLabels[item] then return cachedItemLabels[item]
+        else
+            for itemName, v in pairs(OXInv:Items()) do
+                cachedItemLabels[itemName] = data.label
+            end
+
+            return cachedItemLabels[item]
+        end
+    elseif ESX then return ESX.GetItemLabel(item)
     elseif QB then return QB.Shared.Items[item].label end
 end
 

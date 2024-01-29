@@ -97,7 +97,16 @@ function FM.player.get(id)
     p.getItem = function(item)
         if not item then return end
 
-        if ESX then
+        if OXInv then
+            item = OXInv:GetItem(_fwp.source, item, nil, false)
+            if not item then return end
+
+            return {
+                name = item.name,
+                label = item.label,
+                amount = item.count
+            }
+        elseif ESX then
             item = _fwp.getInventoryItem(item)
             if not item then return end
 
