@@ -6,5 +6,5 @@ function FM.utils.notify(message, type)
     if not message then return end
 
     if ESX then ESX.ShowNotification(message, type)
-    elseif QB then QBCore.Functions.Notify(message, type) end
+    elseif QB then QB.Functions.Notify(message, type) end
 end
