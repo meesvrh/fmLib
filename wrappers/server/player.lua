@@ -2,7 +2,10 @@ FM.player = {}
 
 local function getPlayerBySrc(src)
     if not src then return end
+
     local _fwp = ESX and ESX.GetPlayerFromId(src) or QB and QB.Functions.GetPlayer(src) or nil
+    if not _fwp or not type(_fwp) == 'table' then return end
+
     _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
     return _fwp
 end
@@ -10,6 +13,8 @@ end
 local function getPlayerByIdentifier(identifier)
     if not identifier then return end
     local _fwp = ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
+    if not _fwp or not type(_fwp) == 'table' then return end
+
     _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
     return _fwp
 end
@@ -92,7 +97,16 @@ function FM.player.get(id)
     p.getItem = function(item)
         if not item then return end
 
-        if ESX then
+        if OXInv then
+            item = OXInv:GetItem(_fwp.source, item, nil, false)
+            if not item then return end
+
+            return {
+                name = item.name,
+                label = item.label,
+                amount = item.count
+            }
+        elseif ESX then
             item = _fwp.getInventoryItem(item)
             if not item then return end
 

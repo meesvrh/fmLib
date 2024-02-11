@@ -17,6 +17,23 @@ elseif not ignoreResourceNotFoundErrors then
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
+if GetResourceState(Resources.OXInv or 'ox_inventory') == 'started' then
+    OXInv = exports[Resources.OXInv or 'ox_inventory']
+
+    if not ignoreResourceInitializedLogs then
+        FM.console.suc("Initialized OX-Inventory")
+    end
+-- elseif GetResourceState(Resources.QBInv or 'qb-inventory') == 'started' then
+--     QBInv = exports[Resources.QBInv or 'qb-inventory']
+
+--     if not ignoreResourceInitializedLogs then
+--         FM.console.suc("Initialized QB-Inventory")
+--     end
+elseif not ignoreResourceNotFoundErrors then
+    FM.console.err("No inventory found for "..GetCurrentResourceName(), true)
+    FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
+end
+
 -- if GetResourceState(Resources.OXTarget or 'ox_target') == 'started' then
 --     OXTarget = exports[Resources.OXTarget or 'ox_target']
 
@@ -31,22 +48,5 @@ end
 --     end
 -- elseif not ignoreResourceNotFoundErrors then
 --     FM.console.err("No target found for "..GetCurrentResourceName(), true)
---     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
--- end
-
--- if GetResourceState(Resources.OXInv or 'ox_inventory') == 'started' then
---     OXInv = exports[Resources.OXInv or 'ox_inventory']
-
---     if not ignoreResourceInitializedLogs then
---         FM.console.suc("Initialized OX-Inventory")
---     end
--- elseif GetResourceState(Resources.QBInv or 'qb-inventory') == 'started' then
---     QBInv = exports[Resources.QBInv or 'qb-inventory']
-
---     if not ignoreResourceInitializedLogs then
---         FM.console.suc("Initialized QB-Inventory")
---     end
--- elseif not ignoreResourceNotFoundErrors then
---     FM.console.err("No inventory found for "..GetCurrentResourceName(), true)
 --     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 -- end

@@ -65,25 +65,3 @@ end)
 function FM.pin.isOpen()
     return pinRes ~= nil
 end
-
---[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('openpin', function (source, args, raw)
-    local pin = FM.pin.open({
-        title = 'Vault Pin',
-        subtitle = 'Enter the vault code.',
-        maxNumbers = 4,
-        reactiveUI = {
-            correctPin = 4444,
-        },
-    })
-
-    if pin then
-        if pin == 4444 then
-            FM.console.success('Correct Pin: '..pin)
-        else
-            FM.console.error('Wrong Pin: '..pin)
-        end
-    else
-        FM.console.error('No pin inserted!')
-    end
-end)
