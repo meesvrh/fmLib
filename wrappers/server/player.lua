@@ -194,7 +194,6 @@ function FM.player.get(id)
     p.notify = function(message, type)
         if not message then return end
 
-        print(_fwp.source, message, type)
         if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, message, type)
         elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, message, type) end
     end
