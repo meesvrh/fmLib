@@ -37,6 +37,4 @@ Resources = {
     QB = 'qb-core',
     OXInv = 'ox_inventory',
     -- QBInv = 'qb-inventory',
-    -- OXTarget = 'ox_target',
-    -- QBTarget = 'qb-target',
 }

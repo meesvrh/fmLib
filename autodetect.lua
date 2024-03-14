@@ -33,20 +33,3 @@ elseif not ignoreResourceNotFoundErrors then
     FM.console.err("No inventory found for "..GetCurrentResourceName(), true)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
-
--- if GetResourceState(Resources.OXTarget or 'ox_target') == 'started' then
---     OXTarget = exports[Resources.OXTarget or 'ox_target']
-
---     if not ignoreResourceInitializedLogs then
---         FM.console.suc("Initialized OX-Target")
---     end
--- elseif GetResourceState(Resources.QBTarget or 'qb-target') == 'started' then
---     QBTarget = exports[Resources.QBTarget or 'qb-target']
-
---     if not ignoreResourceInitializedLogs then
---         FM.console.suc("Initialized QB-Target")
---     end
--- elseif not ignoreResourceNotFoundErrors then
---     FM.console.err("No target found for "..GetCurrentResourceName(), true)
---     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
--- end
