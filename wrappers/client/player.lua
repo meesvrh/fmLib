@@ -15,7 +15,7 @@ end
 function FM.player.getFullName()
     if ESX then 
         local playerData = ESX.GetPlayerData()
-        return playerData ~= nil and playerData.firstName .. " " .. playerData.lastName or nil
+        return playerData ~= nil and tostring(playerData.firstName) .. " " .. tostring(playerData.lastName) or nil
     elseif QB then 
         local playerData = QB.Functions.GetPlayerData()
         return playerData ~= nil and playerData.charinfo.firstname .. " " .. playerData.charinfo.lastname or nil
