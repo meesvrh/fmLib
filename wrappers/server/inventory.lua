@@ -17,6 +17,7 @@ end
 local cachedItemLabels = {}
 ---@param item string
 ---@return string label
+--- Currently not working for weapons in ESX & OXInv
 function FM.inventory.getItemLabel(item)
     if not item then return end
 
