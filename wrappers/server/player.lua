@@ -110,7 +110,6 @@ function FM.player.get(id)
             }
         elseif ESX then
             item = _fwp.getInventoryItem(item)
-            FM.console.debug(item)
             if not item then return end
 
             return {
