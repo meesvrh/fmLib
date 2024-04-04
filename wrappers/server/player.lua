@@ -28,10 +28,12 @@ function FM.player.get(id)
 
     ---@param item string
     ---@param amount number
-    p.addItem = function(item, amount)
+    ---@param metadata? any
+    p.addItem = function(item, amount, metadata)
         if not item or not amount then return end
 
-        if ESX then _fwp.addInventoryItem(item, amount)
+        if OXInv then OXInv:AddItem(_fwp.source, item, amount, metadata)
+        elseif ESX then _fwp.addInventoryItem(item, amount)
         elseif QB then _fwp.Functions.AddItem(item, amount) end
     end
 
@@ -108,6 +110,7 @@ function FM.player.get(id)
             }
         elseif ESX then
             item = _fwp.getInventoryItem(item)
+            FM.console.debug(item)
             if not item then return end
 
             return {
@@ -200,10 +203,13 @@ function FM.player.get(id)
 
     ---@param item string
     ---@param amount number
-    p.removeItem = function(item, amount)
+    ---@param slotId? number
+    ---@param metadata? any
+    p.removeItem = function(item, amount, slotId, metadata)
         if not item or not amount then return end
         
-        if ESX then _fwp.removeInventoryItem(item, amount)
+        if OXInv then OXInv:RemoveItem(_fwp.source, item, amount, metadata, slotId)
+        elseif ESX then _fwp.removeInventoryItem(item, amount)
         elseif QB then _fwp.Functions.RemoveItem(item, amount) end
     end
 

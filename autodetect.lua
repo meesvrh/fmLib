@@ -13,7 +13,7 @@ elseif GetResourceState(Resources.QB or 'qb-core') == 'started' then
         FM.console.suc("Initialized QB-Core")
     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No core found for "..GetCurrentResourceName(), true)
+    FM.console.err("No core found for "..GetCurrentResourceName(), false)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end
 
@@ -30,6 +30,6 @@ if GetResourceState(Resources.OXInv or 'ox_inventory') == 'started' then
 --         FM.console.suc("Initialized QB-Inventory")
 --     end
 elseif not ignoreResourceNotFoundErrors then
-    FM.console.err("No inventory found for "..GetCurrentResourceName(), true)
+    FM.console.err("No inventory found for "..GetCurrentResourceName(), false)
     FM.console.err('Did you rename a resource? Go to fmLib/settings.lua:Resources')
 end

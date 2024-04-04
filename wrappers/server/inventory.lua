@@ -34,4 +34,16 @@ function FM.inventory.getItemLabel(item)
     elseif QB then return QB.Shared.Items[item].label end
 end
 
+---@param inv string inventory name/player source
+---@param slot number
+function FM.inventory.getMetaData(inv, slot)
+    if OXInv then return OXInv:GetSlot(inv, slot).metadata end
+end
+
+---@param inv string inventory name/player source
+---@param itemName string
+function FM.inventory.getSlotIDWithItem(inv, itemName)
+    if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName) end
+end
+
 FM.inv = FM.inventory
