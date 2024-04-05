@@ -29,12 +29,23 @@ function FM.player.get(id)
     ---@param item string
     ---@param amount number
     ---@param metadata? any
-    p.addItem = function(item, amount, metadata)
-        if not item or not amount then return end
+    ---@param checkCarry? boolean
+    p.addItem = function(item, amount, metadata, checkCarry)
+        if not item or not amount then return false end
 
-        if OXInv then OXInv:AddItem(_fwp.source, item, amount, metadata)
-        elseif ESX then _fwp.addInventoryItem(item, amount)
-        elseif QB then _fwp.Functions.AddItem(item, amount) end
+        if OXInv then 
+            if checkCarry and not OXInv:CanCarryItem(_fwp.source, item, amount, metadata) then return false end
+            OXInv:AddItem(_fwp.source, item, amount, metadata)
+
+            return true
+        elseif ESX then
+            if checkCarry and not _fwp.canCarryItem(item, amount) then return false end
+            _fwp.addInventoryItem(item, amount)
+
+            return true
+        elseif QB then
+            return _fwp.Functions.AddItem(item, amount)
+        end
     end
 
         ---@param amount number
