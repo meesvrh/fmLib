@@ -14,8 +14,7 @@ function FM.inventory.getItemsAmounts()
     local items = FM.inventory.getItems()
     local amounts = {}
 
-    for i = 1, #items do
-        local item = items[i]
+    for slot, item in pairs(items) do
         if amounts[item.name] then
             amounts[item.name] = amounts[item.name] + item.amount
         else
@@ -32,9 +31,8 @@ function FM.inventory.getItems()
 
     if OXInv then
         local items = OXInv:GetPlayerItems()
-        for i = 1, #items do
-            local item = items[i]
-            inventory[#inventory+1] = {
+        for slot, item in pairs(items) do
+            inventory[slot] = {
                 name = item.name,
                 label = item.label,
                 amount = item.count
@@ -42,9 +40,8 @@ function FM.inventory.getItems()
         end
     elseif ESX then
         local items = ESX.GetPlayerData().inventory
-        for i = 1, #items do
-            local item = items[i]
-            inventory[#inventory+1] = {
+        for slot, item in pairs(items) do
+            inventory[slot] = {
                 name = item.name,
                 label = item.label,
                 amount = item.count
@@ -52,9 +49,8 @@ function FM.inventory.getItems()
         end
     elseif QB then
         local items = QB.Functions.GetPlayerData().items
-        for i = 1, #items do
-            local item = items[i]
-            inventory[#inventory+1] = {
+        for slot, item in pairs(items) do
+            inventory[slot] = {
                 name = item.name,
                 label = item.label,
                 amount = item.amount
