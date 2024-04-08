@@ -140,24 +140,26 @@ function FM.player.get(id)
         end
     end
 
-    ---@return { [string]: { amount: number, label: string } } inventory
+    ---@return { [slot]: { amount: number, label: string } } inventory
     p.getItems = function()
         local inventory = {}
 
         if ESX then
             local items = _fwp.getInventory()
-            for _, v in pairs(items) do
-                inventory[v.name] = {
-                    amount = v.count,
-                    label = v.label,
+            for slot, item in pairs(items) do
+                inventory[slot] = {
+                    name = item.name,
+                    label = item.label,
+                    amount = item.count
                 }
             end
         elseif QB then
             local items = _fwp.PlayerData.items
-            for _, v in pairs(items) do
-                inventory[v.name] = {
-                    amount = v.amount,
-                    label = v.label,
+            for slot, item in pairs(items) do
+                inventory[slot] = {
+                    name = item.name,
+                    label = item.label,
+                    amount = item.amount
                 }
             end
         end
