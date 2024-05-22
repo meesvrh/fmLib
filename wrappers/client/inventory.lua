@@ -1,5 +1,6 @@
 FM.inventory = {}
 
+--- Currently only working for qb-inventory
 ---@param type 'otherplayer'
 ---@param id string | number
 function FM.inventory.open(type, id)
@@ -7,6 +8,24 @@ function FM.inventory.open(type, id)
     
     if QBInv then
         TriggerServerEvent("inventory:server:OpenInventory", type, id)
+    end
+end
+
+---@param stashId string | number
+---@param owner? string | boolean
+---@param weight? number
+---@param slots? number
+function FM.inventory.openStash(stashId, owner, weight, slots)
+    if not stashId then FM.console.err('No stash ID provided') return end
+
+    if OXInv then
+        OXInv:openInventory('stash', { id = stashId, owner = owner })
+    elseif QBInv or QSInv or PSInv then
+        TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
+            maxweight = weight,
+            slots = slots,
+        })
+        TriggerEvent('inventory:client:SetCurrentStash', stashId)
     end
 end
 

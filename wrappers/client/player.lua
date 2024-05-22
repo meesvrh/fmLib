@@ -21,3 +21,14 @@ function FM.player.getFullName()
         return playerData ~= nil and playerData.charinfo.firstname .. " " .. playerData.charinfo.lastname or nil
     end
 end
+
+---@return string | nil
+function FM.player.getIdentifier()
+    if ESX then 
+        local playerData = ESX.GetPlayerData()
+        return playerData ~= nil and playerData.identifier or nil
+    elseif QB then 
+        local playerData = QB.Functions.GetPlayerData()
+        return playerData ~= nil and playerData.citizenid or nil
+    end
+end

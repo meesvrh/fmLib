@@ -31,10 +31,12 @@ KeyMappings = {
     CANCEL = { mapper = 'keyboard', key = 'x' },
 }
 
----@type table Only change these if you know what you're doing!
+---@type table Only change these if you have changed the name of a resource
 Resources = {
     ESX = 'es_extended',
     QB = 'qb-core',
     OXInv = 'ox_inventory',
-    -- QBInv = 'qb-inventory',
+    QBInv = 'qb-inventory',
+    QSInv = 'qs-inventory',
+    PSInv = 'ps-inventory'
 }

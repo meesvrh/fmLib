@@ -46,4 +46,28 @@ function FM.inventory.getSlotIDWithItem(inv, itemName)
     if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName) end
 end
 
+
+--- Only necessary for ox-inventory
+---@param stash { id: string | number, label: string, slots: number, weight: number, owner?: string | boolean, groups?: table, coords?: vector3 | vector3[] }
+function FM.inventory.registerStash(stash)
+    if OXInv then
+        OXInv:RegisterStash(stash.id, stash.label, stash.slots, stash.weight, stash.owner, stash.groups, stash.coords)
+    end
+end
+
+--- Only necessary for ox-inventory
+---@param stashId string | number
+---@param newWeight? number
+---@param newSlots? number
+function FM.inventory.upgradeStash(stashId, newWeight, newSlots)
+    if newWeight then
+        if OXInv then OXInv:SetMaxWeight(stashId, newWeight) end
+    end
+
+    if newSlots then
+        if OXInv then OXInv:SetSlotCount(stashId, newSlots) end
+    end
+end
+
+
 FM.inv = FM.inventory
