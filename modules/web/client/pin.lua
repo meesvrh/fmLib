@@ -8,12 +8,14 @@ FM.pin = {}
 ---@field maxNumbers? number
 ---@field canClose? boolean
 ---@field useSfx? boolean
+---@field hidden? boolean
 ---@field reactiveUI? { correctPin: number, closeOnWrong?: boolean }
 
 local function setDefaultProps(props)
     if not props then props = {} end
     props.maxNumbers = (props.maxNumbers and props.maxNumbers <= 8 and props.maxNumbers > 0) and props.maxNumbers or 4
     if props.useSfx == nil then props.useSfx = true end
+    if props.hidden == nil then props.hidden = false end
     if props.reactiveUI then
         props.reactiveUI = props.reactiveUI.correctPin and props.reactiveUI or nil
         if props.reactiveUI and props.reactiveUI.closeOnWrong == nil then props.reactiveUI.closeOnWrong = true end

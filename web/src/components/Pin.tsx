@@ -145,7 +145,7 @@ const Pin = () => {
                   }, 0.9)`,
                 }}
               >
-                {pin}
+                {!props.hidden ? pin : "*".repeat(pin.length)}
               </span>
             )}
           </div>
