@@ -140,7 +140,7 @@ function FM.player.get(id)
         end
     end
 
-    ---@return { [slot]: { amount: number, label: string } } inventory
+    ---@return { [slot]: { name: string, amount: number, label: string } } inventory
     p.getItems = function()
         local inventory = {}
 

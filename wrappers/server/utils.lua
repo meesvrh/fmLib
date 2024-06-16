@@ -11,12 +11,23 @@ function FM.utils.notify(src, message, type)
     elseif QB then TriggerClientEvent('QBCore:Notify', src, message, type) end
 end
 
-function FM.utils.getPlayers()
+---@param filter? { job: string }
+function FM.utils.getPlayers(filter)
     local playerSources = GetPlayers()
 
     local players = {}
-    for k, src in pairs(playerSources) do
-        players[src] = FM.player.get(tonumber(src))
+    for _, src in pairs(playerSources) do
+        local p = FM.player.get(tonumber(src))
+
+        if not filter then
+            players[src] = p
+        else
+            if filter.job then
+                if p.getJob().name == filter.job then
+                    players[src] = p
+                end
+            end
+        end
     end
     
     return players
