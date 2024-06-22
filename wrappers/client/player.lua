@@ -32,3 +32,28 @@ function FM.player.getIdentifier()
         return playerData ~= nil and playerData.citizenid or nil
     end
 end
+
+---@return { name: string, label: string, grade: number, gradeLabel: string } | nil
+function FM.player.getJob()
+    if ESX then
+        local playerData = ESX.GetPlayerData()
+        local job = playerData ~= nil and playerData.job or nil
+
+        return job and {
+            name = job.name,
+            label = job.label,
+            grade = job.grade,
+            gradeLabel = job.grade_label
+        } or nil
+    elseif QB then
+        local playerData = QB.Functions.GetPlayerData()
+        local job = playerData ~= nil and playerData.job or nil
+
+        return job and {
+            name = job.name,
+            label = job.label,
+            grade = job.grade.level,
+            gradeLabel = job.grade.name
+        } or nil
+    end
+end
