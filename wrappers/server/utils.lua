@@ -18,16 +18,20 @@ function FM.utils.getPlayers(filter)
     local players = {}
     for _, src in pairs(playerSources) do
         local p = FM.player.get(tonumber(src))
+        if not p then goto continue end
 
         if not filter then
             players[src] = p
         else
             if filter.job then
-                if p.getJob().name == filter.job then
+                local job = p.getJob()
+                if job and job.name == filter.job then
                     players[src] = p
                 end
             end
         end
+
+        ::continue::
     end
     
     return players
