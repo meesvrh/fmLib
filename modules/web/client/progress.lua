@@ -138,27 +138,27 @@ function FM.progress.isActive()
     return progressRes ~= nil
 end
 
-RegisterCommand('cancelprogress', function(source, args, raw)
+RegisterCommand('progresscancel', function(source, args, raw)
     if not progressRes or not currProps or not currProps.canCancel then return end
     FM.progress.stop(false)
 end)
-RegisterKeyMapping('cancelprogress', 'Cancel Progress', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
+RegisterKeyMapping('progresscancel', 'Cancel Progress', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
 
 --[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('startprogress', function(source, args, raw)
-    if FM.progress.start({
-        label = 'Testing progress',
-        time = 10000,
-        canCancel = true,
-        type = 'linear',
-        failedLabel = 'Progress Failed!',
-        completedLabel = 'Progress Completed!',
-        anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" },
-        prop = { model = 'prop_tool_broom', position = vector3(0.0, 0.0, 0.0), rotation = vector3(0.0, 0.0, 0.0), bone = 60309 },
-    }) then
-        FM.console.debug('Progress success')
-    else
-        FM.console.debug('Progress failed')
-    end
-end)
+-- RegisterCommand('startprogress', function(source, args, raw)
+--     if FM.progress.start({
+--         label = 'Testing progress',
+--         time = 10000,
+--         canCancel = true,
+--         type = 'linear',
+--         failedLabel = 'Progress Failed!',
+--         completedLabel = 'Progress Completed!',
+--         anim = { dict = "amb@world_human_gardener_plant@male@base", anim = "base" },
+--         prop = { model = 'prop_tool_broom', position = vector3(0.0, 0.0, 0.0), rotation = vector3(0.0, 0.0, 0.0), bone = 60309 },
+--     }) then
+--         FM.console.debug('Progress success')
+--     else
+--         FM.console.debug('Progress failed')
+--     end
+-- end)
 

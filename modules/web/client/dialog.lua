@@ -70,15 +70,15 @@ function FM.dialog.isOpen()
 end
 
 --[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('opendialog', function (source, args, raw)
-    local result = FM.dialog.open({
-        title = 'Test',
-        message = 'This is a test dialog',
-        size = 'lg'
-    })
-    FM.console.debug(result)
-end)
+-- RegisterCommand('opendialog', function (source, args, raw)
+--     local result = FM.dialog.open({
+--         title = 'Test',
+--         message = 'This is a test dialog',
+--         size = 'lg'
+--     })
+--     FM.console.debug(result)
+-- end)
 
-RegisterCommand('closedialog', function (source, args, raw)
-    FM.dialog.close('confirm')
-end)
+-- RegisterCommand('closedialog', function (source, args, raw)
+--     FM.dialog.close('confirm')
+-- end)

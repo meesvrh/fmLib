@@ -83,14 +83,14 @@ end)
 RegisterKeyMapping('cancelload', 'Cancel Loading', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
 
 --[[ EXAMPLE FOR NOW HERE ]]
-RegisterCommand('startload', function (source, args, raw)
-    FM.loading.start({
-        time = 5000,
-        focus = true,
-        cursor = false,
-        input = false,
-        useSfx = true,
-    }, function(success)
-        FM.console.debug(success)
-    end)
-end)
+-- RegisterCommand('startload', function (source, args, raw)
+--     FM.loading.start({
+--         time = 5000,
+--         focus = true,
+--         cursor = false,
+--         input = false,
+--         useSfx = true,
+--     }, function(success)
+--         FM.console.debug(success)
+--     end)
+-- end)
