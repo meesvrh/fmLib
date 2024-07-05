@@ -204,6 +204,12 @@ function FM.player.get(id)
         end
     end
 
+    ---@return string | table group
+    p.getGroup = function()
+        if ESX then return _fwp.getGroup()
+        elseif QB then return QB.Functions.GetPermission(_fwp.source) end
+    end
+
     ---@param message string
     ---@param type? 'success'|'error'
     p.notify = function(message, type)
