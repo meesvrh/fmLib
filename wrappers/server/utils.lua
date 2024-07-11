@@ -11,7 +11,7 @@ function FM.utils.notify(src, message, type)
     elseif QB then TriggerClientEvent('QBCore:Notify', src, message, type) end
 end
 
----@param filter? { job: string }
+---@param filter? { job?: string, gang?: string }
 function FM.utils.getPlayers(filter)
     local playerSources = GetPlayers()
 
@@ -26,6 +26,13 @@ function FM.utils.getPlayers(filter)
             if filter.job then
                 local job = p.getJob()
                 if job and job.name == filter.job then
+                    players[src] = p
+                end
+            end
+
+            if filter.gang then
+                local gang = p.getGang()
+                if gang and gang.name == filter.gang then
                     players[src] = p
                 end
             end
