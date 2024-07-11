@@ -94,7 +94,7 @@ function FM.player.get(id)
 
     ---@return { name: string, label: string, grade: number, gradeLabel: string } gang
     p.getGang = function()
-        if ESX then return FM.getJob()
+        if ESX then return p.getJob()
         elseif QB then
             return {
                 name = _fwp.PlayerData.gang.name,
