@@ -11,6 +11,7 @@ FM.animation = {}
 ---@field duration? number
 ---@field flag? number
 ---@field animTime? number
+---@field advanced? boolean | nil
 
 ---@param props AnimationProps
 local function validateProps(props)
@@ -56,7 +57,11 @@ function FM.animation.play(props)
     props = setDefaultProps(props)
     if not FM.animation.request(props.dict) then return end
     
-    TaskPlayAnimAdvanced(props.ped, props.dict, props.anim, props.position, props.rotation, props.enterSpeed, props.exitSpeed, props.duration, props.flag, props.animTime)
+    if props.advanced then
+        TaskPlayAnimAdvanced(props.ped, props.dict, props.anim, props.position, props.rotation, props.enterSpeed, props.exitSpeed, props.duration, props.flag, props.animTime)
+    else
+        TaskPlayAnim(props.ped, props.dict, props.anim, props.enterSpeed, props.exitSpeed, props.duration, props.flag, props.animTime, false, false, false)
+    end
 end
 
 FM.anim = FM.animation
