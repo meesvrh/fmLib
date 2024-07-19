@@ -57,3 +57,20 @@ function FM.player.getJob()
         } or nil
     end
 end
+
+--[[ 
+    EVENT HANDLERS 
+--]]
+
+local function jobUpdated(newJob)
+    TriggerEvent('fm:player:onJobUpdate', newJob)
+end
+
+RegisterNetEvent('esx:setJob', function(job, lastJob)
+    jobUpdated(job)
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
+    jobUpdated(JobInfo)
+end)
+

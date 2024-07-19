@@ -11,7 +11,7 @@ function FM.utils.notify(src, message, type)
     elseif QB then TriggerClientEvent('QBCore:Notify', src, message, type) end
 end
 
----@param filter? { job?: string, gang?: string }
+---@param filter? { job?: string, gang?: string, count?: boolean }
 function FM.utils.getPlayers(filter)
     local playerSources = GetPlayers()
 
@@ -35,6 +35,12 @@ function FM.utils.getPlayers(filter)
                 if gang and gang.name == filter.gang then
                     players[src] = p
                 end
+            end
+
+            if filter.count then
+                local count = 0
+                for _, _ in pairs(players) do count = count + 1 end
+                return count
             end
         end
 
