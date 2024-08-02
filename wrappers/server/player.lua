@@ -202,6 +202,9 @@ function FM.player.get(id)
         elseif QB then
             return QB.Functions.HasPermission(_fwp.source, Defaults.ADMIN_QB)
         end
+
+        -- Using ACE perms? Add 'add_ace group.admin fmLib.admin allow' to your server.cfg
+        -- return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
     end
 
     ---@return string | table group

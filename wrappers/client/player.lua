@@ -63,6 +63,7 @@ end
 --]]
 
 local function jobUpdated(newJob)
+    -- TODO: check if newJob has same params, otherwise map it
     TriggerEvent('fm:player:onJobUpdate', newJob)
 end
 
@@ -70,7 +71,7 @@ RegisterNetEvent('esx:setJob', function(job, lastJob)
     jobUpdated(job)
 end)
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
-    jobUpdated(JobInfo)
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(jobInfo)
+    jobUpdated(jobInfo)
 end)
 

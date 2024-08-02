@@ -69,5 +69,17 @@ function FM.inventory.upgradeStash(stashId, newWeight, newSlots)
     end
 end
 
+--[[
+    INTERNAL EVENT HANDLERS
+    DO NOT USE
+--]]
+
+RegisterNetEvent('fm:internal:openStash', function(stashId, owner, weight, slots)
+    local src = source
+    exports['qb-inventory']:OpenInventory(src, stashId, {
+        maxweight = weight,
+        slots = slots,
+    })
+end)
 
 FM.inv = FM.inventory

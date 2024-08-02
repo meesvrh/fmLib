@@ -1,5 +1,18 @@
 FM.inventory = {}
 
+local function isNewQBInv()
+    local version = GetResourceMetadata(Resources.QBInv or 'qb-inventory', 'version', 0)
+    if not version then return false end
+
+    local vNums = {}
+
+    for num in version:gmatch("(%d+)") do
+        vNums[#vNums + 1] = tonumber(num)
+    end
+
+    return vNums and vNums[1] >= 2
+end
+
 --- Currently only working for qb-inventory
 ---@param type 'otherplayer'
 ---@param id string | number
@@ -21,11 +34,15 @@ function FM.inventory.openStash(stashId, owner, weight, slots)
     if OXInv then
         OXInv:openInventory('stash', { id = stashId, owner = owner })
     elseif QBInv or QSInv or PSInv then
-        TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
-            maxweight = weight,
-            slots = slots,
-        })
-        TriggerEvent('inventory:client:SetCurrentStash', stashId)
+        if QBInv and isNewQBInv() then
+            TriggerServerEvent('fm:internal:openStash', stashId, owner, weight, slots)
+        else
+            TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
+                maxweight = weight,
+                slots = slots,
+            })
+            TriggerEvent('inventory:client:SetCurrentStash', stashId)
+        end
     end
 end
 
