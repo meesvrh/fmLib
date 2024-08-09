@@ -20,7 +20,7 @@ FM.progress = {}
 ---@field rotation vector3
 ---@field bone? number
 
----@class ProgressProps
+---@class fmProgressProps
 ---@field label? string
 ---@field time? number
 ---@field type? 'linear' | 'circle'
@@ -33,7 +33,7 @@ FM.progress = {}
 ---@field disable? { move?: boolean, car?: boolean, combat?: boolean, mouse?: boolean } -- Credits to ox_lib
 ---@field useSfx? boolean
 
----@type ProgressProps | nil
+---@type fmProgressProps | nil
 local currProps
 
 -- CREDITS TO ox_lib FOR THE CONTROLS
@@ -140,7 +140,7 @@ local function setDefaultProps(props)
     return props
 end
 
----@param props ProgressProps | nil
+---@param props fmProgressProps | nil
 function FM.progress.start(props)
     if progressRes then return FM.console.err('Progress already active') end
     

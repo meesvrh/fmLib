@@ -37,6 +37,10 @@ function FM.inventory.openStash(stashId, owner, weight, slots)
         if QBInv and isNewQBInv() then
             TriggerServerEvent('fm:internal:openStash', stashId, owner, weight, slots)
         else
+            if QSInv then
+                QSInv:RegisterStash(stashId, slots, weight)
+            end
+
             TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
                 maxweight = weight,
                 slots = slots,

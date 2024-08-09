@@ -7,14 +7,14 @@ import useSfx from "../hooks/useSfx";
 const Progress = () => {
   const { playSfx } = useSfx();
   let timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const completedLabel = useRef<string>("COMPLETED");
+  const failedLabel = useRef<string>("FAILED");
   const sfxEnabled = useRef<boolean>(true);
   const [transition, setTransition] = useState(false);
   const [visible, setVisible] = useState(false);
   const [label, setLabel] = useState<string>("");
   const [type, setType] = useState<"linear" | "circle">("linear");
   const [progress, setProgress] = useState<number>(0);
-  const [completedLabel, setCompletedLabel] = useState<string>("COMPLETED");
-  const [failedLabel, setFailedLabel] = useState<string>("FAILED");
   const [color, setColor] = useState<"primary" | "success" | "danger">("primary");
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Progress = () => {
       if (success) playSfx('success');
       else playSfx('fail');
     }
-    setLabel(success ? completedLabel : failedLabel);
+    setLabel(success ? completedLabel.current : failedLabel.current);
     setColor(success ? "success" : "danger");
 
     const stop = () => {
@@ -75,8 +75,8 @@ const Progress = () => {
   useNuiEvent("startProgress", (data) => {
     sfxEnabled.current = data.useSfx;
     setLabel(data.label.toUpperCase());
-    setCompletedLabel(data.completedLabel.toUpperCase());
-    setFailedLabel(data.failedLabel.toUpperCase());
+    completedLabel.current = data.completedLabel.toUpperCase();
+    failedLabel.current = data.failedLabel.toUpperCase();
     setType(data.type);
     setColor('primary');
     setProgress(0);
