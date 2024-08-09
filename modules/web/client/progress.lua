@@ -145,6 +145,10 @@ function FM.progress.start(props)
     if progressRes then return FM.console.err('Progress already active') end
     
     currProps = setDefaultProps(props)
+
+    local override = OverrideProgress(currProps)
+    if override ~= nil then return override end
+
     progressRes = promise.new()
     isStopping = false
 

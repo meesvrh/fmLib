@@ -11,8 +11,6 @@ Settings = {
     debug = true,
     ---@type boolean Whether or not to use sfx for web modules (overrides sfx = true in modules)
     useSfx = true,
-    ---@type boolean Whether or not to ignore resource not found errors
-    ignoreResourceNotFoundErrors = true,
     ---@type boolean Whether or not to ignore resource initialized logs
     ignoreResourceInitializedLogs = false,
 }
@@ -33,10 +31,11 @@ KeyMappings = {
 
 ---@type table Only change these if you have changed the name of a resource
 Resources = {
-    ESX = 'es_extended',
-    QB = 'qb-core',
+    ESX = { name = 'es_extended', export = 'getSharedObject' },
+    QB = { name = 'qb-core', export = 'GetCoreObject' },
     OXInv = 'ox_inventory',
     QBInv = 'qb-inventory',
     QSInv = 'qs-inventory',
-    PSInv = 'ps-inventory'
+    PSInv = 'ps-inventory',
+    MOVHUD = '17mov_Hud', -- currently not supported for server-sided notifications
 }

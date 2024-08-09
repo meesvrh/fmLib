@@ -21,6 +21,7 @@ shared_script {
 }
 
 client_scripts {
+  'modules/cl_overrides.lua',
   'modules/**/client.lua',
   'modules/web/client/*.lua',
   'wrappers/client/*.lua',
