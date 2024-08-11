@@ -1,6 +1,8 @@
 ---@diagnostic disable: need-check-nil
 ---@param props fmProgressProps | nil
 function OverrideProgress(props)
+    local promise = promise.new()
+
     if MOVHUD then
         local actions = {
             duration = props.time,
@@ -35,6 +37,10 @@ function OverrideProgress(props)
             }
         end
 
-        return MOVHUD:StartProgress(actions)
+        MOVHUD:StartProgress(actions, nil, nil, function(success)
+            promise:resolve(success)
+        end)
+
+        return true, Citizen.Await(promise)
     end
 end

@@ -146,8 +146,8 @@ function FM.progress.start(props)
     
     currProps = setDefaultProps(props)
 
-    local override = OverrideProgress(currProps)
-    if override ~= nil then return override end
+    local override, res = OverrideProgress(currProps)
+    if override then return res end
 
     progressRes = promise.new()
     isStopping = false
