@@ -37,10 +37,10 @@ function OverrideProgress(props)
             }
         end
 
-        MOVHUD:StartProgress(actions, nil, nil, function(success)
-            promise:resolve(success)
+        MOVHUD:StartProgress(actions, nil, nil, function(wasCanceled)
+            promise:resolve(wasCanceled)
         end)
 
-        return true, Citizen.Await(promise)
+        return true, not Citizen.Await(promise)
     end
 end
