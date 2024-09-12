@@ -20,7 +20,7 @@ Settings = {
 Defaults = {
     MONEY = 'money',
     ADMIN_ESX = 'admin',
-    ADMIN_QB = 'god',
+    ADMIN_QB = 'admin',
 }
 
 ---@enum KeyMappings
@@ -37,5 +37,5 @@ Resources = {
     QBInv = 'qb-inventory',
     QSInv = 'qs-inventory',
     PSInv = 'ps-inventory',
-    MOVHUD = '17mov_Hud',
+    -- MOVHUD = '17mov_Hud',
 }

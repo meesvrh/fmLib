@@ -29,17 +29,17 @@ function FM.player.get(id)
     ---@param item string
     ---@param amount number
     ---@param metadata? any
-    ---@param checkCarry? boolean
-    p.addItem = function(item, amount, metadata, checkCarry)
+    ---@param ignoreCarry? boolean
+    p.addItem = function(item, amount, metadata, ignoreCarry)
         if not item or not amount then return false end
 
         if OXInv then 
-            if checkCarry and not OXInv:CanCarryItem(_fwp.source, item, amount, metadata) then return false end
+            if not ignoreCarry and not OXInv:CanCarryItem(_fwp.source, item, amount, metadata) then return false end
             OXInv:AddItem(_fwp.source, item, amount, metadata)
 
             return true
         elseif ESX then
-            if checkCarry and not _fwp.canCarryItem(item, amount) then return false end
+            if not ignoreCarry and not _fwp.canCarryItem(item, amount) then return false end
             _fwp.addInventoryItem(item, amount)
 
             return true
@@ -48,7 +48,7 @@ function FM.player.get(id)
         end
     end
 
-        ---@param amount number
+    ---@param amount number
     ---@param moneyType? string
     p.addMoney = function(amount, moneyType)
         moneyType = moneyType or Defaults.MONEY
@@ -59,12 +59,21 @@ function FM.player.get(id)
     end
 
     ---@param moneyType? string
-    ---@return number amount
+    ---@return number | nil amount
     p.getMoney = function(moneyType)
         moneyType = moneyType or Defaults.MONEY
 
-        if ESX then return _fwp.getAccount(moneyType).money
-        elseif QB then return _fwp.PlayerData.money[moneyType] end
+        if ESX then
+            local acc = _fwp.getAccount(moneyType)
+            if not acc then FM.console.err('Money Type not found: '..moneyType) return 0 end
+
+            return acc.money
+        elseif QB then 
+            local money = _fwp.PlayerData.money[moneyType]
+            if money == nil then FM.console.err('Money Type not found: '..moneyType) return 0 end
+
+            return money
+        end
     end
 
     ---@return string identifier

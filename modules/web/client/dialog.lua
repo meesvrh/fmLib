@@ -7,6 +7,7 @@ FM.dialog = {}
 ---@field message? string
 ---@field confirmLabel? string
 ---@field cancelLabel? string
+---@field canCancel? boolean
 ---@field size? 'sm' | 'md' | 'lg'
 ---@field keepInput? boolean
 ---@field useSfx? boolean

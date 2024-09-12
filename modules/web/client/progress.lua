@@ -168,6 +168,7 @@ end
 
 ---@param success boolean
 function FM.progress.stop(success)
+    if StopOverrideProgress() then return end
     if not progressRes or isStopping then return FM.console.err('No progress active') end
     
     SendNUIMessage({

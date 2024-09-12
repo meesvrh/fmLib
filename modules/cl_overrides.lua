@@ -44,3 +44,12 @@ function OverrideProgress(props)
         return true, not Citizen.Await(promise)
     end
 end
+
+function StopOverrideProgress()
+    if MOVHUD then
+        MOVHUD:StopProgress()
+        return true
+    end
+
+    return false
+end
