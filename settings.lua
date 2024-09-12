@@ -37,5 +37,5 @@ Resources = {
     QBInv = 'qb-inventory',
     QSInv = 'qs-inventory',
     PSInv = 'ps-inventory',
-    -- MOVHUD = '17mov_Hud',
+    MOVHUD = '17mov_Hud',
 }
