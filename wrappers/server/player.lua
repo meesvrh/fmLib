@@ -29,17 +29,16 @@ function FM.player.get(id)
     ---@param item string
     ---@param amount number
     ---@param metadata? any
-    ---@param ignoreCarry? boolean
-    p.addItem = function(item, amount, metadata, ignoreCarry)
+    ---@param ignoreCheck? boolean
+    p.addItem = function(item, amount, metadata, ignoreCheck)
         if not item or not amount then return false end
+        if not ignoreCheck and not p.canAddItem(item, amount) then return false end
 
-        if OXInv then 
-            if not ignoreCarry and not OXInv:CanCarryItem(_fwp.source, item, amount, metadata) then return false end
+        if OXInv then
             OXInv:AddItem(_fwp.source, item, amount, metadata)
 
             return true
         elseif ESX then
-            if not ignoreCarry and not _fwp.canCarryItem(item, amount) then return false end
             _fwp.addInventoryItem(item, amount)
 
             return true
@@ -56,6 +55,16 @@ function FM.player.get(id)
 
         if ESX then _fwp.addAccountMoney(moneyType, amount)
         elseif QB then _fwp.Functions.AddMoney(moneyType, amount) end
+    end
+
+    p.canAddItem = function(item, amount)
+        if not item or not amount then return false end
+
+        if OXInv then return OXInv:CanCarryItem(_fwp.source, item, amount)
+        elseif QBInv then return QBInv:CanAddItem(_fwp.source, item, amount)
+        elseif QSInv then return QSInv:CanCarryItem(_fwp.source, item, amount)
+        elseif ESX then return _fwp.canCarryItem(item, amount)
+        elseif QB then return true end
     end
 
     ---@param moneyType? string
@@ -209,11 +218,12 @@ function FM.player.get(id)
         if ESX then
             return _fwp.getGroup() == Defaults.ADMIN_ESX
         elseif QB then
-            return QB.Functions.HasPermission(_fwp.source, Defaults.ADMIN_QB)
+            if QB.Functions.HasPermission(_fwp.source, Defaults.ADMIN_QB) or QB.Functions.HasPermission(_fwp.source, Defaults.GOD_QB) then
+                return true
+            end
         end
 
-        -- Using ACE perms? Add 'add_ace group.admin fmLib.admin allow' to your server.cfg
-        -- return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
+        return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
     end
 
     ---@return string | table group

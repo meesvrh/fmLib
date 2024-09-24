@@ -21,6 +21,7 @@ Defaults = {
     MONEY = 'money',
     ADMIN_ESX = 'admin',
     ADMIN_QB = 'admin',
+    GOD_QB = 'god',
 }
 
 ---@enum KeyMappings
