@@ -223,6 +223,7 @@ function FM.player.get(id)
             end
         end
 
+        -- IN SERVER.CFG: add_ace group.admin fmLib.admin allow
         return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
     end
 
