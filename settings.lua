@@ -31,12 +31,23 @@ KeyMappings = {
 }
 
 ---@type table Only change these if you have changed the name of a resource
+-- This is used for autodetecting resources
+-- Any table with an export, will have the export called and put in the global variable
+-- Any table with export = false, will be set to true if the resource is started (mostly used for event-based resources)
+-- Any string will have all the exports put in the global variable 
 Resources = {
     ESX = { name = 'es_extended', export = 'getSharedObject' },
     QB = { name = 'qb-core', export = 'GetCoreObject' },
+    
     OXInv = 'ox_inventory',
     QBInv = 'qb-inventory',
     QSInv = 'qs-inventory',
     PSInv = 'ps-inventory',
+    
     MOVHUD = '17mov_Hud',
+    
+    QBVehKeys = { name = 'qb-vehiclekeys', export = false },
+    CDGarage = { name = 'cd_garage', export = false },
+    okokGarage = { name = 'okokGarage', export = false },
+    QSVehKeys = 'qs-vehiclekeys',
 }

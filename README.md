@@ -28,7 +28,7 @@ While it may not cover every possible resource or framework, fmLib strives to en
 
 ## Credits
 
-fmLib extends its gratitude to the following frameworks, resources, or other open-source projects that it integrates with:
+fmLib extends its gratitude to the following frameworks, resources, or other open-source projects that it integrates with, or has used as a reference:
 
 - [ESX Framework](https://github.com/esx-framework)
 - [QBCore Framework](https://github.com/qbcore-framework)
