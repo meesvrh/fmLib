@@ -54,7 +54,7 @@ local controls = {
 }
 
 local function initProgressThread()
-    while progressRes do
+    while progressRes ~= nil do
         if currProps.disable then
             if currProps.disable.mouse then
                 DisableControlAction(0, controls.INPUT_LOOK_LR, true)
@@ -142,7 +142,7 @@ end
 
 ---@param props fmProgressProps | nil
 function FM.progress.start(props)
-    if progressRes then return FM.console.err('Progress already active') end
+    if progressRes ~= nil or isStopping then return FM.console.err('Progress already active') end
     
     currProps = setDefaultProps(props)
 
@@ -169,7 +169,9 @@ end
 ---@param success boolean
 function FM.progress.stop(success)
     if StopOverrideProgress() then return end
-    if not progressRes or isStopping then return FM.console.err('No progress active') end
+    if progressRes == nil then return FM.console.err('No progress active') end
+    if isStopping then return FM.console.err('Progress already stopping') end
+    isStopping = true
     
     SendNUIMessage({
         action = 'stopProgress',
@@ -178,6 +180,8 @@ function FM.progress.stop(success)
 end
 
 RegisterNUICallback('progressStopped', function(success, cb)
+    isStopping = true
+
     if progressRes then
         progressRes:resolve(success)
         progressRes = nil
@@ -198,7 +202,7 @@ function FM.progress.isActive()
 end
 
 RegisterCommand('progresscancel', function(source, args, raw)
-    if not progressRes or not currProps or not currProps.canCancel then return end
+    if isStopping or progressRes == nil or not currProps or not currProps.canCancel then return end
     FM.progress.stop(false)
 end)
 RegisterKeyMapping('progresscancel', 'Cancel Progress', KeyMappings.CANCEL.mapper, KeyMappings.CANCEL.key)
