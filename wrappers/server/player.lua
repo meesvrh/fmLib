@@ -1,5 +1,18 @@
 FM.player = {}
 
+local function isNewQBInv()
+    local version = GetResourceMetadata(Resources.QBInv or 'qb-inventory', 'version', 0)
+    if not version then return false end
+
+    local vNums = {}
+
+    for num in version:gmatch("(%d+)") do
+        vNums[#vNums + 1] = tonumber(num)
+    end
+
+    return vNums and vNums[1] >= 2
+end
+
 local function getPlayerBySrc(src)
     if not src then return end
 
@@ -61,7 +74,7 @@ function FM.player.get(id)
         if not item or not amount then return false end
 
         if OXInv then return OXInv:CanCarryItem(_fwp.source, item, amount)
-        elseif QBInv then return QBInv:CanAddItem(_fwp.source, item, amount)
+        elseif QBInv and isNewQBInv() then return QBInv:CanAddItem(_fwp.source, item, amount)
         elseif QSInv then return QSInv:CanCarryItem(_fwp.source, item, amount)
         elseif ESX then return _fwp.canCarryItem(item, amount)
         elseif QB then return true end
@@ -174,6 +187,8 @@ function FM.player.get(id)
         elseif QB then
             local items = _fwp.PlayerData.items
             for slot, item in pairs(items) do
+                if item.amount == nil then item.amount = item.count end -- Simple QBox compatibility fix
+
                 inventory[slot] = {
                     name = item.name,
                     label = item.label,
@@ -216,15 +231,20 @@ function FM.player.get(id)
     ---@return boolean
     p.isAdmin = function()
         if ESX then
-            return _fwp.getGroup() == Defaults.ADMIN_ESX
+            if _fwp.getGroup() == Defaults.ADMIN_ESX then
+                return true
+            end
         elseif QB then
             if QB.Functions.HasPermission(_fwp.source, Defaults.ADMIN_QB) or QB.Functions.HasPermission(_fwp.source, Defaults.GOD_QB) then
                 return true
             end
         end
 
+        return IsPlayerAceAllowed(_fwp.source, 'command')
+
+        -- Want custom admin group? Uncomment below and add the group in server.cfg
         -- IN SERVER.CFG: add_ace group.admin fmLib.admin allow
-        return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
+        -- return IsPlayerAceAllowed(_fwp.source, 'fmLib.admin')
     end
 
     ---@return string | table group

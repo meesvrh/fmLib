@@ -30,24 +30,23 @@ KeyMappings = {
     CANCEL = { mapper = 'keyboard', key = 'x' },
 }
 
+--[[
+    This is used for autodetecting resources
+    Any table with an export, will have the export called and put in the global variable
+    Any table with export = false, will be set to true if the resource is started (mostly used for event-based resources)
+    Any table with export = 'all', will have all exports put in the global variable
+--]]
 ---@type table Only change these if you have changed the name of a resource
--- This is used for autodetecting resources
--- Any table with an export, will have the export called and put in the global variable
--- Any table with export = false, will be set to true if the resource is started (mostly used for event-based resources)
--- Any string will have all the exports put in the global variable 
 Resources = {
     ESX = { name = 'es_extended', export = 'getSharedObject' },
     QB = { name = 'qb-core', export = 'GetCoreObject' },
-    
-    OXInv = 'ox_inventory',
-    QBInv = 'qb-inventory',
-    QSInv = 'qs-inventory',
-    PSInv = 'ps-inventory',
-    
-    MOVHUD = '17mov_Hud',
-    
+    OXInv = { name = 'ox_inventory', export = 'all' },
+    QBInv = { name = 'qb-inventory', export = 'all', },
+    QSInv = { name = 'qs-inventory', export = 'all' },
+    PSInv = { name = 'ps-inventory', export = 'all' },
+    MOVHUD = { name = '17mov_Hud', export = 'all' },
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },
     okokGarage = { name = 'okokGarage', export = false },
-    QSVehKeys = 'qs-vehiclekeys',
+    QSVehKeys = { name = 'qs-vehiclekeys', export = 'all' },
 }
