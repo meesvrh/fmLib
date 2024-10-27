@@ -44,6 +44,7 @@ Resources = {
     QBInv = { name = 'qb-inventory', export = 'all', },
     QSInv = { name = 'qs-inventory', export = 'all' },
     PSInv = { name = 'ps-inventory', export = 'all' },
+    CHEZZAInv = { name = 'inventory', export = 'all' },
     MOVHUD = { name = '17mov_Hud', export = 'all' },
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },

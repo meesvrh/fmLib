@@ -52,7 +52,11 @@ function FM.player.get(id)
 
             return true
         elseif ESX then
-            _fwp.addInventoryItem(item, amount)
+            if CHEZZAInv and string.find(item:lower(), 'weapon') then
+                _fwp.addWeapon(item, 0)
+            else
+                _fwp.addInventoryItem(item, amount)
+            end
 
             return true
         elseif QB then
@@ -151,7 +155,17 @@ function FM.player.get(id)
                 amount = item.count
             }
         elseif ESX then
-            item = _fwp.getInventoryItem(item)
+            if CHEZZAInv and string.find(item:lower(), 'weapon') then
+                local loadoutNum, weapon = _fwp.getWeapon(item)
+                
+                if weapon then
+                    item = weapon
+                    item.count = 1 -- CHEZZAInv compatibility fix
+                end
+            else
+                item = _fwp.getInventoryItem(item)
+            end
+
             if not item then return end
 
             return {
