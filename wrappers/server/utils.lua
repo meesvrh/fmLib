@@ -14,7 +14,6 @@ end
 ---@param filter? { job?: string, gang?: string, count?: boolean }
 function FM.utils.getPlayers(filter)
     local playerSources = GetPlayers()
-    local count = 0
     local players = {}
     
     for _, src in pairs(playerSources) do
@@ -37,16 +36,14 @@ function FM.utils.getPlayers(filter)
                     players[src] = p
                 end
             end
-
-            if filter.count then
-                for _, _ in pairs(players) do count = count + 1 end
-            end
         end
 
         ::continue::
     end
-    
+
     if filter and filter.count then
+        local count = 0
+        for _, _ in pairs(players) do count = count + 1 end
         return count
     end
 
