@@ -50,4 +50,6 @@ Resources = {
     CDGarage = { name = 'cd_garage', export = false },
     okokGarage = { name = 'okokGarage', export = false },
     QSVehKeys = { name = 'qs-vehiclekeys', export = 'all' },
+    LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
+    OXFUEL = { name = 'ox_fuel', export = false },
 }

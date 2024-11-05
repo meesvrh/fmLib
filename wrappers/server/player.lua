@@ -37,7 +37,9 @@ function FM.player.get(id)
     local _fwp = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
     if not _fwp or type(_fwp) ~= 'table' then return end
 
-    local p = {}
+    local p = {
+        src = _fwp.source
+    }
 
     ---@param item string
     ---@param amount number

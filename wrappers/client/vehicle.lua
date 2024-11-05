@@ -28,3 +28,17 @@ function FM.vehicle.giveKeys(vehicle)
         QSVehKeys:GiveKeys(plate, model, true)
     end
 end
+
+---@param vehicle string
+---@param fuelLvl number
+function FM.vehicle.setFuel(vehicle, fuelLvl)
+    if not vehicle or fuel == nil then return end
+
+    if LEGACYFUEL then
+        LEGACYFUEL:SetFuel(vehicle, fuelLvl)
+    elseif OXFUEL then
+        Entity(vehicle).state.fuel = fuelLvl
+    else
+        SetVehicleFuelLevel(vehicle, fuelLvl)
+    end
+end
