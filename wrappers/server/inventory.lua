@@ -37,13 +37,15 @@ end
 ---@param inv string inventory name/player source
 ---@param slot number
 function FM.inventory.getMetaData(inv, slot)
-    if OXInv then return OXInv:GetSlot(inv, slot).metadata end
+    if OXInv then return OXInv:GetSlot(inv, slot).metadata
+    elseif QB then return QB.Functions.GetPlayer(inv).PlayerData.items[slot].info end
 end
 
 ---@param inv string inventory name/player source
 ---@param itemName string
 function FM.inventory.getSlotIDWithItem(inv, itemName)
-    if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName) end
+    if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName)
+    elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) end
 end
 
 

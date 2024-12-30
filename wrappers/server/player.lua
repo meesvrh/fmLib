@@ -62,7 +62,7 @@ function FM.player.get(id)
 
             return true
         elseif QB then
-            return _fwp.Functions.AddItem(item, amount)
+            return _fwp.Functions.AddItem(item, amount, nil, metadata)
         end
     end
 
@@ -96,7 +96,7 @@ function FM.player.get(id)
             if not acc then FM.console.err('Money Type not found: '..moneyType) return 0 end
 
             return acc.money
-        elseif QB then 
+        elseif QB then
             local money = _fwp.PlayerData.money[moneyType]
             if money == nil then FM.console.err('Money Type not found: '..moneyType) return 0 end
 
@@ -159,7 +159,7 @@ function FM.player.get(id)
         elseif ESX then
             if CHEZZAInv and string.find(item:lower(), 'weapon') then
                 local loadoutNum, weapon = _fwp.getWeapon(item)
-                
+
                 if weapon then
                     item = weapon
                     item.count = 1 -- CHEZZAInv compatibility fix
@@ -284,7 +284,7 @@ function FM.player.get(id)
     ---@param metadata? any
     p.removeItem = function(item, amount, slotId, metadata)
         if not item or not amount then return end
-        
+
         if OXInv then OXInv:RemoveItem(_fwp.source, item, amount, metadata, slotId)
         elseif ESX then _fwp.removeInventoryItem(item, amount)
         elseif QB then _fwp.Functions.RemoveItem(item, amount) end
@@ -299,7 +299,7 @@ function FM.player.get(id)
         if ESX then _fwp.removeAccountMoney(moneyType, amount)
         elseif QB then _fwp.Functions.RemoveMoney(moneyType, amount) end
     end
-    
+
     return p
 end
 
