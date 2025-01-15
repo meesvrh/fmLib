@@ -45,11 +45,12 @@ Resources = {
     QSInv = { name = 'qs-inventory', export = 'all' },
     PSInv = { name = 'ps-inventory', export = 'all' },
     CHEZZAInv = { name = 'inventory', export = 'all' },
-    MOVHUD = { name = '17mov_Hud', export = 'all' },
+    -- MOVHUD = { name = '17mov_Hud', export = 'all' },
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },
     okokGarage = { name = 'okokGarage', export = false },
     QSVehKeys = { name = 'qs-vehiclekeys', export = 'all' },
+    RenewedVehKeys = { name = 'Renewed-Vehiclekeys', export = 'all' },
     LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
     OXFUEL = { name = 'ox_fuel', export = false },
 }

@@ -1,6 +1,6 @@
 FM.vehicle = {}
 
----@param vehicle string
+---@param vehicle number
 function FM.vehicle.getPlate(vehicle)
     if not vehicle then return end
 
@@ -11,10 +11,11 @@ function FM.vehicle.getPlate(vehicle)
     end
 end
 
----@param vehicle string
+---@param vehicle number
 function FM.vehicle.giveKeys(vehicle)
     if not vehicle then return end
     local plate = FM.vehicle.getPlate(vehicle)
+    local model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
 
     if QBVehKeys then
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
@@ -24,12 +25,34 @@ function FM.vehicle.giveKeys(vehicle)
     elseif okokGarage then
         TriggerServerEvent('okokGarage:GiveKeys', plate)
     elseif QSVehKeys then
-        local model = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
         QSVehKeys:GiveKeys(plate, model, true)
+    elseif RenewedVehKeys then
+        RenewedVehKeys:addKey(plate)
     end
 end
 
----@param vehicle string
+---@param vehicle number
+function FM.vehicle.removeKeys(vehicle)
+    if not vehicle then return end
+    local plate = FM.vehicle.getPlate(vehicle)
+
+    if RenewedVehKeys then
+        RenewedVehKeys:removeKey(plate)
+    end
+end
+
+---@param vehicle number
+function FM.vehicle.hasKey(vehicle)
+    if not vehicle then return end
+    local plate = FM.vehicle.getPlate(vehicle)
+
+    if RenewedVehKeys then
+        RenewedVehKeys:hasKey(plate)
+    end
+end
+
+
+---@param vehicle number
 ---@param fuelLvl number
 function FM.vehicle.setFuel(vehicle, fuelLvl)
     if not vehicle or fuel == nil then return end
