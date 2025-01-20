@@ -55,12 +55,12 @@ end
 ---@param vehicle number
 ---@param fuelLvl number
 function FM.vehicle.setFuel(vehicle, fuelLvl)
-    if not vehicle or fuel == nil then return end
+    if not vehicle or fuelLvl == nil then return end
 
-    if LEGACYFUEL then
-        LEGACYFUEL:SetFuel(vehicle, fuelLvl)
-    elseif OXFUEL then
+    if OXFUEL then
         Entity(vehicle).state.fuel = fuelLvl
+    elseif LEGACYFUEL then
+        LEGACYFUEL:SetFuel(vehicle, fuelLvl)
     else
         SetVehicleFuelLevel(vehicle, fuelLvl)
     end
