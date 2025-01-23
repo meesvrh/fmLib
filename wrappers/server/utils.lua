@@ -15,7 +15,7 @@ end
 function FM.utils.getPlayers(filter)
     local playerSources = GetPlayers()
     local players = {}
-    
+
     for _, src in pairs(playerSources) do
         local p = FM.player.get(tonumber(src))
         if not p then goto continue end

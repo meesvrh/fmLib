@@ -35,19 +35,30 @@ function FM.inventory.getItemLabel(item)
 end
 
 ---@param inv string inventory name/player source
----@param slot number
-function FM.inventory.getMetaData(inv, slot)
-    if OXInv then return OXInv:GetSlot(inv, slot).metadata
-    elseif QB then return QB.Functions.GetPlayer(inv).PlayerData.items[slot].info end
+---@param slot? number slot number
+function FM.inventory.getMetaDataBySlot(inv, slot)
+    if OXInv then return OXInv:GetSlot(inv, slot)?.metadata
+    elseif COREInv then return COREInv:getItemBySlot(inv, slot)?.metadata
+    elseif QBInv then return QBInv:GetItemBySlot(inv, slot)?.info end
 end
 
 ---@param inv string inventory name/player source
----@param itemName string
-function FM.inventory.getSlotIDWithItem(inv, itemName)
+---@param itemName string item name
+function FM.inventory.getSlotIDByItem(inv, itemName)
     if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName)
+    elseif QBInv then return QBInv:GetFirstSlotByItem(QB.Functions.GetPlayer(inv).PlayerData.Items, itemName)
+    elseif COREInv then return COREInv:getFirstSlotByItem(inv, itemName)
     elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) end
 end
 
+---@param inv string inventory name/player source
+---@param slot number slot number
+---@param metadata table metadata
+function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
+    if OXInv then OXInv:SetMetaData(inv, slot, metadata)
+    elseif COREInv then COREInv:setMetadata(inv, slot, metadata)
+    elseif QBInv then QBInv:SetMetaData(inv, slot, metadata) end
+end
 
 --- Only necessary for ox-inventory
 ---@param stash { id: string | number, label: string, slots: number, weight: number, owner?: string | boolean, groups?: table, coords?: vector3 | vector3[] }
@@ -84,4 +95,9 @@ RegisterNetEvent('fm:internal:openStash', function(stashId, owner, weight, slots
     })
 end)
 
+-- Compatibility bridge for older versions
+FM.inventory.getSlotIDWithItem = FM.inventory.getSlotIDByItem
+FM.inventory.getMetaData = FM.inventory.getMetaDataBySlot
+
+-- Aliases
 FM.inv = FM.inventory

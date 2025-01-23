@@ -61,14 +61,14 @@ local function initProgressThread()
                 DisableControlAction(0, controls.INPUT_LOOK_UD, true)
                 DisableControlAction(0, controls.INPUT_VEH_MOUSE_CONTROL_OVERRIDE, true)
             end
-    
+
             if currProps.disable.move then
                 DisableControlAction(0, controls.INPUT_SPRINT, true)
                 DisableControlAction(0, controls.INPUT_MOVE_LR, true)
                 DisableControlAction(0, controls.INPUT_MOVE_UD, true)
                 DisableControlAction(0, controls.INPUT_DUCK, true)
             end
-    
+
             if currProps.disable.car then
                 DisableControlAction(0, controls.INPUT_VEH_MOVE_LEFT_ONLY, true)
                 DisableControlAction(0, controls.INPUT_VEH_MOVE_RIGHT_ONLY, true)
@@ -76,7 +76,7 @@ local function initProgressThread()
                 DisableControlAction(0, controls.INPUT_VEH_BRAKE, true)
                 DisableControlAction(0, controls.INPUT_VEH_EXIT, true)
             end
-    
+
             if currProps.disable.combat then
                 DisableControlAction(0, controls.INPUT_AIM, true)
                 DisablePlayerFiring(PlayerId(), true)
@@ -143,7 +143,7 @@ end
 ---@param props fmProgressProps | nil
 function FM.progress.start(props)
     if progressRes ~= nil or isStopping then return FM.console.err('Progress already active') end
-    
+
     currProps = setDefaultProps(props)
 
     local override, res = OverrideProgress(currProps)
@@ -162,7 +162,7 @@ function FM.progress.start(props)
 
     if currProps.prop then currProps.prop = createProp(currProps.prop) end
     CreateThread(initProgressThread)
-    
+
     return Citizen.Await(progressRes)
 end
 
@@ -172,7 +172,7 @@ function FM.progress.stop(success)
     if progressRes == nil then return FM.console.err('No progress active') end
     if isStopping then return FM.console.err('Progress already stopping') end
     isStopping = true
-    
+
     SendNUIMessage({
         action = 'stopProgress',
         data = success
