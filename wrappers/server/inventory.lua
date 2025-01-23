@@ -55,7 +55,7 @@ end
 ---@param slot number slot number
 ---@param metadata table metadata
 function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
-    if OXInv then OXInv:SetMetaData(inv, slot, metadata)
+    if OXInv then OXInv:SetMetadata(inv, slot, metadata)
     elseif COREInv then COREInv:setMetadata(inv, slot, metadata)
     elseif QBInv then QBInv:SetMetaData(inv, slot, metadata) end
 end
