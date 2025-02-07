@@ -129,7 +129,7 @@ function FM.player.get(id)
         end
     end
 
-    ---@return { name: string, label: string, grade: number, gradeLabel: string } gang
+    ---@return { name: string, label: string, grade: number, gradeLabel: string } | nil gang
     p.getGang = function()
         if ESX then
             local job = p.getJob()
@@ -312,4 +312,14 @@ function FM.player.get(id)
     return p
 end
 
+--[[
+    INTERNAL EVENT HANDLERS
+    DO NOT USE
+--]]
+
+FM.callback.register('fm:internal:getGang', function(src)
+    return FM.player.get(src).getGang()
+end)
+
+-- Aliases
 FM.p = FM.player

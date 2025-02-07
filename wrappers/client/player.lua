@@ -58,6 +58,11 @@ function FM.player.getJob()
     end
 end
 
+---@return { name: string, label: string, grade: number, gradeLabel: string } | nil gang
+function FM.player.getGang()
+    return FM.callback.sync('fm:internal:getGang')
+end
+
 --[[
     EVENT HANDLERS
 --]]
