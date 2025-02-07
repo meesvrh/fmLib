@@ -67,8 +67,25 @@ end
     EVENT HANDLERS
 --]]
 
-local function onJobUpdate()
-    TriggerEvent('fm:player:onJobUpdate', FM.player.getJob())
+local function onJobUpdate(newJob)
+    local job
+    if ESX then
+        job = newJob and {
+            name = newJob.name,
+            label = newJob.label,
+            grade = newJob.grade,
+            gradeLabel = newJob.grade_label
+        } or nil
+    elseif QB then
+        job = newJob and {
+            name = newJob.name,
+            label = newJob.label,
+            grade = newJob.grade.level,
+            gradeLabel = newJob.grade.name
+        } or nil
+    end
+
+    TriggerEvent('fm:player:onJobUpdate', job)
 end
 
 -- We do not send player data, because for ESX its also sent when there is no character selected yet.
