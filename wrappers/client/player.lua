@@ -2,10 +2,10 @@ FM.player = {}
 
 ---@return boolean
 function FM.player.isLoggedIn()
-    if ESX then 
+    if ESX then
         local playerData = ESX.GetPlayerData()
         return playerData ~= nil and playerData.identifier ~= nil
-    elseif QB then 
+    elseif QB then
         local playerData = QB.Functions.GetPlayerData()
         return playerData ~= nil and playerData ~= nil and playerData.citizenid ~= nil
     end
@@ -13,10 +13,10 @@ end
 
 ---@return string | nil
 function FM.player.getFullName()
-    if ESX then 
+    if ESX then
         local playerData = ESX.GetPlayerData()
         return playerData ~= nil and tostring(playerData.firstName) .. " " .. tostring(playerData.lastName) or nil
-    elseif QB then 
+    elseif QB then
         local playerData = QB.Functions.GetPlayerData()
         return playerData ~= nil and playerData.charinfo.firstname .. " " .. playerData.charinfo.lastname or nil
     end
@@ -24,10 +24,10 @@ end
 
 ---@return string | nil
 function FM.player.getIdentifier()
-    if ESX then 
+    if ESX then
         local playerData = ESX.GetPlayerData()
         return playerData ~= nil and playerData.identifier or nil
-    elseif QB then 
+    elseif QB then
         local playerData = QB.Functions.GetPlayerData()
         return playerData ~= nil and playerData.citizenid or nil
     end
@@ -58,20 +58,21 @@ function FM.player.getJob()
     end
 end
 
---[[ 
-    EVENT HANDLERS 
+--[[
+    EVENT HANDLERS
 --]]
 
-local function jobUpdated(newJob)
-    -- TODO: check if newJob has same params, otherwise map it
-    TriggerEvent('fm:player:onJobUpdate', newJob)
+local function onJobUpdate()
+    TriggerEvent('fm:player:onJobUpdate', FM.player.getJob())
 end
 
-RegisterNetEvent('esx:setJob', function(job, lastJob)
-    jobUpdated(job)
-end)
+-- We do not send player data, because for ESX its also sent when there is no character selected yet.
+-- After this event gets triggered, use FM.player.isLoggedIn to check if the player is logged in & to make sure the character is selected.
+local function onPlayerLoaded()
+    TriggerEvent('fm:player:onPlayerLoaded')
+end
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function(jobInfo)
-    jobUpdated(jobInfo)
-end)
-
+RegisterNetEvent('esx:setJob', onJobUpdate)
+RegisterNetEvent('QBCore:Client:OnJobUpdate', onJobUpdate)
+RegisterNetEvent('esx:playerLoaded', onPlayerLoaded)
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', onPlayerLoaded)
