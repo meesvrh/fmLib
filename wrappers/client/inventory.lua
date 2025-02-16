@@ -18,7 +18,7 @@ end
 ---@param id string | number
 function FM.inventory.open(type, id)
     if not type or not id then return end
-    
+
     if QBInv then
         TriggerServerEvent("inventory:server:OpenInventory", type, id)
     end
@@ -99,6 +99,15 @@ function FM.inventory.getItems()
     end
 
     return inventory
+end
+
+---@param state boolean
+function FM.inventory.setWeaponWheel(state)
+    if OXInv then
+        OXInv:weaponWheel(state)
+    elseif QSInv then
+        QSInv:WeaponWheel(state)
+    end
 end
 
 FM.inv = {}
