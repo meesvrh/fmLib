@@ -47,11 +47,20 @@ Resources = {
     PSInv = { name = 'ps-inventory', export = 'all' },
     CHEZZAInv = { name = 'inventory', export = 'all' },
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
+
+    -- Vehicle Keys
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },
     okokGarage = { name = 'okokGarage', export = false },
     QSVehKeys = { name = 'qs-vehiclekeys', export = 'all' },
     RenewedVehKeys = { name = 'Renewed-Vehiclekeys', export = 'all' },
+
+    -- Fuel Systems
     LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
     OXFUEL = { name = 'ox_fuel', export = false },
+
+    -- TextUIs
+    OXLib = { name = 'ox_lib', export = 'all' },
+    JGTextUI = { name = 'jg-textui', export = 'all' },
+    OKOKTextUI = { name = 'okokTextUI', export = 'all' },
 }
