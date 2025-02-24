@@ -57,6 +57,8 @@ end
 function FM.vehicle.setFuel(vehicle, fuelLvl)
     if not vehicle or fuelLvl == nil then return end
 
+    fuelLvl = fuelLvl + 0.0
+
     if OXFUEL then
         Entity(vehicle).state.fuel = fuelLvl
     elseif LEGACYFUEL then
