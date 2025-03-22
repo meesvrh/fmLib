@@ -28,6 +28,10 @@ function FM.vehicle.giveKeys(vehicle)
         QSVehKeys:GiveKeys(plate, model, true)
     elseif RenewedVehKeys then
         RenewedVehKeys:addKey(plate)
+    elseif WASABIKEY then
+        WASABIKEY:GiveKey(plate)
+    elseif TGIANNKeys then
+        TGIANNKeys:GiveKeyPlate(plate, true)
     end
 end
 
@@ -38,6 +42,8 @@ function FM.vehicle.removeKeys(vehicle)
 
     if RenewedVehKeys then
         RenewedVehKeys:removeKey(plate)
+    elseif WASABIKEY then
+        WASABIKEY:RemoveKey(plate)
     end
 end
 
@@ -48,6 +54,10 @@ function FM.vehicle.hasKey(vehicle)
 
     if RenewedVehKeys then
         RenewedVehKeys:hasKey(plate)
+    elseif WASABIKEY then
+        WASABIKEY:HasKey(plate)
+    elseif TGIANNKeys then
+        TGIANNKeys:HaveKeyPlate(plate)
     end
 end
 
