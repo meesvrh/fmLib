@@ -54,12 +54,12 @@ Resources = {
     okokGarage = { name = 'okokGarage', export = false },
     QSVehKeys = { name = 'qs-vehiclekeys', export = 'all' },
     RenewedVehKeys = { name = 'Renewed-Vehiclekeys', export = 'all' },
-    WASABIKEY = { name = 'wasabi_carlock', export = 'all' },
-    TGIANNKeys = { name = 'tgiann-hotwire', export = 'all' },
+    WasabiCarlock = { name = 'wasabi_carlock', export = 'all' },
+    ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
 
     -- Fuel Systems
-    OXFUEL = { name = 'ox_fuel', export = false },
     LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
+    OXFUEL = { name = 'ox_fuel', export = false },
 
     -- TextUIs
     OXLib = { name = 'ox_lib', export = 'all' },
