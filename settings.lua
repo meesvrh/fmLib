@@ -57,6 +57,8 @@ Resources = {
     WASABI_CARLOCK = { name = 'wasabi_carlock', export = 'all' },
     TGIANN_HOTWIRE = { name = 'tgiann-hotwire', export = 'all' },
     MM_CARKEYS = { name = 'mm_carkeys', export = 'all' },
+    MRNNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = 'all' },
+    ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
 
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
@@ -73,6 +75,7 @@ Resources = {
     GKS_FUEL = { name = 'gks-fuel', export = 'all' },
     RIP_FUEL = { name = 'RiP-Fuel', export = 'all' },
     MYFUEL = { name = 'myFuel', export = 'all' },
+    LJ_FUEL = { name = 'lj-fuel', export = 'all' },
 
     -- TextUIs
     OXLib = { name = 'ox_lib', export = 'all' },
