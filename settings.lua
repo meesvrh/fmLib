@@ -59,6 +59,7 @@ Resources = {
     MM_CARKEYS = { name = 'mm_carkeys', export = 'all' },
     MRNNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = 'all' },
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
+    FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
 
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
