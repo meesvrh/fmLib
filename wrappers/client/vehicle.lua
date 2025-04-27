@@ -127,8 +127,8 @@ function FM.vehicle.setFuel(vehicle, fuelLvl)
         MYFUEL:SetFuel(vehicle, fuelLvl)
     elseif LJ_FUEL then
         LJ_FUEL:SetFuel(vehicle, fuelLvl)
-    elseif MELLONS_FUEL then
-         MELLONS_FUEL:SetFuel(vehicle, fuelLvl)
+    elseif MELONS_FUEL then
+         MELONS_FUEL:SetFuel(vehicle, fuelLvl)
     else
         SetVehicleFuelLevel(vehicle, fuelLvl)
     end
