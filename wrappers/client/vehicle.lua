@@ -40,6 +40,8 @@ function FM.vehicle.giveKeys(vehicle)
         ISVehicleKeys:GiveKey(plate)
     elseif FAST_VEHICLEKEYS then
         FAST_VEHICLEKEYS:GiveKey(plate)
+    elseif FILO_VEHICLEKEYS then
+        FILO_VEHICLEKEYS:GiveKeys(plate)
     end
 end
 
