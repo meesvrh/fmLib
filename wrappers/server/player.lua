@@ -1,5 +1,20 @@
 FM.player = {}
 
+function string.split(str, delimiter)
+    local result = {}
+    local from = 1
+    local delim_from, delim_to = string.find(str, delimiter, from)
+
+    while delim_from do
+        table.insert(result, string.sub(str, from, delim_from - 1))
+        from = delim_to + 1
+        delim_from, delim_to = string.find(str, delimiter, from)
+    end
+
+    table.insert(result, string.sub(str, from))
+    return result
+end
+
 local function isNewQBInv()
     local version = GetResourceMetadata(Resources.QBInv or 'qb-inventory', 'version', 0)
     if not version then return false end
@@ -196,11 +211,22 @@ function FM.player.get(id)
         end
     end
 
-    ---@return { [slot]: { name: string, amount: number, label: string } } inventory
+    ---@return { [slot]: { name: string, amount: number, label: string, metadata?: any } } inventory
     p.getItems = function()
         local inventory = {}
 
-        if ESX then
+        if OXInv then
+            local items = OXInv:GetInventory(_fwp.source).items
+
+            for slot, item in pairs(items) do
+                inventory[slot] = {
+                    name = item.name,
+                    label = item.label,
+                    amount = item.count,
+                    metadata = item.metadata,
+                }
+            end
+        elseif ESX then
             local items = _fwp.getInventory()
             for slot, item in pairs(items) do
                 inventory[slot] = {
@@ -227,13 +253,13 @@ function FM.player.get(id)
 
     ---@return string firstName
     p.getFirstName = function()
-        if ESX then return _fwp.getName().split(' ')[1]
+        if ESX then return string.split(_fwp.getName(), ' ')[1]
         elseif QB then return _fwp.PlayerData.charinfo.firstname end
     end
 
     ---@return string lastName
     p.getLastName = function()
-        if ESX then return _fwp.getName().split(' ')[2]
+        if ESX then return string.split(_fwp.getName(), ' ')[2]
         elseif QB then return _fwp.PlayerData.charinfo.lastname end
     end
 
