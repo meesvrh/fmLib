@@ -226,6 +226,26 @@ function FM.player.get(id)
                     metadata = item.metadata,
                 }
             end
+        elseif QSInv then
+            local items = QSInv:GetInventory(_fwp.source)
+            for itemName, itemData in pairs(items) do
+                inventory[itemData.slot] = {
+                    name = itemName,
+                    label = itemData.label,
+                    amount = itemData.count,
+                    metadata = itemData.info,
+                }
+            end
+        elseif COREInv then
+            local items = COREInv:getInventory()
+            for _, item in pairs(items) do
+                inventory[item.slot] = {
+                    name = item.name,
+                    label = item.label,
+                    amount = item.amount,
+                    metadata = item.metadata,
+                }
+            end
         elseif ESX then
             local items = _fwp.getInventory()
             for slot, item in pairs(items) do
@@ -243,7 +263,8 @@ function FM.player.get(id)
                 inventory[slot] = {
                     name = item.name,
                     label = item.label,
-                    amount = item.amount
+                    amount = item.amount,
+                    metadata = item.info,
                 }
             end
         end
