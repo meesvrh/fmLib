@@ -48,6 +48,9 @@ Resources = {
     CHEZZAInv = { name = 'inventory', export = 'all' },
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
 
+    -- Banking
+    RX_BANKING = { name = 'RxBanking', export = 'all' },
+
     -- Vehicle Keys
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },

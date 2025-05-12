@@ -83,9 +83,19 @@ function FM.player.get(id)
 
     ---@param amount number
     ---@param moneyType? string
-    p.addMoney = function(amount, moneyType)
+    ---@param transactionData? { type?: 'deposit' | 'withdraw' | 'transfer' | 'interest' | 'payment', reason?: string, fromIban?: string }
+    p.addMoney = function(amount, moneyType, transactionData)
         moneyType = moneyType or Defaults.MONEY
         if not amount then return end
+
+        if transactionData and moneyType == 'bank' then
+            if GetResourceState(Resources.RX_BANKING.name) == 'started' then
+                local personalAcc = exports[Resources.RX_BANKING.name]:GetPlayerPersonalAccount(p.getIdentifier())
+                if personalAcc then
+                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type, transactionData.fromIban, personalAcc.iban, transactionData.reason)
+                end
+            end
+        end
 
         if ESX then _fwp.addAccountMoney(moneyType, amount)
         elseif QB then _fwp.Functions.AddMoney(moneyType, amount) end
@@ -348,9 +358,19 @@ function FM.player.get(id)
 
     ---@param amount number
     ---@param moneyType? string
-    p.removeMoney = function(amount, moneyType)
+    ---@param transactionData? { type?: 'deposit' | 'withdraw' | 'transfer' | 'interest' | 'payment', reason?: string, toIban?: string }
+    p.removeMoney = function(amount, moneyType, transactionData)
         moneyType = moneyType or Defaults.MONEY
         if not amount then return end
+
+        if transactionData and moneyType == 'bank' then
+            if GetResourceState(Resources.RX_BANKING.name) == 'started' then
+                local personalAcc = exports[Resources.RX_BANKING.name]:GetPlayerPersonalAccount(p.getIdentifier())
+                if personalAcc then
+                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type, personalAcc.iban, transactionData.toIban, transactionData.reason)
+                end
+            end
+        end
 
         if ESX then _fwp.removeAccountMoney(moneyType, amount)
         elseif QB then _fwp.Functions.RemoveMoney(moneyType, amount) end
