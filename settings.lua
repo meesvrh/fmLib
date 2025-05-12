@@ -81,6 +81,7 @@ Resources = {
     RIP_FUEL = { name = 'RiP-Fuel', export = 'all' },
     MYFUEL = { name = 'myFuel', export = 'all' },
     LJ_FUEL = { name = 'lj-fuel', export = 'all' },
+    MELONS_FUEL = { name = 'melons_fuel', export = 'all' },
 
     -- TextUIs
     OXLib = { name = 'ox_lib', export = 'all' },
