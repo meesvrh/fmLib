@@ -35,7 +35,7 @@ function FM.vehicle.giveKeys(vehicle)
     elseif MM_CARKEYS then
         MM_CARKEYS:GiveKey(plate)
     elseif MRNNEWBVEHICLEKEYS then
-        MRNNEWBVEHICLEKEYS:GiveKey(plate)
+        MRNNEWBVEHICLEKEYS:GiveKeys(plate)
     elseif ISVehicleKeys then
         ISVehicleKeys:GiveKey(plate)
     elseif FAST_VEHICLEKEYS then
@@ -63,7 +63,7 @@ function FM.vehicle.removeKeys(vehicle)
     elseif MM_CARKEYS then
         MM_CARKEYS:RemoveKey(plate)
     elseif MRNNEWBVEHICLEKEYS then
-        MRNNEWBVEHICLEKEYS:RemoveKey(plate)
+        MRNNEWBVEHICLEKEYS:GiveKeys(plate)
     end
 end
 
