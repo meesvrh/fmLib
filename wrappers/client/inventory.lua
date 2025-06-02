@@ -110,4 +110,14 @@ function FM.inventory.setWeaponWheel(state)
     end
 end
 
+---@param item string
+function FM.inventory.hasItem(item)
+    if ESX then
+        local has = ESX.SearchInventory(item, 1)
+        return has and has > 0
+    elseif QB then
+        return QB.Functions.HasItem(item)
+    end
+end
+
 FM.inv = {}

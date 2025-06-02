@@ -45,6 +45,8 @@ function FM.inventory.getMetaDataBySlot(inv, slot)
             if item.slot == slot then return item.info end
         end
     elseif QBInv then return QBInv:GetItemBySlot(inv, slot)?.info end
+
+    Debug('(inventory.getMetaDataBySlot) Missing compatibility')
 end
 
 ---@param inv string inventory name/player source
@@ -59,6 +61,8 @@ function FM.inventory.getSlotIDByItem(inv, itemName)
             if name == itemName then return item.slot end
         end
     elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) end
+
+    Debug('(inventory.getSlotIDByItem) Missing compatibility')
 end
 
 ---@param inv string inventory name/player source
@@ -69,6 +73,8 @@ function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
     elseif COREInv then COREInv:setMetadata(inv, slot, metadata)
     elseif QSInv then QSInv:SetItemMetadata(inv, slot, metadata)
     elseif QBInv then QBInv:SetMetaData(inv, slot, metadata) end
+
+    Debug('(inventory.setMetaDataBySlot) Missing compatibility')
 end
 
 --- Only necessary for ox-inventory
