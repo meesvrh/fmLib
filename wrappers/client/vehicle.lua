@@ -55,7 +55,7 @@ function FM.vehicle.removeKeys(vehicle)
     elseif okokGarage then
         TriggerServerEvent('okokGarage:RemoveKeys', plate)
     elseif QSVehKeys then
-        QSVehKeys:RemoveKeys(plate)
+        QSVehKeys:RemoveKeys(plate, model)
     elseif RenewedVehKeys then
         RenewedVehKeys:removeKey(plate)
     elseif WASABI_CARLOCK then
