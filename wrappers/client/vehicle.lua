@@ -49,6 +49,7 @@ end
 function FM.vehicle.removeKeys(vehicle)
     if not vehicle then return end
     local plate = FM.vehicle.getPlate(vehicle)
+    local model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
 
     if QBVehKeys then
         TriggerEvent("vehiclekeys:client:RemoveKeys", plate)
