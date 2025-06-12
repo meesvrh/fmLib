@@ -49,13 +49,14 @@ end
 function FM.vehicle.removeKeys(vehicle)
     if not vehicle then return end
     local plate = FM.vehicle.getPlate(vehicle)
+    local model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
 
     if QBVehKeys then
         TriggerEvent("vehiclekeys:client:RemoveKeys", plate)
     elseif okokGarage then
         TriggerServerEvent('okokGarage:RemoveKeys', plate)
     elseif QSVehKeys then
-        QSVehKeys:RemoveKeys(plate)
+        QSVehKeys:RemoveKeys(plate, model)
     elseif RenewedVehKeys then
         RenewedVehKeys:removeKey(plate)
     elseif WASABI_CARLOCK then
