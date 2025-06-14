@@ -40,7 +40,8 @@ end
 
 local function getPlayerByIdentifier(identifier)
     if not identifier then return end
-    local _fwp = ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or nil
+    local _fwp = ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or
+        nil
     if not _fwp or not type(_fwp) == 'table' then return end
 
     _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
@@ -66,19 +67,22 @@ function FM.player.get(id)
 
         if OXInv then
             OXInv:AddItem(_fwp.source, item, amount, metadata)
-
             return true
+        elseif QSInv then
+            local success = QSInv:AddItem(_fwp.source, item, amount, false, metadata or {})
+            return success
         elseif ESX then
             if CHEZZAInv and string.find(item:lower(), 'weapon') then
                 _fwp.addWeapon(item, 0)
             else
                 _fwp.addInventoryItem(item, amount)
             end
-
             return true
         elseif QB then
             return _fwp.Functions.AddItem(item, amount, nil, metadata)
         end
+
+        return false
     end
 
     ---@param amount number
@@ -92,23 +96,33 @@ function FM.player.get(id)
             if GetResourceState(Resources.RX_BANKING.name) == 'started' then
                 local personalAcc = exports[Resources.RX_BANKING.name]:GetPlayerPersonalAccount(p.getIdentifier())
                 if personalAcc then
-                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type, transactionData.fromIban, personalAcc.iban, transactionData.reason)
+                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type,
+                        transactionData.fromIban, personalAcc.iban, transactionData.reason)
                 end
             end
         end
 
-        if ESX then _fwp.addAccountMoney(moneyType, amount)
-        elseif QB then _fwp.Functions.AddMoney(moneyType, amount) end
+        if ESX then
+            _fwp.addAccountMoney(moneyType, amount)
+        elseif QB then
+            _fwp.Functions.AddMoney(moneyType, amount)
+        end
     end
 
     p.canAddItem = function(item, amount)
         if not item or not amount then return false end
 
-        if OXInv then return OXInv:CanCarryItem(_fwp.source, item, amount)
-        elseif QBInv and isNewQBInv() then return QBInv:CanAddItem(_fwp.source, item, amount)
-        elseif QSInv then return QSInv:CanCarryItem(_fwp.source, item, amount)
-        elseif ESX then return _fwp.canCarryItem(item, amount)
-        elseif QB then return true end
+        if OXInv then
+            return OXInv:CanCarryItem(_fwp.source, item, amount)
+        elseif QBInv and isNewQBInv() then
+            return QBInv:CanAddItem(_fwp.source, item, amount)
+        elseif QSInv then
+            return QSInv:CanCarryItem(_fwp.source, item, amount)
+        elseif ESX then
+            return _fwp.canCarryItem(item, amount)
+        elseif QB then
+            return true
+        end
     end
 
     ---@param moneyType? string
@@ -118,12 +132,18 @@ function FM.player.get(id)
 
         if ESX then
             local acc = _fwp.getAccount(moneyType)
-            if not acc then FM.console.err('Money Type not found: '..moneyType) return 0 end
+            if not acc then
+                FM.console.err('Money Type not found: ' .. moneyType)
+                return 0
+            end
 
             return acc.money
         elseif QB then
             local money = _fwp.PlayerData.money[moneyType]
-            if money == nil then FM.console.err('Money Type not found: '..moneyType) return 0 end
+            if money == nil then
+                FM.console.err('Money Type not found: ' .. moneyType)
+                return 0
+            end
 
             return money
         end
@@ -131,8 +151,11 @@ function FM.player.get(id)
 
     ---@return string identifier
     p.getIdentifier = function()
-        if ESX then return _fwp.getIdentifier()
-        elseif QB then return _fwp.PlayerData.citizenid end
+        if ESX then
+            return _fwp.getIdentifier()
+        elseif QB then
+            return _fwp.PlayerData.citizenid
+        end
     end
 
     ---@return { name: string, label: string, grade: number, gradeLabel: string } job
@@ -240,7 +263,7 @@ function FM.player.get(id)
             local items = QSInv:GetInventory(_fwp.source)
             for itemName, itemData in pairs(items) do
                 inventory[itemData.slot] = {
-                    name = itemName,
+                    name = itemData.name,
                     label = itemData.label,
                     amount = itemData.count,
                     metadata = itemData.info,
@@ -284,20 +307,29 @@ function FM.player.get(id)
 
     ---@return string firstName
     p.getFirstName = function()
-        if ESX then return string.split(_fwp.getName(), ' ')[1]
-        elseif QB then return _fwp.PlayerData.charinfo.firstname end
+        if ESX then
+            return string.split(_fwp.getName(), ' ')[1]
+        elseif QB then
+            return _fwp.PlayerData.charinfo.firstname
+        end
     end
 
     ---@return string lastName
     p.getLastName = function()
-        if ESX then return string.split(_fwp.getName(), ' ')[2]
-        elseif QB then return _fwp.PlayerData.charinfo.lastname end
+        if ESX then
+            return string.split(_fwp.getName(), ' ')[2]
+        elseif QB then
+            return _fwp.PlayerData.charinfo.lastname
+        end
     end
 
     ---@return string fullName
     p.getFullName = function()
-        if ESX then return _fwp.getName()
-        elseif QB then return _fwp.PlayerData.charinfo.firstname .. ' ' .. _fwp.PlayerData.charinfo.lastname end
+        if ESX then
+            return _fwp.getName()
+        elseif QB then
+            return _fwp.PlayerData.charinfo.firstname .. ' ' .. _fwp.PlayerData.charinfo.lastname
+        end
     end
 
     ---@param item string
@@ -331,8 +363,11 @@ function FM.player.get(id)
 
     ---@return string | table group
     p.getGroup = function()
-        if ESX then return _fwp.getGroup()
-        elseif QB then return QB.Functions.GetPermission(_fwp.source) end
+        if ESX then
+            return _fwp.getGroup()
+        elseif QB then
+            return QB.Functions.GetPermission(_fwp.source)
+        end
     end
 
     ---@param message string
@@ -340,8 +375,11 @@ function FM.player.get(id)
     p.notify = function(message, type)
         if not message then return end
 
-        if ESX then TriggerClientEvent('esx:showNotification', _fwp.source, message, type)
-        elseif QB then TriggerClientEvent('QBCore:Notify', _fwp.source, message, type) end
+        if ESX then
+            TriggerClientEvent('esx:showNotification', _fwp.source, message, type)
+        elseif QB then
+            TriggerClientEvent('QBCore:Notify', _fwp.source, message, type)
+        end
     end
 
     ---@param item string
@@ -351,9 +389,13 @@ function FM.player.get(id)
     p.removeItem = function(item, amount, slotId, metadata)
         if not item or not amount then return end
 
-        if OXInv then OXInv:RemoveItem(_fwp.source, item, amount, metadata, slotId)
-        elseif ESX then _fwp.removeInventoryItem(item, amount)
-        elseif QB then _fwp.Functions.RemoveItem(item, amount) end
+        if OXInv then
+            OXInv:RemoveItem(_fwp.source, item, amount, metadata, slotId)
+        elseif ESX then
+            _fwp.removeInventoryItem(item, amount)
+        elseif QB then
+            _fwp.Functions.RemoveItem(item, amount)
+        end
     end
 
     ---@param amount number
@@ -367,13 +409,17 @@ function FM.player.get(id)
             if GetResourceState(Resources.RX_BANKING.name) == 'started' then
                 local personalAcc = exports[Resources.RX_BANKING.name]:GetPlayerPersonalAccount(p.getIdentifier())
                 if personalAcc then
-                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type, personalAcc.iban, transactionData.toIban, transactionData.reason)
+                    exports[Resources.RX_BANKING.name]:CreateTransaction(amount, transactionData.type, personalAcc.iban,
+                        transactionData.toIban, transactionData.reason)
                 end
             end
         end
 
-        if ESX then _fwp.removeAccountMoney(moneyType, amount)
-        elseif QB then _fwp.Functions.RemoveMoney(moneyType, amount) end
+        if ESX then
+            _fwp.removeAccountMoney(moneyType, amount)
+        elseif QB then
+            _fwp.Functions.RemoveMoney(moneyType, amount)
+        end
     end
 
     return p
