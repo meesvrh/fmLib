@@ -60,7 +60,7 @@ Resources = {
     WASABI_CARLOCK = { name = 'wasabi_carlock', export = 'all' },
     TGIANN_HOTWIRE = { name = 'tgiann-hotwire', export = 'all' },
     MM_CARKEYS = { name = 'mm_carkeys', export = 'all' },
-    MRNNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = 'false' },
+    MRNNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = false },
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
     FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
     FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all'},
