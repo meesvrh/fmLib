@@ -64,7 +64,7 @@ function FM.vehicle.removeKeys(vehicle)
     elseif MM_CARKEYS then
         MM_CARKEYS:RemoveKey(plate)
     elseif MRNEWBVEHICLEKEYS then
-        MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)-- not working atm
+        MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)
     end
 end
 
