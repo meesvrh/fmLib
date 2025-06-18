@@ -34,8 +34,8 @@ function FM.vehicle.giveKeys(vehicle)
         TGIANN_HOTWIRE:GiveKeyPlate(plate, true)
     elseif MM_CARKEYS then
         MM_CARKEYS:GiveKey(plate)
-    elseif MRNNEWBVEHICLEKEYS then
-        MRNNEWBVEHICLEKEYS:GiveKeys(vehicle)
+    elseif MRNEWBVEHICLEKEYS then
+        MRNEWBVEHICLEKEYS:GiveKeys(vehicle)
     elseif ISVehicleKeys then
         ISVehicleKeys:GiveKey(plate)
     elseif FAST_VEHICLEKEYS then
@@ -63,8 +63,8 @@ function FM.vehicle.removeKeys(vehicle)
         WASABI_CARLOCK:RemoveKey(plate)
     elseif MM_CARKEYS then
         MM_CARKEYS:RemoveKey(plate)
-    elseif MRNNEWBVEHICLEKEYS then
-        MRNNEWBVEHICLEKEYS:RemoveKeys(vehicle)-- not working atm
+    elseif MRNEWBVEHICLEKEYS then
+        MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)-- not working atm
     end
 end
 
@@ -85,8 +85,8 @@ function FM.vehicle.hasKey(vehicle)
         return WASABI_CARLOCK:HasKey(plate)
     elseif TGIANN_HOTWIRE then
         return TGIANN_HOTWIRE:HasKeyPlate(plate)
-    elseif MRNNEWBVEHICLEKEYS then
-        return MRNNEWBVEHICLEKEYS:HaveKeys(vehicle)
+    elseif MRNEWBVEHICLEKEYS then
+        return MRNEWBVEHICLEKEYS:HaveKeys(vehicle)
     end
 end
 
