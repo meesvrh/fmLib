@@ -68,6 +68,9 @@ function FM.player.get(id)
             OXInv:AddItem(_fwp.source, item, amount, metadata)
 
             return true
+        elseif QSInv then
+            QSInv:AddItem(_fwp.source, item, amount, nil, metadata)
+            return true
         elseif ESX then
             if CHEZZAInv and string.find(item:lower(), 'weapon') then
                 _fwp.addWeapon(item, 0)
@@ -210,8 +213,10 @@ function FM.player.get(id)
                 amount = item.count
             }
         elseif QB then
+            Debug('(p.getItem) Executing QB GetItemByName on: ' .. item)
             item = _fwp.Functions.GetItemByName(item)
             if not item then return end
+            Debug('(p.getItem) GetItemByName returned: ' .. item.name .. ' (x' .. item.amount .. ') ' .. item.label)
 
             return {
                 name = item.name,
@@ -238,9 +243,9 @@ function FM.player.get(id)
             end
         elseif QSInv then
             local items = QSInv:GetInventory(_fwp.source)
-            for itemName, itemData in pairs(items) do
+            for _, itemData in pairs(items) do
                 inventory[itemData.slot] = {
-                    name = itemName,
+                    name = itemData.name,
                     label = itemData.label,
                     amount = itemData.count,
                     metadata = itemData.info,
