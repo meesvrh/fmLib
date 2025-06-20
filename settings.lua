@@ -64,7 +64,7 @@ Resources = {
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
     FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
     FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all'},
-    QBX_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all'},
+    QBX_VEHICLEKEYS = { name = 'qbx_vehiclekeys', export = 'all'},
 
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
