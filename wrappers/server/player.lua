@@ -71,6 +71,9 @@ function FM.player.get(id)
         elseif QSInv then
             QSInv:AddItem(_fwp.source, item, amount, nil, metadata)
             return true
+        elseif TGIANN_INV then
+            TGIANN_INV:AddItem(_fwp.source, item, amount, nil, metadata)
+            return true
         elseif ESX then
             if CHEZZAInv and string.find(item:lower(), 'weapon') then
                 _fwp.addWeapon(item, 0)
@@ -273,6 +276,16 @@ function FM.player.get(id)
             end
         elseif COREInv then
             local items = COREInv:getInventory()
+            for _, item in pairs(items) do
+                inventory[item.slot] = {
+                    name = item.name,
+                    label = item.label,
+                    amount = item.amount,
+                    metadata = item.metadata,
+                }
+            end
+        elseif TGIANN_INV then
+            local items = TGIANN_INV:GetPlayerItems(src)
             for _, item in pairs(items) do
                 inventory[item.slot] = {
                     name = item.name,
