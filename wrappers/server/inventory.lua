@@ -69,10 +69,10 @@ end
 ---@param slot number slot number
 ---@param metadata table metadata
 function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
-    if OXInv then OXInv:SetMetadata(inv, slot, metadata)
-    elseif COREInv then COREInv:setMetadata(inv, slot, metadata)
-    elseif QSInv then QSInv:SetItemMetadata(inv, slot, metadata)
-    elseif QBInv then QBInv:SetMetaData(inv, slot, metadata) end
+    if OXInv then return OXInv:SetMetadata(inv, slot, metadata)
+    elseif COREInv then return COREInv:setMetadata(inv, slot, metadata)
+    elseif QSInv then return QSInv:SetItemMetadata(inv, slot, metadata)
+    elseif QBInv then return QBInv:SetMetaData(inv, slot, metadata) end
 
     Debug('(inventory.setMetaDataBySlot) Missing compatibility')
 end

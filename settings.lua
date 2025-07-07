@@ -46,10 +46,12 @@ Resources = {
     COREInv = { name = 'core_inventory', export = 'all' },
     PSInv = { name = 'ps-inventory', export = 'all' },
     CHEZZAInv = { name = 'inventory', export = 'all' },
+    TGIANN_INV = { name = 'tgiann-inventory', export = 'all' },
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
 
-    -- Banking
+    -- Banking/Accounts
     RX_BANKING = { name = 'RxBanking', export = 'all' },
+    ADDON_ACCOUNT = { name = 'esx_addonaccount', export = false },
 
     -- Vehicle Keys
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
