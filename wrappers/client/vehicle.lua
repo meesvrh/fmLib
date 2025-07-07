@@ -42,8 +42,6 @@ function FM.vehicle.giveKeys(vehicle)
         FAST_VEHICLEKEYS:GiveKey(plate)
     elseif FILO_VEHICLEKEYS then
         FILO_VEHICLEKEYS:GiveKeys(plate)
-    elseif QBX_VEHICLEKEYS then
-        QBX_VEHICLEKEYS:GiveKeys(vehicle)
     end
 end
 
@@ -67,8 +65,6 @@ function FM.vehicle.removeKeys(vehicle)
         MM_CARKEYS:RemoveKey(plate)
     elseif MRNEWBVEHICLEKEYS then
         MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)
-    elseif QBX_VEHICLEKEYS then
-        QBX_VEHICLEKEYS:RemoveKeys(vehicle)
     end
 end
 
@@ -91,8 +87,6 @@ function FM.vehicle.hasKey(vehicle)
         return TGIANN_HOTWIRE:HasKeyPlate(plate)
     elseif MRNEWBVEHICLEKEYS then
         return MRNEWBVEHICLEKEYS:HaveKeys(vehicle)
-    elseif QBX_VEHICLEKEYS then
-        return QBX_VEHICLEKEYS:HasKeys(vehicle)
     end
 end
 
