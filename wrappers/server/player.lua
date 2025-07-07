@@ -129,6 +129,8 @@ function FM.player.get(id)
             local canCarry, reason = exports.origen_inventory:canCarryItem(_fwp.source, item, amount)
             return canCarry
         end
+
+        return false
     end
 
 
