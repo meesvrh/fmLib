@@ -29,7 +29,10 @@ end
 ---@param weight? number
 ---@param slots? number
 function FM.inventory.openStash(stashId, owner, weight, slots)
-    if not stashId then FM.console.err('No stash ID provided') return end
+    if not stashId then
+        FM.console.err('No stash ID provided')
+        return
+    end
 
     if OXInv then
         OXInv:openInventory('stash', { id = stashId, owner = owner })

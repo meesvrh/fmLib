@@ -47,6 +47,7 @@ Resources = {
     PSInv = { name = 'ps-inventory', export = 'all' },
     CHEZZAInv = { name = 'inventory', export = 'all' },
     TGIANN_INV = { name = 'tgiann-inventory', export = 'all' },
+    origen_inventory = { name = 'origen_inventory', export = 'all' },
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
 
     -- Banking/Accounts
@@ -65,7 +66,7 @@ Resources = {
     MRNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = 'all' },
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
     FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
-    FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all'},
+    FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all' },
 
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
