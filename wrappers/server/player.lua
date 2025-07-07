@@ -125,8 +125,12 @@ function FM.player.get(id)
             return _fwp.canCarryItem(item, amount)
         elseif QB then
             return true
+        elseif origen_inventory then
+            local canCarry, reason = exports.origen_inventory:canCarryItem(_fwp.source, item, amount)
+            return canCarry
         end
     end
+
 
     ---@param moneyType? string
     ---@return number | nil amount
