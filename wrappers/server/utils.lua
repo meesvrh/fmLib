@@ -49,3 +49,16 @@ function FM.utils.getPlayers(filter)
 
     return players
 end
+
+---@param job string
+---@return number[] sources Array of player sources with the specified job
+function FM.utils.getJobOnlineSources(job)
+    local sources = {}
+    local players = FM.utils.getPlayers({ job = job })
+    
+    for src, _ in pairs(players) do
+        sources[#sources + 1] = tonumber(src)
+    end
+    
+    return sources
+end
