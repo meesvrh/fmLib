@@ -63,6 +63,23 @@ function FM.player.getGang()
     return FM.callback.sync('fm:internal:getGang')
 end
 
+---@param propertyId? string The property ID (optional unique identifier)
+function FM.player.openWardrobe(propertyId)
+    if FMAPP then
+        FMAPP:openWardrobe()
+    elseif ILA then
+        TriggerEvent("illenium-appearance:client:openOutfitMenu")
+    elseif QBClothing then
+        TriggerEvent('qb-clothing:client:openMenu')
+    elseif ESXSKIN then
+        TriggerEvent('esx_skin:openSaveableMenu')
+    elseif CRM then
+        TriggerEvent('crm-appearance:show-outfits')
+    else
+        FM.console.err("No wardrobe resource found")
+    end
+end
+
 --[[
     EVENT HANDLERS
 --]]
