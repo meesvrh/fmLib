@@ -42,6 +42,8 @@ function FM.vehicle.giveKeys(vehicle)
         FAST_VEHICLEKEYS:GiveKey(plate)
     elseif FILO_VEHICLEKEYS then
         FILO_VEHICLEKEYS:GiveKeys(plate)
+    elseif QBX_VEHICLEKEYS then
+        QBX_VEHICLEKEYS:GiveKeys(vehicle)
     end
 end
 
@@ -65,6 +67,8 @@ function FM.vehicle.removeKeys(vehicle)
         MM_CARKEYS:RemoveKey(plate)
     elseif MRNEWBVEHICLEKEYS then
         MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)
+    elseif QBX_VEHICLEKEYS then
+        QBX_VEHICLEKEYS:RemoveKeys(vehicle)
     end
 end
 
@@ -87,6 +91,8 @@ function FM.vehicle.hasKey(vehicle)
         return TGIANN_HOTWIRE:HasKeyPlate(plate)
     elseif MRNEWBVEHICLEKEYS then
         return MRNEWBVEHICLEKEYS:HaveKeys(vehicle)
+    elseif QBX_VEHICLEKEYS then
+        return QBX_VEHICLEKEYS:HasKeys(vehicle)
     end
 end
 
@@ -134,5 +140,42 @@ function FM.vehicle.setFuel(vehicle, fuelLvl)
          HRS_FUEL:SetFuel(vehicle, fuelLvl)
     else
         SetVehicleFuelLevel(vehicle, fuelLvl)
+    end
+end
+
+---@param garageId string | number The garage ID
+function FM.vehicle.storeInGarage(garageId)
+    if RXGARAGE then
+        RXGARAGE:ParkVehicle("House Garage ("..tostring(garageId)..")", 'garage', 'car')
+    elseif OKOKG then
+        TriggerEvent("okokGarage:StoreVehiclePrivate")
+    elseif JGGARAGE then
+        TriggerEvent("jg-advancedgarages:client:store-vehicle", "House: "..tostring(garageId), "car")
+    elseif CODEMG then
+        TriggerEvent("codem-garage:storeVehicle", garageId)
+    elseif CDGarage then
+        TriggerEvent('cd_garage:StoreVehicle_Main', 1, false, false)
+    else
+        FM.console.err("No garage resource found")
+    end
+end
+
+---@param garageId string | number The garage ID
+---@param coords vector4 The coordinates for the garage
+function FM.vehicle.openGarage(garageId, coords)
+    if RXGARAGE then
+        RXGARAGE:OpenGarage("House Garage ("..tostring(garageId)..")", 'garage', 'car', coords)
+    elseif OKOKG then
+        TriggerEvent("okokGarage:OpenPrivateGarageMenu", vector3(coords.x, coords.y, coords.z), coords.w)
+    elseif JGGARAGE then
+        TriggerEvent("jg-advancedgarages:client:open-garage", "House: "..tostring(garageId), "car", coords)
+    elseif CODEMG then
+        TriggerEvent("codem-garage:openHouseGarage", garageId)
+    elseif CDGarage then
+        -- Choose either 'quick' or 'inside' in the 1st argument.
+        -- Replace nil with '10cargarage_shell' or '40cargarage_shell' in the 2nd argument.
+        TriggerEvent('cd_garage:PropertyGarage', 'quick', nil)
+    else
+        FM.console.err("No garage resource found")
     end
 end

@@ -13,6 +13,19 @@ local function isNewQBInv()
     return vNums and vNums[1] >= 2
 end
 
+local function isNewPSInv()
+    local version = GetResourceMetadata('ps-inventory', 'version', 0)
+    if not version then return false end
+
+    local vNums = {}
+
+    for num in version:gmatch("(%d+)") do
+        vNums[#vNums + 1] = tonumber(num)
+    end
+
+    return vNums and vNums[1] >= 2
+end
+
 --- Currently only working for qb-inventory
 ---@param type 'otherplayer'
 ---@param id string | number
@@ -29,27 +42,28 @@ end
 ---@param weight? number
 ---@param slots? number
 function FM.inventory.openStash(stashId, owner, weight, slots)
-    if not stashId then
-        FM.console.err('No stash ID provided')
-        return
-    end
+    if not stashId then FM.console.err('No stash ID provided') return end
 
     if OXInv then
         OXInv:openInventory('stash', { id = stashId, owner = owner })
-    elseif QBInv or QSInv or PSInv then
-        if QBInv and isNewQBInv() then
+    elseif QBInv or QSInv or PSInv or CODEMInv then
+        if (QBInv and isNewQBInv()) or (PSInv and isNewPSInv()) then
             TriggerServerEvent('fm:internal:openStash', stashId, owner, weight, slots)
         else
             if QSInv then
                 QSInv:RegisterStash(stashId, slots, weight)
             end
-
+            
             TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
                 maxweight = weight,
                 slots = slots,
             })
             TriggerEvent('inventory:client:SetCurrentStash', stashId)
         end
+    elseif JPRInv then
+        TriggerServerEvent('fm:internal:openStash', stashId, owner, weight, slots)
+    else
+        FM.console.err("No inventory found for opening stash")
     end
 end
 

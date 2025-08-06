@@ -47,14 +47,15 @@ Resources = {
     PSInv = { name = 'ps-inventory', export = 'all' },
     CHEZZAInv = { name = 'inventory', export = 'all' },
     TGIANN_INV = { name = 'tgiann-inventory', export = 'all' },
-    origen_inventory = { name = 'origen_inventory', export = 'all' },
-    -- MOVHUD = { name = '17mov_Hud', export = 'all' },
-
+    JPRInv = { name = 'jpr-inventory', export = 'all' },
+    CODEMInv = { name = 'codem-inventory', export = 'all' },
+    ORIGEN_INVENTORY = { name = 'origen_inventory', export = 'all' },
+    
     -- Banking/Accounts
     RX_BANKING = { name = 'RxBanking', export = 'all' },
     ADDON_ACCOUNT = { name = 'esx_addonaccount', export = false },
-
-    -- Vehicle Keys
+    
+    -- Garages/Vehicle Keys
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
     CDGarage = { name = 'cd_garage', export = false },
     okokGarage = { name = 'okokGarage', export = false },
@@ -67,11 +68,15 @@ Resources = {
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
     FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
     FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all' },
-
+    QBX_VEHICLEKEYS = { name = 'qbx_vehiclekeys', export = 'all' },
+    JGGARAGE = { name = 'jg-advancedgarages', export = false },
+    CODEMG = { name = 'mGarage', export = false },
+    RXGARAGE = { name = 'RxGarages', export = 'all' },
+    
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
     LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
-    CDN_FUEL = { name = 'cdn_fuel', export = 'all' },
+    CDN_FUEL = { name = 'cdn-fuel', export = 'all' },
     RENEWED_FUEL = { name = 'renewed-fuel', export = 'all' },
     QBFUEL = { name = 'qb-fuel', export = 'all' },
     LC_FUEL = { name = 'lc_fuel', export = 'all' },
@@ -86,9 +91,18 @@ Resources = {
     LJ_FUEL = { name = 'lj-fuel', export = 'all' },
     MELONS_FUEL = { name = 'melons_fuel', export = 'all' },
     HRS_FUEL = { name = 'hrs_fuel', export = 'all' },
-
+    
     -- TextUIs
     OXLib = { name = 'ox_lib', export = 'all' },
     JGTextUI = { name = 'jg-textui', export = 'all' },
     OKOKTextUI = { name = 'okokTextUI', export = 'all' },
+    
+    -- Appearance/Clothing
+    FMAPP = { name = 'fivem-appearance', export = 'all' },
+    ILA = { name = 'illenium-appearance', export = false },
+    QBClothing = { name = 'qb-clothing', export = false },
+    ESXSKIN = { name = 'esx_skin', export = false },
+    CRM = { name = 'crm-appearance', export = false },
+    
+    -- MOVHUD = { name = '17mov_Hud', export = 'all' },
 }

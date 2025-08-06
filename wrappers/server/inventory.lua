@@ -22,8 +22,7 @@ function FM.inventory.getItemLabel(item)
     if not item then return end
 
     if OXInv then
-        if cachedItemLabels[item] then
-            return cachedItemLabels[item]
+        if cachedItemLabels[item] then return cachedItemLabels[item]
         else
             for itemName, v in pairs(OXInv:Items()) do
                 cachedItemLabels[itemName] = v.label
@@ -31,28 +30,21 @@ function FM.inventory.getItemLabel(item)
 
             return cachedItemLabels[item]
         end
-    elseif ESX then
-        return ESX.GetItemLabel(item)
-    elseif QB then
-        return QB.Shared.Items[item].label
-    end
+    elseif ESX then return ESX.GetItemLabel(item)
+    elseif QB then return QB.Shared.Items[item].label end
 end
 
 ---@param inv string inventory name/player source
 ---@param slot? number slot number
 function FM.inventory.getMetaDataBySlot(inv, slot)
-    if OXInv then
-        return OXInv:GetSlot(inv, slot)?.metadata
-    elseif COREInv then
-        return COREInv:getItemBySlot(inv, slot)?.metadata
+    if OXInv then return OXInv:GetSlot(inv, slot)?.metadata
+    elseif COREInv then return COREInv:getItemBySlot(inv, slot)?.metadata
     elseif QSInv then
         local items = QSInv:GetInventory(inv)
         for _, item in pairs(items) do
             if item.slot == slot then return item.info end
         end
-    elseif QBInv then
-        return QBInv:GetItemBySlot(inv, slot)?.info
-    end
+    elseif QBInv then return QBInv:GetItemBySlot(inv, slot)?.info end
 
     Debug('(inventory.getMetaDataBySlot) Missing compatibility')
 end
@@ -60,20 +52,16 @@ end
 ---@param inv string inventory name/player source
 ---@param itemName string item name
 function FM.inventory.getSlotIDByItem(inv, itemName)
-    if OXInv then
-        return OXInv:GetSlotIdWithItem(inv, itemName)
-    elseif QBInv then
-        return QBInv:GetFirstSlotByItem(QB.Functions.GetPlayer(inv).PlayerData.Items, itemName)
-    elseif COREInv then
-        return COREInv:getFirstSlotByItem(inv, itemName)
+    if OXInv then return OXInv:GetSlotIdWithItem(inv, itemName)
+    elseif QBInv then return QBInv:GetFirstSlotByItem(QB.Functions.GetPlayer(inv).PlayerData.Items, itemName)
+    elseif COREInv then return COREInv:getFirstSlotByItem(inv, itemName)
     elseif QSInv then
         local items = QSInv:GetInventory(inv)
         for name, item in pairs(items) do
             if name == itemName then return item.slot end
         end
-    elseif PSInv then
-        return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName)
-    elseif origen_inventory then
+    elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) 
+    elseif ORIGEN_INVENTORY then
         local inventoryData = exports.origen_inventory:getInventory(inv)
         if inventoryData and inventoryData.items then
             for _, item in pairs(inventoryData.items) do
@@ -87,26 +75,17 @@ function FM.inventory.getSlotIDByItem(inv, itemName)
     Debug('(inventory.getSlotIDByItem) Missing compatibility')
 end
 
-
 ---@param inv string inventory name/player source
 ---@param slot number slot number
 ---@param metadata table metadata
 function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
-    if OXInv then
-        return OXInv:SetMetadata(inv, slot, metadata)
-    elseif COREInv then
-        return COREInv:setMetadata(inv, slot, metadata)
-    elseif QSInv then
-        return QSInv:SetItemMetadata(inv, slot, metadata)
-    elseif QBInv then
-        return QBInv:SetMetaData(inv, slot, metadata)
-    elseif origen_inventory then
-        return exports.origen_inventory:setMetadata(inv, slot, metadata)
-    end
-
+    if OXInv then return OXInv:SetMetadata(inv, slot, metadata)
+    elseif COREInv then return COREInv:setMetadata(inv, slot, metadata)
+    elseif QSInv then return QSInv:SetItemMetadata(inv, slot, metadata)
+    elseif QBInv then return QBInv:SetMetaData(inv, slot, metadata) 
+    elseif ORIGEN_INVENTORY then return exports.origen_inventory:setMetadata(inv, slot, metadata) end
     Debug('(inventory.setMetaDataBySlot) Missing compatibility')
 end
-
 
 --- Only necessary for ox-inventory
 ---@param stash { id: string | number, label: string, slots: number, weight: number, owner?: string | boolean, groups?: table, coords?: vector3 | vector3[] }
