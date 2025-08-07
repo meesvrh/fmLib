@@ -60,7 +60,17 @@ function FM.inventory.getSlotIDByItem(inv, itemName)
         for name, item in pairs(items) do
             if name == itemName then return item.slot end
         end
-    elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) end
+    elseif PSInv then return PSInv:GetFirstSlotByItem(FM.player.get(inv).getItems(), itemName) 
+    elseif ORIGEN_INVENTORY then
+        local inventoryData = exports.origen_inventory:getInventory(inv)
+        if inventoryData and inventoryData.items then
+            for _, item in pairs(inventoryData.items) do
+                if item.name == itemName then
+                    return item.slot
+                end
+            end
+        end
+    end
 
     Debug('(inventory.getSlotIDByItem) Missing compatibility')
 end
@@ -72,8 +82,8 @@ function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
     if OXInv then return OXInv:SetMetadata(inv, slot, metadata)
     elseif COREInv then return COREInv:setMetadata(inv, slot, metadata)
     elseif QSInv then return QSInv:SetItemMetadata(inv, slot, metadata)
-    elseif QBInv then return QBInv:SetMetaData(inv, slot, metadata) end
-
+    elseif QBInv then return QBInv:SetMetaData(inv, slot, metadata) 
+    elseif ORIGEN_INVENTORY then return exports.origen_inventory:setMetadata(inv, slot, metadata) end
     Debug('(inventory.setMetaDataBySlot) Missing compatibility')
 end
 
