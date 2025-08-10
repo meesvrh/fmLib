@@ -49,6 +49,7 @@ Resources = {
     TGIANN_INV = { name = 'tgiann-inventory', export = 'all' },
     JPRInv = { name = 'jpr-inventory', export = 'all' },
     CODEMInv = { name = 'codem-inventory', export = 'all' },
+    ORIGEN_INVENTORY = { name = 'origen_inventory', export = 'all' },
     
     -- Banking/Accounts
     RX_BANKING = { name = 'RxBanking', export = 'all' },
@@ -66,7 +67,8 @@ Resources = {
     MRNEWBVEHICLEKEYS = { name = 'MrNewbVehicleKeys', export = 'all' },
     ISVehicleKeys = { name = 'is_vehiclekeys', export = 'all' },
     FAST_VEHICLEKEYS = { name = 'fast-vehiclekeys', export = 'all' },
-    FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all'},
+    FILO_VEHICLEKEYS = { name = 'filo_vehiclekey', export = 'all' },
+    QBX_VEHICLEKEYS = { name = 'qbx_vehiclekeys', export = 'all' },
     JGGARAGE = { name = 'jg-advancedgarages', export = false },
     CODEMG = { name = 'mGarage', export = false },
     RXGARAGE = { name = 'RxGarages', export = 'all' },
@@ -74,7 +76,7 @@ Resources = {
     -- Fuel Systems
     OXFUEL = { name = 'ox_fuel', export = false },
     LEGACYFUEL = { name = 'LegacyFuel', export = 'all' },
-    CDN_FUEL = { name = 'cdn_fuel', export = 'all' },
+    CDN_FUEL = { name = 'cdn-fuel', export = 'all' },
     RENEWED_FUEL = { name = 'renewed-fuel', export = 'all' },
     QBFUEL = { name = 'qb-fuel', export = 'all' },
     LC_FUEL = { name = 'lc_fuel', export = 'all' },
