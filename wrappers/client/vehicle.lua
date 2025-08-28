@@ -42,6 +42,8 @@ function FM.vehicle.giveKeys(vehicle)
         FAST_VEHICLEKEYS:GiveKey(plate)
     elseif FILO_VEHICLEKEYS then
         FILO_VEHICLEKEYS:GiveKeys(plate)
+    elseif QBX_VEHICLEKEYS then
+        QBX_VEHICLEKEYS:GiveKeys(vehicle)
     end
 end
 
@@ -65,6 +67,10 @@ function FM.vehicle.removeKeys(vehicle)
         MM_CARKEYS:RemoveKey(plate)
     elseif MRNEWBVEHICLEKEYS then
         MRNEWBVEHICLEKEYS:RemoveKeys(vehicle)
+    elseif FILO_VEHICLEKEYS then
+        FILO_VEHICLEKEYS:RemoveKeys(plate)
+    elseif QBX_VEHICLEKEYS then
+        QBX_VEHICLEKEYS:RemoveKeys(vehicle)
     end
 end
 
@@ -85,8 +91,12 @@ function FM.vehicle.hasKey(vehicle)
         return WASABI_CARLOCK:HasKey(plate)
     elseif TGIANN_HOTWIRE then
         return TGIANN_HOTWIRE:HasKeyPlate(plate)
+    elseif FILO_VEHICLEKEYS then
+        return FILO_VEHICLEKEYS:HasKeys(plate)
     elseif MRNEWBVEHICLEKEYS then
         return MRNEWBVEHICLEKEYS:HaveKeys(vehicle)
+    elseif QBX_VEHICLEKEYS then
+        return QBX_VEHICLEKEYS:HasKeys(vehicle)
     end
 end
 
