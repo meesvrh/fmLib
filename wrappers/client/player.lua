@@ -105,6 +105,10 @@ local function onJobUpdate(newJob)
     TriggerEvent('fm:player:onJobUpdate', job)
 end
 
+local function onGangUpdate(newGang)
+    TriggerEvent('fm:player:onGangUpdate', FM.player.getGang())
+end
+
 -- We do not send player data, because for ESX its also sent when there is no character selected yet.
 -- After this event gets triggered, use FM.player.isLoggedIn to check if the player is logged in & to make sure the character is selected.
 local function onPlayerLoaded()
@@ -113,5 +117,6 @@ end
 
 RegisterNetEvent('esx:setJob', onJobUpdate)
 RegisterNetEvent('QBCore:Client:OnJobUpdate', onJobUpdate)
+RegisterNetEvent('QBCore:Client:OnGangUpdate', onGangUpdate)
 RegisterNetEvent('esx:playerLoaded', onPlayerLoaded)
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', onPlayerLoaded)
