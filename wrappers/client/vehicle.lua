@@ -139,8 +139,8 @@ end
 
 ---@param garageId string | number The garage ID
 function FM.vehicle.storeInGarage(garageId)
-    if RXGARAGE then
-        RXGARAGE:ParkVehicle("House Garage ("..tostring(garageId)..")", 'garage', 'car')
+    if GetResourceState(Resources.RXGARAGE.name) == "started" then
+        exports[Resources.RXGARAGE.name]:ParkVehicle("House Garage ("..tostring(garageId)..")", 'garage', 'car')
     elseif OKOKG then
         TriggerEvent("okokGarage:StoreVehiclePrivate")
     elseif JGGARAGE then
@@ -157,8 +157,8 @@ end
 ---@param garageId string | number The garage ID
 ---@param coords vector4 The coordinates for the garage
 function FM.vehicle.openGarage(garageId, coords)
-    if RXGARAGE then
-        RXGARAGE:OpenGarage("House Garage ("..tostring(garageId)..")", 'garage', 'car', coords)
+    if GetResourceState(Resources.RXGARAGE.name) == "started" then
+        exports[Resources.RXGARAGE.name]:OpenGarage("House Garage ("..tostring(garageId)..")", 'garage', 'car', coords)
     elseif OKOKG then
         TriggerEvent("okokGarage:OpenPrivateGarageMenu", vector3(coords.x, coords.y, coords.z), coords.w)
     elseif JGGARAGE then
