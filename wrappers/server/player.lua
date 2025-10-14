@@ -83,6 +83,9 @@ function FM.player.get(id)
             return true
         elseif QB then
             return _fwp.Functions.AddItem(item, amount, nil, metadata)
+        elseif ORIGEN_INVENTORY then
+            local canCarry, reason = exports.origen_inventory:canCarryItem(_fwp.source, item, amount)
+            return canCarry
         end
 
         return false
