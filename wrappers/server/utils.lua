@@ -126,38 +126,36 @@ function FM.utils.getGangs()
     local gangs = {}
 
     if ESX then
-        -- ESX doesn't have native gangs, but check for common gang resources
-        if GetResourceState('esx_gangs') == 'started' then
-            -- Try to get gangs from esx_gangs export
-            local success, result = pcall(function()
-                return exports['esx_gangs']:GetGangs()
-            end)
+        -- ESX stores gangs as jobs, so we get them from ESX.GetJobs()
+        local esxJobs = ESX.GetJobs()
+        if esxJobs then
+            for jobName, jobData in pairs(esxJobs) do
+                -- Typically gang jobs are prefixed or categorized differently
+                -- You can filter here based on your server's naming convention
+                -- For now, we'll return all jobs and let the boss menu filter them
+                -- Common patterns: gang_, ballas, vagos, families, etc.
 
-            if success and result then
-                for gangName, gangData in pairs(result) do
-                    local grades = {}
-                    -- Convert gang grades to unified format
-                    if gangData.grades then
-                        for gradeId, gradeData in pairs(gangData.grades) do
-                            grades[#grades + 1] = {
-                                grade = tonumber(gradeId) or 0,
-                                name = gradeData.label or gradeData.name or 'Unknown',
-                                label = gradeData.label or gradeData.name or 'Unknown',
-                                salary = gradeData.salary or 0,
-                                isboss = gradeData.name and (string.lower(gradeData.name):find('boss') ~= nil) or false
-                            }
-                        end
+                local grades = {}
+                -- Convert ESX grades to unified format
+                if jobData.grades then
+                    for gradeId, gradeData in pairs(jobData.grades) do
+                        grades[#grades + 1] = {
+                            grade = tonumber(gradeId) or 0,
+                            name = gradeData.label or gradeData.name or 'Unknown',
+                            label = gradeData.label or gradeData.name or 'Unknown',
+                            salary = gradeData.salary or 0,
+                            isboss = gradeData.name and (string.lower(gradeData.name):find('boss') ~= nil) or false
+                        }
                     end
-
-                    gangs[#gangs + 1] = {
-                        name = gangName,
-                        label = gangData.label or gangName,
-                        grades = grades
-                    }
                 end
+
+                gangs[#gangs + 1] = {
+                    name = jobName,
+                    label = jobData.label or jobName,
+                    grades = grades
+                }
             end
         end
-        -- Could add support for other ESX gang resources here
     elseif QB then
         if QB.Shared and QB.Shared.Gangs then
             for gangName, gangData in pairs(QB.Shared.Gangs) do
