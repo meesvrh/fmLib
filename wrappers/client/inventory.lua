@@ -118,6 +118,13 @@ function FM.inventory.getItems()
     return inventory
 end
 
+---@param metadata table<string|number, string>
+function FM.inventory.displayMetadata(metadata)
+    if OXInv then
+        OXInv:displayMetadata(metadata)
+    end
+end
+
 ---@param state boolean
 function FM.inventory.setWeaponWheel(state)
     if OXInv then
