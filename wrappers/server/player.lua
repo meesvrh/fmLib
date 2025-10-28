@@ -440,6 +440,28 @@ function FM.player.get(id)
         end
     end
 
+    ---@param jobName string
+    ---@param jobGrade number
+    p.setJob = function(jobName, jobGrade)
+        if not jobName or not jobGrade then return end
+
+        if ESX then
+            _fwp.setJob(jobName, jobGrade)
+        elseif QB then
+            _fwp.Functions.SetJob(jobName, jobGrade)
+        end
+    end
+
+    p.setGang = function(gangName, gangGrade)
+        if not gangName or not gangGrade then return end
+
+        if ESX then 
+            _fwp.setJob(gangName, gangGrade)
+        elseif QB then
+            _fwp.Functions.SetGang(gangName, gangGrade)
+        end
+    end
+
     return p
 end
 
