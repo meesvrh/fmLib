@@ -80,6 +80,73 @@ function FM.player.openWardrobe(propertyId)
     end
 end
 
+---@param clothingData table The clothing data to apply
+function FM.player.setOutfit(clothingData)
+    local playerPed = PlayerPedId()
+
+    if FMAPP or ILA then
+        local propMapping = {
+            [0] = { drawable = 'helmet_1', texture = 'helmet_2' },
+            [1] = { drawable = 'glasses_1', texture = 'glasses_2' },
+        }
+
+        local componentMapping = {
+            [1] = { drawable = 'mask_1', texture = 'mask_2' },
+            [3] = { drawable = 'arms', texture = nil },
+            [4] = { drawable = 'pants_1', texture = 'pants_2' },
+            [5] = { drawable = 'bag', texture = 'bag_color' },
+            [6] = { drawable = 'shoes_1', texture = 'shoes_2' },
+            [7] = { drawable = 'chain_1', texture = 'chain_2' },
+            [8] = { drawable = 'tshirt_1', texture = 'tshirt_2' },
+            [9] = { drawable = 'bproof_1', texture = 'bproof_2' },
+            [10] = { drawable = 'decals_1', texture = 'decals_2' },
+            [11] = { drawable = 'torso_1', texture = 'torso_2' },
+        }
+
+        local props = {}
+        for id, prop in pairs(propMapping) do
+            props[#props + 1] = {
+                component_id = id,
+                drawable = clothingData[prop.drawable] or 0,
+                texture = clothingData[prop.texture] or 0
+            }
+        end
+
+        local components = {}
+        for id, comp in pairs(componentMapping) do
+            components[#components + 1] = {
+                component_id = id,
+                drawable = clothingData[comp.drawable] or 0,
+                texture = comp.texture and (clothingData[comp.texture] or 0) or 0
+            }
+        end
+
+        exports[FMAPP and 'fivem-appearance' or 'illenium-appearance']:setPedProps(playerPed, props)
+        exports[FMAPP and 'fivem-appearance' or 'illenium-appearance']:setPedComponents(playerPed, components)
+    elseif ESXSKIN then
+        ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+            TriggerEvent('skinchanger:loadClothes', skin, clothingData)
+        end)
+    elseif QBClothing then
+        TriggerEvent('qb-clothing:client:loadOutfit', { outfitData = clothingData })
+    else
+        FM.console.err("No clothing resource found")
+    end
+end
+
+function FM.player.loadSkin()
+    if ESX then
+        ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+            TriggerEvent('skinchanger:loadSkin', skin)
+            TriggerEvent('esx:restoreLoadout')
+        end)
+    elseif QB then
+        TriggerServerEvent('qb-clothes:loadPlayerSkin')
+    else
+        FM.console.err("No framework found to load player skin")
+    end
+end
+
 --[[
     EVENT HANDLERS
 --]]
