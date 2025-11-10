@@ -135,7 +135,9 @@ function FM.player.setOutfit(clothingData)
 end
 
 function FM.player.loadSkin()
-    if ESX then
+    if ILA then
+        TriggerEvent("illenium-appearance:client:reloadSkin")
+    elseif ESX then
         ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
             TriggerEvent('skinchanger:loadSkin', skin)
             TriggerEvent('esx:restoreLoadout')
