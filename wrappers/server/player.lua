@@ -48,6 +48,32 @@ local function getPlayerByIdentifier(identifier)
     return _fwp
 end
 
+---Get player fullname by identifier
+---@param identifier string The player identifier
+---@return string|nil The player's full name or nil if not found
+FM.player.getFullnameByIdentifier = function(identifier)
+    if not identifier then return nil end
+
+    if ESX then
+        local result = MySQL.scalar.await('SELECT firstname, lastname FROM users WHERE identifier = ?', {identifier})
+        if result then
+            local data = MySQL.query.await('SELECT firstname, lastname FROM users WHERE identifier = ?', {identifier})
+            if data and data[1] then
+                return (data[1].firstname or '') .. ' ' .. (data[1].lastname or '')
+            end
+        end
+    elseif QB then
+        local result = MySQL.query.await('SELECT JSON_EXTRACT(charinfo, "$.firstname") as firstname, JSON_EXTRACT(charinfo, "$.lastname") as lastname FROM players WHERE citizenid = ?', {identifier})
+        if result and result[1] then
+            local firstname = result[1].firstname and string.gsub(result[1].firstname, '"', '') or ''
+            local lastname = result[1].lastname and string.gsub(result[1].lastname, '"', '') or ''
+            return firstname .. ' ' .. lastname
+        end
+    end
+
+    return nil
+end
+
 ---@param id number|string
 function FM.player.get(id)
     local _fwp = type(id) == 'number' and getPlayerBySrc(id) or type(id) == 'string' and getPlayerByIdentifier(id) or nil
@@ -455,7 +481,7 @@ function FM.player.get(id)
     p.setGang = function(gangName, gangGrade)
         if not gangName or not gangGrade then return end
 
-        if ESX then 
+        if ESX then
             _fwp.setJob(gangName, gangGrade)
         elseif QB then
             _fwp.Functions.SetGang(gangName, gangGrade)
