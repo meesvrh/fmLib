@@ -1,7 +1,7 @@
 FM.inventory = {}
 
 local function isNewQBInv()
-    local version = GetResourceMetadata(Resources.QBInv or 'qb-inventory', 'version', 0)
+    local version = GetResourceMetadata(Resources.QBInv.name or 'qb-inventory', 'version', 0)
     if not version then return false end
 
     local vNums = {}
@@ -42,7 +42,10 @@ end
 ---@param weight? number
 ---@param slots? number
 function FM.inventory.openStash(stashId, owner, weight, slots)
-    if not stashId then FM.console.err('No stash ID provided') return end
+    if not stashId then
+        FM.console.err('No stash ID provided')
+        return
+    end
 
     if OXInv then
         OXInv:openInventory('stash', { id = stashId, owner = owner })
@@ -53,7 +56,7 @@ function FM.inventory.openStash(stashId, owner, weight, slots)
             if QSInv then
                 QSInv:RegisterStash(stashId, slots, weight)
             end
-            
+
             TriggerServerEvent('inventory:server:OpenInventory', 'stash', stashId, {
                 maxweight = weight,
                 slots = slots,
