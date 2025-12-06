@@ -75,6 +75,8 @@ function FM.player.openWardrobe(propertyId)
         TriggerEvent('esx_skin:openSaveableMenu')
     elseif CRM then
         TriggerEvent('crm-appearance:show-outfits')
+    elseif MOVCS then
+        TriggerEvent("17mov_CharacterSystem:OpenOutfitsMenu")
     else
         FM.console.err("No wardrobe resource found")
     end

@@ -104,6 +104,7 @@ Resources = {
     QBClothing = { name = 'qb-clothing', export = false },
     ESXSKIN = { name = 'esx_skin', export = false },
     CRM = { name = 'crm-appearance', export = false },
+    MOVCS = { name = '17mov_CharacterSystem', export = false },
 
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
 }
