@@ -3,6 +3,15 @@ FM.account = {}
 ---@param accountName string
 ---@return number
 function FM.account.getAccountMoney(accountName)
+    if GetResourceState(Resources.RX_BANKING.name) == 'started' then
+        local bankingCfg = exports[Resources.RX_BANKING.name]:GetConfig()
+        -- If RxBanking is using thirdPartyAccounts, it will call this function again, causing a loop, as it uses esx_addonaccount or qb-management in that case.
+        -- This check is to make sure we only use RxBanking if it's managing the society accounts itself.
+        if not bankingCfg.Society.thirdPartyAccounts then
+            return exports[Resources.RX_BANKING.name]:GetSocietyAccount(accountName)?.balance or 0
+        end
+    end
+
     if ADDON_ACCOUNT then
         local p = promise.new()
 
@@ -29,6 +38,15 @@ end
 ---@param amount number
 ---@return boolean
 function FM.account.addAccountMoney(accountName, amount)
+    if GetResourceState(Resources.RX_BANKING.name) == 'started' then
+        local bankingCfg = exports[Resources.RX_BANKING.name]:GetConfig()
+        -- If RxBanking is using thirdPartyAccounts, it will call this function again, causing a loop, as it uses esx_addonaccount or qb-management in that case.
+        -- This check is to make sure we only use RxBanking if it's managing the society accounts itself.
+        if not bankingCfg.Society.thirdPartyAccounts then
+            return exports[Resources.RX_BANKING.name]:AddSocietyMoney(accountName, amount)
+        end
+    end
+
     if ADDON_ACCOUNT then
         local p = promise.new()
 
@@ -56,6 +74,15 @@ end
 ---@param amount number
 ---@return boolean
 function FM.account.removeAccountMoney(accountName, amount)
+    if GetResourceState(Resources.RX_BANKING.name) == 'started' then
+        local bankingCfg = exports[Resources.RX_BANKING.name]:GetConfig()
+        -- If RxBanking is using thirdPartyAccounts, it will call this function again, causing a loop, as it uses esx_addonaccount or qb-management in that case.
+        -- This check is to make sure we only use RxBanking if it's managing the society accounts itself.
+        if not bankingCfg.Society.thirdPartyAccounts then
+            return exports[Resources.RX_BANKING.name]:RemoveSocietyMoney(accountName, amount)
+        end
+    end
+
     if ADDON_ACCOUNT then
         local p = promise.new()
 
