@@ -17,10 +17,8 @@ function FM.account.getAccountMoney(accountName)
         end)
 
         return Citizen.Await(p)
-    elseif QB then
-        Debug("(account.getAccountMoney) Missing QB compatibility")
-        -- qb-management? Not sure..
-        return 0
+    elseif QB_MANAGEMENT then
+        return QB_MANAGEMENT:GetAccount(accountName) or 0
     end
 
     Debug("(account.getAccountMoney) Missing compatibility")
@@ -46,10 +44,8 @@ function FM.account.addAccountMoney(accountName, amount)
         end)
 
         return Citizen.Await(p)
-    elseif QB then
-        Debug("(account.addAccountMoney) Missing QB compatibility")
-        -- qb-management? Not sure..
-        return false
+    elseif QB_MANAGEMENT then
+        return QB_MANAGEMENT:AddMoney(accountName, amount)
     end
 
     Debug("(account.addAccountMoney) Missing compatibility")
@@ -80,10 +76,8 @@ function FM.account.removeAccountMoney(accountName, amount)
         end)
 
         return Citizen.Await(p)
-    elseif QB then
-        Debug("(account.removeAccountMoney) Missing QB compatibility")
-        -- qb-management? Not sure..
-        return false
+    elseif QB_MANAGEMENT then
+        return QB_MANAGEMENT:RemoveMoney(accountName, amount)
     end
 
     Debug("(account.removeAccountMoney) Missing compatibility")

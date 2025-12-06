@@ -54,6 +54,7 @@ Resources = {
     -- Banking/Accounts
     RX_BANKING = { name = 'RxBanking', export = 'all' },
     ADDON_ACCOUNT = { name = 'esx_addonaccount', export = false },
+    QB_MANAGEMENT = { name = 'qb-management', export = 'all' },
 
     -- Garages/Vehicle Keys
     QBVehKeys = { name = 'qb-vehiclekeys', export = false },
