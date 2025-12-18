@@ -31,7 +31,7 @@ function BaseAdapter:init()
         Debug(('Loaded %s adapter: %s'):format(self.category, self.adapterName))
         return true
     else
-        Error(('Failed to find %s adapter: %s (looking for global %s)'):format(self.category, self.adapterName, adapterGlobalName))
+        Warning(('Failed to find %s adapter: %s (looking for global %s)'):format(self.category, self.adapterName, adapterGlobalName))
         return false
     end
 end
@@ -41,13 +41,11 @@ function BaseAdapter:call(funcName, ...)
         self:init()
     end
 
-    if not self.currentAdapter then
-        Error(('No %s system available'):format(self.category))
-        return
-    end
+    -- Warning message already handled in detector
+    if not self.currentAdapter then return end
 
     if not self.currentAdapter[funcName] then
-        Error(('%s adapter %s does not support: %s'):format(
+        Warning(('%s adapter %s does not support: %s'):format(
             self.category, self.adapterName or 'unknown', funcName))
         return
     end
