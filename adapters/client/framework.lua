@@ -13,6 +13,9 @@ function FM.framework.getPlate(vehicle)
 end
 
 -- Backwards compatibility
+FM.vehicle = FM.vehicle or {}
+
+-- Backwards compatibility
 function FM.vehicle.getPlate(vehicle)
     Warning('FM.vehicle.getPlate is deprecated, use FM.framework.getPlate instead')
     return FM.framework.getPlate(vehicle)

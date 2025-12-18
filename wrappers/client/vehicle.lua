@@ -1,4 +1,4 @@
-FM.vehicle = {}
+-- FM.vehicle = {}
 
 -- MIGRATED TO ADAPTER PATTERN: adapters/client/framework.lua
 -- Backwards compatibility is handled in the framework adapter
@@ -108,7 +108,9 @@ function FM.vehicle.hasKey(vehicle)
 end
 --]]
 
--- FUEL ADAPTERS WILL BE NEXT
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/fuel.lua
+-- Backwards compatibility is handled in the fuel adapter
+--[[
 ---@param vehicle number
 ---@param fuelLvl number
 function FM.vehicle.setFuel(vehicle, fuelLvl)
@@ -154,6 +156,7 @@ function FM.vehicle.setFuel(vehicle, fuelLvl)
         SetVehicleFuelLevel(vehicle, fuelLvl)
     end
 end
+--]]
 
 -- MIGRATED TO ADAPTER PATTERN: adapters/client/garage.lua
 -- Backwards compatibility is handled in the garage adapter
