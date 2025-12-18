@@ -80,7 +80,6 @@ function FM.utils.getJobs()
                             name = gradeData.label or gradeData.name or 'Unknown',
                             label = gradeData.label or gradeData.name or 'Unknown',
                             salary = gradeData.salary or 0,
-                            isboss = gradeData.name and (string.lower(gradeData.name):find('boss') ~= nil) or false
                         }
                     end
                 end
@@ -104,7 +103,6 @@ function FM.utils.getJobs()
                             name = gradeData.name or 'Unknown',
                             label = gradeData.name or 'Unknown',
                             salary = gradeData.payment or 0,
-                            isboss = gradeData.isboss or false
                         }
                     end
                 end
@@ -144,7 +142,6 @@ function FM.utils.getGangs()
                             name = gradeData.label or gradeData.name or 'Unknown',
                             label = gradeData.label or gradeData.name or 'Unknown',
                             salary = gradeData.salary or 0,
-                            isboss = gradeData.name and (string.lower(gradeData.name):find('boss') ~= nil) or false
                         }
                     end
                 end
@@ -167,8 +164,6 @@ function FM.utils.getGangs()
                             grade = tonumber(gradeId) or 0,
                             name = gradeData.name or 'Unknown',
                             label = gradeData.name or 'Unknown',
-                            isboss = gradeData.isboss or false
-                            -- Note: QB gangs typically don't have salaries
                         }
                     end
                 end
@@ -183,4 +178,56 @@ function FM.utils.getGangs()
     end
 
     return gangs
+end
+
+---@param jobName string
+---@return { name: string, label: string, grades: table[] }|nil job Job object
+function FM.utils.getJob(jobName)
+    local jobs = FM.utils.getJobs()
+    for _, job in pairs(jobs) do
+        if job.name == jobName then
+            return job
+        end
+    end
+    return nil
+end
+
+---@param gangName string
+---@return { name: string, label: string, grades: table[] }|nil gang Gang object
+function FM.utils.getGang(gangName)
+    local gangs = FM.utils.getGangs()
+    for _, gang in pairs(gangs) do
+        if gang.name == gangName then
+            return gang
+        end
+    end
+    return nil
+end
+
+---@param jobName string
+---@return table|nil grade Boss grade
+function FM.utils.getJobBossGrade(jobName)
+    local job = FM.utils.getJob(jobName)
+    if not job then return nil end
+    local highestGrade = nil
+    for _, grade in pairs(job.grades) do
+        if not highestGrade or grade.grade > highestGrade.grade then
+            highestGrade = grade
+        end
+    end
+    return highestGrade
+end
+
+---@param gangName string
+---@return table|nil grade Boss grade
+function FM.utils.getGangBossGrade(gangName)
+    local gang = FM.utils.getGang(gangName)
+    if not gang then return nil end
+    local highestGrade = nil
+    for _, grade in pairs(gang.grades) do
+        if not highestGrade or grade.grade > highestGrade.grade then
+            highestGrade = grade
+        end
+    end
+    return highestGrade
 end
