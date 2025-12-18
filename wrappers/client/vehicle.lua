@@ -1,5 +1,8 @@
 FM.vehicle = {}
 
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/framework.lua
+-- Backwards compatibility is handled in the framework adapter
+--[[
 ---@param vehicle number
 function FM.vehicle.getPlate(vehicle)
     if not vehicle then return end
@@ -10,7 +13,11 @@ function FM.vehicle.getPlate(vehicle)
         return QB.Functions.GetPlate(vehicle)
     end
 end
+--]]
 
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/keys.lua
+-- Backwards compatibility is handled in the keys adapter
+--[[
 ---@param vehicle number
 function FM.vehicle.giveKeys(vehicle)
     if not vehicle then return end
@@ -99,8 +106,9 @@ function FM.vehicle.hasKey(vehicle)
         return QBX_VEHICLEKEYS:HasKeys(vehicle)
     end
 end
+--]]
 
-
+-- FUEL ADAPTERS WILL BE NEXT
 ---@param vehicle number
 ---@param fuelLvl number
 function FM.vehicle.setFuel(vehicle, fuelLvl)

@@ -47,7 +47,7 @@ function BaseAdapter:call(funcName, ...)
     end
 
     if not self.currentAdapter[funcName] then
-        Error(('%s adapter %s does not support: %s'):format(
+        Debug(('%s adapter %s does not support: %s'):format(
             self.category, self.adapterName or 'unknown', funcName))
         return
     end

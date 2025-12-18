@@ -1,5 +1,7 @@
 FM.player = {}
 
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/player.lua
+--[[
 ---@return boolean
 function FM.player.isLoggedIn()
     if ESX then
@@ -62,6 +64,7 @@ end
 function FM.player.getGang()
     return FM.callback.sync('fm:internal:getGang')
 end
+--]]
 
 ---@param propertyId? string The property ID (optional unique identifier)
 function FM.player.openWardrobe(propertyId)

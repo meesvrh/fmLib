@@ -12,6 +12,15 @@ function FM.adapters.detect(category)
         return FM.adapters.cache[category]
     end
 
+    -- Special handling for player category - check framework instead
+    if category == 'player' then
+        local frameworkDetected = FM.adapters.detect('framework')
+        if frameworkDetected then
+            FM.adapters.cache[category] = frameworkDetected
+            return frameworkDetected
+        end
+    end
+
     local categoryResources = AdapterResources[category]
     if not categoryResources then
         Error(string.format("Unknown category: %s", category))
