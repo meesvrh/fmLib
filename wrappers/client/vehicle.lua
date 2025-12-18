@@ -147,6 +147,9 @@ function FM.vehicle.setFuel(vehicle, fuelLvl)
     end
 end
 
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/garage.lua
+-- Backwards compatibility is handled in the garage adapter
+--[[
 ---@param garageId string | number The garage ID
 function FM.vehicle.storeInGarage(garageId)
     if GetResourceState(Resources.RXGARAGE.name) == "started" then
@@ -183,3 +186,4 @@ function FM.vehicle.openGarage(garageId, coords)
         FM.console.err("No garage resource found")
     end
 end
+--]]

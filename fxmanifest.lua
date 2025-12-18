@@ -12,11 +12,14 @@ author 'meesvrh'
 repository 'fmLib'
 description 'A library for FiveM developers that wraps multiple frameworks, resources and modules.'
 version '1.15.3'
+lua54 'yes'
 
 shared_script {
   'settings.lua',
   'init.lua',
   'modules/**/shared.lua',
+  'adapters/base.lua',
+  'adapters/detector.lua',
   'autodetect.lua',
 }
 
@@ -24,7 +27,9 @@ client_scripts {
   'modules/cl_overrides.lua',
   'modules/**/client.lua',
   'modules/web/client/*.lua',
-  'wrappers/client/*.lua',
+  'wrappers/client/*.lua',      -- Load wrappers first to create FM.vehicle
+  'adapters/client/**/*.lua',  -- Load individual adapters
+  'adapters/client/*.lua',      -- Then load base adapters (which add backwards compat)
 }
 
 server_scripts {
@@ -41,5 +46,3 @@ files {
   'web/build/**/*',
   'web/assets/**/*',
 }
-
-lua54 'yes'

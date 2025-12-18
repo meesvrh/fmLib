@@ -9,6 +9,8 @@
 Settings = {
     ---@type boolean Whether or not to print debug messages
     debug = false,
+    ---@type boolean Whether or not to print warning messages
+    warning = false,
     ---@type boolean Whether or not to use sfx for web modules (overrides sfx = true in modules)
     useSfx = true,
     ---@type boolean Whether or not to ignore resource initialized logs
@@ -107,4 +109,89 @@ Resources = {
     MOVCS = { name = '17mov_CharacterSystem', export = false },
 
     -- MOVHUD = { name = '17mov_Hud', export = 'all' },
+}
+
+-- Resource definitions organized by category
+-- Only change these if you have changed the name of a resource
+AdapterResources = {
+    framework = {
+        esx = 'es_extended',
+        qb = 'qb-core',
+    },
+
+    inventory = {
+        ox = 'ox_inventory',
+        qb = 'qb-inventory',
+        qs = 'qs-inventory',
+        core = 'core_inventory',
+        ps = 'ps-inventory',
+        chezza = 'inventory',
+        tgiann = 'tgiann-inventory',
+        jpr = 'jpr-inventory',
+        codem = 'codem-inventory',
+        origen = 'origen_inventory',
+    },
+
+    banking = {
+        rx = 'RxBanking',
+        addon = 'esx_addonaccount',
+        management = 'qb-management',
+    },
+
+    keys = {
+        qb = 'qb-vehiclekeys',
+        qs = 'qs-vehiclekeys',
+        renewed = 'Renewed-Vehiclekeys',
+        wasabi = 'wasabi_carlock',
+        tgiann = 'tgiann-hotwire',
+        mm = 'mm_carkeys',
+        mrnewb = 'MrNewbVehicleKeys',
+        is = 'is_vehiclekeys',
+        fast = 'fast-vehiclekeys',
+        filo = 'filo_vehiclekey',
+        qbx = 'qbx_vehiclekeys',
+    },
+
+    garage = {
+        cd = 'cd_garage',
+        okok = 'okokGarage',
+        jg = 'jg-advancedgarages',
+        codem = 'mGarage',
+        rx = 'RxGarages',
+    },
+
+    fuel = {
+        ox = 'ox_fuel',
+        legacy = 'LegacyFuel',
+        cdn = 'cdn-fuel',
+        renewed = 'renewed-fuel',
+        qb = 'qb-fuel',
+        lc = 'lc_fuel',
+        ps = 'ps-fuel',
+        rcore = 'rcore_fuel',
+        qs = 'qs-fuelstations',
+        nd = 'ND_Fuel',
+        bigdaddy = 'BigDaddy-Fuel',
+        gks = 'gks-fuel',
+        rip = 'RiP-Fuel',
+        my = 'myFuel',
+        lj = 'lj-fuel',
+        melons = 'melons_fuel',
+        hrs = 'hrs_fuel',
+    },
+
+    textui = {
+        ox = 'ox_lib',
+        jg = 'jg-textui',
+        okok = 'okokTextUI',
+    },
+
+    appearance = {
+        fivem = 'fivem-appearance',
+        illenium = 'illenium-appearance',
+        qb = 'qb-clothing',
+        esx = 'esx_skin',
+        crm = 'crm-appearance',
+        mov = '17mov_CharacterSystem',
+    },
 }
