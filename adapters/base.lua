@@ -45,10 +45,20 @@ function BaseAdapter:call(funcName, ...)
     if not self.currentAdapter then return end
 
     if not self.currentAdapter[funcName] then
-        Warning(('%s adapter %s does not support: %s'):format(
+        Debug(('%s adapter %s does not support: %s'):format(
             self.category, self.adapterName or 'unknown', funcName))
         return
     end
 
     return self.currentAdapter[funcName](...)
+end
+
+function BaseAdapter:hasFunction(funcName)
+    if not self.currentAdapter then
+        self:init()
+    end
+
+    if not self.currentAdapter then return false end
+
+    return self.currentAdapter[funcName] ~= nil
 end

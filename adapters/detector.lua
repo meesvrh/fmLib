@@ -72,7 +72,7 @@ function FM.adapters.detect(category)
 
     -- Special handling for fuel - use default if no fuel system found
     if category == 'fuel' then
-        Warning('No fuel system detected, using native SetVehicleFuelLevel')
+        Debug('No fuel system detected, using native SetVehicleFuelLevel')
         FM.adapters.cache[category] = {
             key = 'default',
             resource = 'native'
@@ -80,7 +80,7 @@ function FM.adapters.detect(category)
         return FM.adapters.cache[category]
     end
 
-    Warning(string.format("No %s system detected! Check AdapterResources.%s in settings.lua", category, category))
+    Debug(string.format("No %s system detected", category))
     return nil
 end
 

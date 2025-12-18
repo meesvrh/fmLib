@@ -1,3 +1,5 @@
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/inventory.lua and adapters/client/inventory/*.lua
+--[[
 FM.inventory = {}
 
 local function isNewQBInv()
@@ -148,3 +150,4 @@ function FM.inventory.hasItem(item)
 end
 
 FM.inv = {}
+--]]
