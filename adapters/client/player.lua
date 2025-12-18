@@ -1,6 +1,5 @@
 --[[
     fmLib - Player Client Adapter
-    Handles player-related operations
 ]]
 
 FM = FM or {}

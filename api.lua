@@ -36,7 +36,7 @@ local function registerExports()
     end
 
     -- Register exports for backwards compatibility categories (not in AdapterResources)
-    local backwardsCompatCategories = {'vehicle', 'utils'}
+    local backwardsCompatCategories = {'vehicle', 'utils', 'player'}
     for _, category in ipairs(backwardsCompatCategories) do
         if FM[category] then
             for funcName, func in pairs(FM[category]) do
@@ -87,7 +87,7 @@ local function createProxy()
     end
 
     -- Create proxy for backwards compatibility categories
-    local backwardsCompatCategories = {'vehicle', 'utils'}
+    local backwardsCompatCategories = {'vehicle', 'utils', 'player'}
     for _, category in ipairs(backwardsCompatCategories) do
         if FM[category] then
             proxy[category] = {}

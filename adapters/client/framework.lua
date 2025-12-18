@@ -1,6 +1,5 @@
 --[[
     fmLib - Framework Client Adapter
-    Handles framework-specific utility functions
 ]]
 
 FM = FM or {}
