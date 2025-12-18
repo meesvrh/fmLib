@@ -1,8 +1,5 @@
 local adapter = {}
 
--- Ensure ESX framework is detected and initialized
-FM.adapters.detect('framework')
-
 function adapter.openWardrobe(propertyId)
     TriggerEvent('esx_skin:openSaveableMenu')
 end

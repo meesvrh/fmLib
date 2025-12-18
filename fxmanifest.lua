@@ -30,6 +30,7 @@ client_scripts {
   'wrappers/client/*.lua',      -- Load wrappers first to create FM.vehicle
   'adapters/client/**/*.lua',  -- Load individual adapters
   'adapters/client/*.lua',      -- Then load base adapters (which add backwards compat)
+  'api.lua',                    -- API/export system (loads last)
 }
 
 server_scripts {
@@ -37,6 +38,7 @@ server_scripts {
   'versioncontrol.lua',
   'modules/**/server.lua',
   'wrappers/server/*.lua',
+  'api.lua',                    -- API/export system (loads last)
 }
 
 ui_page 'web/build/index.html'

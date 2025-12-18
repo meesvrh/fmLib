@@ -8,9 +8,9 @@
 ---@class Settings
 Settings = {
     ---@type boolean Whether or not to print debug messages
-    debug = false,
+    debug = true,
     ---@type boolean Whether or not to print warning messages
-    warning = false,
+    warning = true,
     ---@type boolean Whether or not to use sfx for web modules (overrides sfx = true in modules)
     useSfx = true,
     ---@type boolean Whether or not to ignore resource initialized logs
@@ -40,8 +40,8 @@ KeyMappings = {
 --]]
 ---@type table Only change these if you have changed the name of a resource
 Resources = {
-    ESX = { name = 'es_extended', export = 'getSharedObject' },
-    QB = { name = 'qb-core', export = 'GetCoreObject' },
+    -- ESX = { name = 'es_extended', export = 'getSharedObject' },
+    -- QB = { name = 'qb-core', export = 'GetCoreObject' },
     OXInv = { name = 'ox_inventory', export = 'all' },
     QBInv = { name = 'qb-inventory', export = 'all', },
     QSInv = { name = 'qs-inventory', export = 'all' },

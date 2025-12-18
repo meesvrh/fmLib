@@ -7,6 +7,37 @@ FM = FM or {}
 FM.adapters = FM.adapters or {}
 FM.adapters.cache = {}
 
+-- Lazy-loading proxy objects for frameworks
+if not ESX then
+    ESX = setmetatable({}, {
+        __index = function(self, key)
+            if GetResourceState('es_extended') ~= 'started' then
+                Error('Attempted to use ESX but es_extended is not running')
+                return nil
+            end
+            local realESX = exports['es_extended']:getSharedObject()
+            ESX = realESX
+            Debug('ESX framework object lazy-loaded on first use')
+            return realESX[key]
+        end
+    })
+end
+
+if not QB then
+    QB = setmetatable({}, {
+        __index = function(self, key)
+            if GetResourceState('qb-core') ~= 'started' then
+                Error('Attempted to use QB but qb-core is not running')
+                return nil
+            end
+            local realQB = exports['qb-core']:GetCoreObject()
+            QB = realQB
+            Debug('QB framework object lazy-loaded on first use')
+            return realQB[key]
+        end
+    })
+end
+
 function FM.adapters.detect(category)
     if FM.adapters.cache[category] then
         return FM.adapters.cache[category]
@@ -35,18 +66,6 @@ function FM.adapters.detect(category)
                 key = key,
                 resource = resourceName
             }
-
-            -- Initialize framework objects when framework is detected
-            if category == 'framework' then
-                if key == 'esx' and not ESX then
-                    ESX = exports['es_extended']:getSharedObject()
-                    Debug('ESX framework object initialized')
-                elseif key == 'qb' and not QB then
-                    QB = exports['qb-core']:GetCoreObject()
-                    Debug('QB framework object initialized')
-                end
-            end
-
             return FM.adapters.cache[category]
         end
     end

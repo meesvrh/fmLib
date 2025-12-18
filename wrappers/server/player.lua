@@ -32,9 +32,13 @@ local function getPlayerBySrc(src)
     if not src then return end
 
     local _fwp = ESX and ESX.GetPlayerFromId(src) or QB and QB.Functions.GetPlayer(src) or nil
-    if not _fwp or not type(_fwp) == 'table' then return end
+    if not _fwp or type(_fwp) ~= 'table' then return end
 
-    _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
+    -- Only set source from PlayerData if it exists (QB structure)
+    if _fwp.PlayerData and _fwp.PlayerData.source then
+        _fwp.source = _fwp.PlayerData.source
+    end
+
     return _fwp
 end
 
@@ -42,9 +46,13 @@ local function getPlayerByIdentifier(identifier)
     if not identifier then return end
     local _fwp = ESX and ESX.GetPlayerFromIdentifier(identifier) or QB and QB.Functions.GetPlayerByCitizenId(identifier) or
         nil
-    if not _fwp or not type(_fwp) == 'table' then return end
+    if not _fwp or type(_fwp) ~= 'table' then return end
 
-    _fwp.source = QB and _fwp.PlayerData.source or _fwp.source
+    -- Only set source from PlayerData if it exists (QB structure)
+    if _fwp.PlayerData and _fwp.PlayerData.source then
+        _fwp.source = _fwp.PlayerData.source
+    end
+
     return _fwp
 end
 
