@@ -35,6 +35,18 @@ function FM.adapters.detect(category)
                 key = key,
                 resource = resourceName
             }
+
+            -- Initialize framework objects when framework is detected
+            if category == 'framework' then
+                if key == 'esx' and not ESX then
+                    ESX = exports['es_extended']:getSharedObject()
+                    Debug('ESX framework object initialized')
+                elseif key == 'qb' and not QB then
+                    QB = exports['qb-core']:GetCoreObject()
+                    Debug('QB framework object initialized')
+                end
+            end
+
             return FM.adapters.cache[category]
         end
     end

@@ -66,6 +66,8 @@ function FM.player.getGang()
 end
 --]]
 
+-- MIGRATED TO ADAPTER PATTERN: adapters/client/appearance.lua
+--[[
 ---@param propertyId? string The property ID (optional unique identifier)
 function FM.player.openWardrobe(propertyId)
     if FMAPP then
@@ -153,6 +155,7 @@ function FM.player.loadSkin()
         FM.console.err("No framework found to load player skin")
     end
 end
+--]]
 
 --[[
     EVENT HANDLERS

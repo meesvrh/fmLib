@@ -20,6 +20,8 @@ function FM.keys.has(vehicle)
 end
 
 -- Backwards compatibility
+FM.vehicle = FM.vehicle or {}
+
 function FM.vehicle.giveKeys(vehicle)
     Warning('FM.vehicle.giveKeys is deprecated, use FM.keys.give instead')
     return FM.keys.give(vehicle)

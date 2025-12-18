@@ -14,7 +14,6 @@ end
 -- Backwards compatibility
 FM.vehicle = FM.vehicle or {}
 
--- Backwards compatibility
 function FM.vehicle.setFuel(vehicle, fuelLvl)
     Warning('FM.vehicle.setFuel is deprecated, use FM.fuel.set instead')
     return FM.fuel.set(vehicle, fuelLvl)
