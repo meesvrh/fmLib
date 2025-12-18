@@ -6,6 +6,7 @@ local adapter = {}
 
 -- Ensure QB framework is detected and initialized
 FM.adapters.detect('framework')
+print('[fmLib] QB Clothing adapter initialized.')
 
 function adapter.openWardrobe(propertyId)
     TriggerEvent('qb-clothing:client:openMenu')

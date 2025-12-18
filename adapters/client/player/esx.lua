@@ -35,4 +35,23 @@ function adapter.getGang()
     return FM.callback.sync('fm:internal:getGang')
 end
 
+-- Event handlers
+function adapter.onJobUpdate(newJob)
+    local job = newJob and {
+        name = newJob.name,
+        label = newJob.label,
+        grade = newJob.grade,
+        gradeLabel = newJob.grade_label
+    } or nil
+    TriggerEvent('fm:player:onJobUpdate', job)
+end
+
+function adapter.onPlayerLoaded()
+    TriggerEvent('fm:player:onPlayerLoaded')
+end
+
 FM_Adapter_client_player_esx = adapter
+
+-- Event registrations
+RegisterNetEvent('esx:setJob', adapter.onJobUpdate)
+RegisterNetEvent('esx:playerLoaded', adapter.onPlayerLoaded)

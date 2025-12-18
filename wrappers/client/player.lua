@@ -1,4 +1,4 @@
-FM.player = {}
+-- FM.player = {}
 
 -- MIGRATED TO ADAPTER PATTERN: adapters/client/player.lua
 --[[
@@ -157,43 +157,46 @@ function FM.player.loadSkin()
 end
 --]]
 
+-- MIGRATED TO ADAPTER PATTERN: Event handlers moved to adapters/client/player/esx.lua and adapters/client/player/qb.lua
+--[[
 --[[
     EVENT HANDLERS
 --]]
 
-local function onJobUpdate(newJob)
-    local job
-    if ESX then
-        job = newJob and {
-            name = newJob.name,
-            label = newJob.label,
-            grade = newJob.grade,
-            gradeLabel = newJob.grade_label
-        } or nil
-    elseif QB then
-        job = newJob and {
-            name = newJob.name,
-            label = newJob.label,
-            grade = newJob.grade.level,
-            gradeLabel = newJob.grade.name
-        } or nil
-    end
+-- local function onJobUpdate(newJob)
+--     local job
+--     if ESX then
+--         job = newJob and {
+--             name = newJob.name,
+--             label = newJob.label,
+--             grade = newJob.grade,
+--             gradeLabel = newJob.grade_label
+--         } or nil
+--     elseif QB then
+--         job = newJob and {
+--             name = newJob.name,
+--             label = newJob.label,
+--             grade = newJob.grade.level,
+--             gradeLabel = newJob.grade.name
+--         } or nil
+--     end
 
-    TriggerEvent('fm:player:onJobUpdate', job)
-end
+--     TriggerEvent('fm:player:onJobUpdate', job)
+-- end
 
-local function onGangUpdate(newGang)
-    TriggerEvent('fm:player:onGangUpdate', FM.player.getGang())
-end
+-- local function onGangUpdate(newGang)
+--     TriggerEvent('fm:player:onGangUpdate', FM.player.getGang())
+-- end
 
--- We do not send player data, because for ESX its also sent when there is no character selected yet.
--- After this event gets triggered, use FM.player.isLoggedIn to check if the player is logged in & to make sure the character is selected.
-local function onPlayerLoaded()
-    TriggerEvent('fm:player:onPlayerLoaded')
-end
+-- -- We do not send player data, because for ESX its also sent when there is no character selected yet.
+-- -- After this event gets triggered, use FM.player.isLoggedIn to check if the player is logged in & to make sure the character is selected.
+-- local function onPlayerLoaded()
+--     TriggerEvent('fm:player:onPlayerLoaded')
+-- end
 
-RegisterNetEvent('esx:setJob', onJobUpdate)
-RegisterNetEvent('QBCore:Client:OnJobUpdate', onJobUpdate)
-RegisterNetEvent('QBCore:Client:OnGangUpdate', onGangUpdate)
-RegisterNetEvent('esx:playerLoaded', onPlayerLoaded)
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', onPlayerLoaded)
+-- RegisterNetEvent('esx:setJob', onJobUpdate)
+-- RegisterNetEvent('QBCore:Client:OnJobUpdate', onJobUpdate)
+-- RegisterNetEvent('QBCore:Client:OnGangUpdate', onGangUpdate)
+-- RegisterNetEvent('esx:playerLoaded', onPlayerLoaded)
+-- RegisterNetEvent('QBCore:Client:OnPlayerLoaded', onPlayerLoaded)
+--]]
