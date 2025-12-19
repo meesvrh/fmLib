@@ -6,6 +6,16 @@ function adapter.notify(src, message, type)
     TriggerClientEvent('esx:showNotification', src, message, type)
 end
 
+function adapter.registerUsableItem(itemName, cb)
+    ESX.RegisterUsableItem(itemName, function(src, item)
+        cb(src, item)
+    end)
+end
+
+function adapter.getItemLabel(item)
+    return ESX.GetItemLabel(item)
+end
+
 function adapter.getJobs()
     local jobs = {}
     local esxJobs = ESX.GetJobs()

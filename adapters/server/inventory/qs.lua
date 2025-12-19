@@ -25,4 +25,22 @@ function adapter.getInventory(src)
     return inventory
 end
 
+function adapter.getMetaDataBySlot(inv, slot)
+    local items = exports['qs-inventory']:GetInventory(inv)
+    for _, item in pairs(items) do
+        if item.slot == slot then return item.info end
+    end
+end
+
+function adapter.getSlotIDByItem(inv, itemName)
+    local items = exports['qs-inventory']:GetInventory(inv)
+    for name, item in pairs(items) do
+        if name == itemName then return item.slot end
+    end
+end
+
+function adapter.setMetaDataBySlot(inv, slot, metadata)
+    return exports['qs-inventory']:SetItemMetadata(inv, slot, metadata)
+end
+
 FM_Adapter_server_inventory_qs = adapter

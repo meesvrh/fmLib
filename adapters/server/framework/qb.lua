@@ -6,6 +6,16 @@ function adapter.notify(src, message, type)
     TriggerClientEvent('QBCore:Notify', src, message, type)
 end
 
+function adapter.registerUsableItem(itemName, cb)
+    QB.Functions.CreateUseableItem(itemName, function(src, item)
+        cb(src, item)
+    end)
+end
+
+function adapter.getItemLabel(item)
+    return QB.Shared.Items[item].label
+end
+
 function adapter.getJobs()
     local jobs = {}
     if QB.Shared and QB.Shared.Jobs then

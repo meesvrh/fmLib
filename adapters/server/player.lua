@@ -26,5 +26,10 @@ function FM.player.get(id)
     end
 end
 
+-- Event registrations
+FM.callback.register('fm:internal:getGang', function(src)
+    return adapter.getPlayerBySrc(src).getGang()
+end)
+
 -- Backwards compatibility alias
 FM.p = FM.player

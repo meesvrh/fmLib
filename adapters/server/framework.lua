@@ -19,6 +19,14 @@ function FM.framework.getGangs()
     return frameworkAdapter:call('getGangs')
 end
 
+function FM.framework.registerUsableItem(itemName, cb)
+    return frameworkAdapter:call('registerUsableItem', itemName, cb)
+end
+
+function FM.framework.getItemLabel(item)
+    return frameworkAdapter:call('getItemLabel', item)
+end
+
 function FM.framework.getPlayers(filter)
     local playerSources = GetPlayers()
     local players = {}

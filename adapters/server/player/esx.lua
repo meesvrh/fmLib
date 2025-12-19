@@ -262,9 +262,4 @@ function adapter.getPlayerByIdentifier(identifier)
     return adapter.getPlayerBySrc(_fwp.source)
 end
 
--- Event registrations
-FM.callback.register('fm:internal:getGang', function(src)
-    return adapter.getPlayerBySrc(src).getGang()
-end)
-
 FM_Adapter_server_player_esx = adapter

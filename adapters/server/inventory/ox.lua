@@ -40,4 +40,42 @@ function adapter.getInventory(src)
     return inventory
 end
 
+local cachedItemLabels = {}
+function adapter.getItemLabel(item)
+    if cachedItemLabels[item] then return cachedItemLabels[item]
+    else
+        for itemName, v in pairs(exports['ox_inventory']:Items()) do
+            cachedItemLabels[itemName] = v.label
+        end
+
+        return cachedItemLabels[item]
+    end
+end
+
+function adapter.getMetaDataBySlot(inv, slot)
+    return exports['ox_inventory']:GetSlot(inv, slot)?.metadata
+end
+
+function adapter.getSlotIDByItem(inv, itemName)
+    return exports['ox_inventory']:GetSlotIdWithItem(inv, itemName)
+end
+
+function adapter.setMetaDataBySlot(inv, slot, metadata)
+    return exports['ox_inventory']:SetMetadata(inv, slot, metadata)
+end
+
+function adapter.registerStash(stash)
+    exports['ox_inventory']:RegisterStash(stash.id, stash.label, stash.slots, stash.weight, stash.owner, stash.groups, stash.coords)
+end
+
+function adapter.upgradeStash(stashId, newWeight, newSlots)
+    if newWeight then
+        exports['ox_inventory']:SetMaxWeight(stashId, newWeight)
+    end
+
+    if newSlots then
+        exports['ox_inventory']:SetSlotCount(stashId, newSlots)
+    end
+end
+
 FM_Adapter_server_inventory_ox = adapter

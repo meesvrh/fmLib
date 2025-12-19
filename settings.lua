@@ -194,4 +194,9 @@ AdapterResources = {
         crm = 'crm-appearance',
         mov = '17mov_CharacterSystem',
     },
+
+    account = {
+        esxaddon = 'esx_addonaccount',
+        qbmanagement = 'qb-management',
+    },
 }
