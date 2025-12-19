@@ -11,57 +11,57 @@ function FM.utils.notify(src, message, type)
     elseif QB then TriggerClientEvent('QBCore:Notify', src, message, type) end
 end
 
----@param filter? { job?: string, gang?: string, count?: boolean }
-function FM.utils.getPlayers(filter)
-    local playerSources = GetPlayers()
-    local players = {}
+-- ---@param filter? { job?: string, gang?: string, count?: boolean }
+-- function FM.utils.getPlayers(filter)
+--     local playerSources = GetPlayers()
+--     local players = {}
 
-    for _, src in pairs(playerSources) do
-        local p = FM.player.get(tonumber(src))
-        if not p then goto continue end
+--     for _, src in pairs(playerSources) do
+--         local p = FM.player.get(tonumber(src))
+--         if not p then goto continue end
 
-        if not filter then
-            players[src] = p
-        else
-            if filter.job then
-                local job = p.getJob()
-                if job and job.name == filter.job then
-                    players[src] = p
-                end
-            end
+--         if not filter then
+--             players[src] = p
+--         else
+--             if filter.job then
+--                 local job = p.getJob()
+--                 if job and job.name == filter.job then
+--                     players[src] = p
+--                 end
+--             end
 
-            if filter.gang then
-                local gang = p.getGang()
-                if gang and gang.name == filter.gang then
-                    players[src] = p
-                end
-            end
-        end
+--             if filter.gang then
+--                 local gang = p.getGang()
+--                 if gang and gang.name == filter.gang then
+--                     players[src] = p
+--                 end
+--             end
+--         end
 
-        ::continue::
-    end
+--         ::continue::
+--     end
 
-    if filter and filter.count then
-        local count = 0
-        for _, _ in pairs(players) do count = count + 1 end
-        return count
-    end
+--     if filter and filter.count then
+--         local count = 0
+--         for _, _ in pairs(players) do count = count + 1 end
+--         return count
+--     end
 
-    return players
-end
+--     return players
+-- end
 
----@param job string
----@return number[] sources Array of player sources with the specified job
-function FM.utils.getJobOnlineSources(job)
-    local sources = {}
-    local players = FM.utils.getPlayers({ job = job })
+-- ---@param job string
+-- ---@return number[] sources Array of player sources with the specified job
+-- function FM.utils.getJobOnlineSources(job)
+--     local sources = {}
+--     local players = FM.utils.getPlayers({ job = job })
 
-    for src, _ in pairs(players) do
-        sources[#sources + 1] = tonumber(src)
-    end
+--     for src, _ in pairs(players) do
+--         sources[#sources + 1] = tonumber(src)
+--     end
 
-    return sources
-end
+--     return sources
+-- end
 
 ---@return table[] jobs Array of job objects with name, label, and grades
 function FM.utils.getJobs()
@@ -180,54 +180,54 @@ function FM.utils.getGangs()
     return gangs
 end
 
----@param jobName string
----@return { name: string, label: string, grades: table[] }|nil job Job object
-function FM.utils.getJob(jobName)
-    local jobs = FM.utils.getJobs()
-    for _, job in pairs(jobs) do
-        if job.name == jobName then
-            return job
-        end
-    end
-    return nil
-end
+-- ---@param jobName string
+-- ---@return { name: string, label: string, grades: table[] }|nil job Job object
+-- function FM.utils.getJob(jobName)
+--     local jobs = FM.utils.getJobs()
+--     for _, job in pairs(jobs) do
+--         if job.name == jobName then
+--             return job
+--         end
+--     end
+--     return nil
+-- end
 
----@param gangName string
----@return { name: string, label: string, grades: table[] }|nil gang Gang object
-function FM.utils.getGang(gangName)
-    local gangs = FM.utils.getGangs()
-    for _, gang in pairs(gangs) do
-        if gang.name == gangName then
-            return gang
-        end
-    end
-    return nil
-end
+-- ---@param gangName string
+-- ---@return { name: string, label: string, grades: table[] }|nil gang Gang object
+-- function FM.utils.getGang(gangName)
+--     local gangs = FM.utils.getGangs()
+--     for _, gang in pairs(gangs) do
+--         if gang.name == gangName then
+--             return gang
+--         end
+--     end
+--     return nil
+-- end
 
----@param jobName string
----@return table|nil grade Boss grade
-function FM.utils.getJobBossGrade(jobName)
-    local job = FM.utils.getJob(jobName)
-    if not job then return nil end
-    local highestGrade = nil
-    for _, grade in pairs(job.grades) do
-        if not highestGrade or grade.grade > highestGrade.grade then
-            highestGrade = grade
-        end
-    end
-    return highestGrade
-end
+-- ---@param jobName string
+-- ---@return table|nil grade Boss grade
+-- function FM.utils.getJobBossGrade(jobName)
+--     local job = FM.utils.getJob(jobName)
+--     if not job then return nil end
+--     local highestGrade = nil
+--     for _, grade in pairs(job.grades) do
+--         if not highestGrade or grade.grade > highestGrade.grade then
+--             highestGrade = grade
+--         end
+--     end
+--     return highestGrade
+-- end
 
----@param gangName string
----@return table|nil grade Boss grade
-function FM.utils.getGangBossGrade(gangName)
-    local gang = FM.utils.getGang(gangName)
-    if not gang then return nil end
-    local highestGrade = nil
-    for _, grade in pairs(gang.grades) do
-        if not highestGrade or grade.grade > highestGrade.grade then
-            highestGrade = grade
-        end
-    end
-    return highestGrade
-end
+-- ---@param gangName string
+-- ---@return table|nil grade Boss grade
+-- function FM.utils.getGangBossGrade(gangName)
+--     local gang = FM.utils.getGang(gangName)
+--     if not gang then return nil end
+--     local highestGrade = nil
+--     for _, grade in pairs(gang.grades) do
+--         if not highestGrade or grade.grade > highestGrade.grade then
+--             highestGrade = grade
+--         end
+--     end
+--     return highestGrade
+-- end
