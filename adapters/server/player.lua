@@ -53,7 +53,7 @@ end
 
 -- Event registrations
 FM.callback.register('fm:internal:getGang', function(src)
-    return adapter.getPlayerBySrc(src).getGang()
+    return playerAdapter:call('getPlayerBySrc', src).getGang()
 end)
 
 -- Backwards compatibility alias

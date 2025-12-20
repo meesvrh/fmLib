@@ -262,4 +262,12 @@ function adapter.getPlayerByIdentifier(identifier)
     return adapter.getPlayerBySrc(_fwp.source)
 end
 
+-- Event handlers
+function adapter.onPlayerLoaded(playerId)
+    TriggerEvent('fm:player:onPlayerLoaded', playerId)
+end
+
+-- Event registrations
+RegisterNetEvent('esx:playerLoaded', adapter.onPlayerLoaded)
+
 FM_Adapter_server_player_esx = adapter

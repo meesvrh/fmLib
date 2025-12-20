@@ -252,4 +252,12 @@ function adapter.getPlayerByIdentifier(identifier)
     return adapter.getPlayerBySrc(_fwp.PlayerData.source)
 end
 
+-- Event handlers
+function adapter.onPlayerLoaded(player)
+    TriggerEvent('fm:player:onPlayerLoaded', player.PlayerData.source)
+end
+
+-- Event registrations
+RegisterNetEvent('QBCore:Server:PlayerLoaded', adapter.onPlayerLoaded)
+
 FM_Adapter_server_player_qb = adapter
