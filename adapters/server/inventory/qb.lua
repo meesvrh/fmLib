@@ -1,7 +1,7 @@
 local adapter = {}
 
 local function isNewQBInv()
-    local version = GetResourceMetadata(Resources.QBInv.name or 'qb-inventory', 'version', 0)
+    local version = GetResourceMetadata('qb-inventory', 'version', 0)
     if not version then return false end
 
     local vNums = {}

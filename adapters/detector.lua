@@ -58,13 +58,13 @@ function FM.adapters.detect(category)
         return nil
     end
 
-    for key, resourceName in pairs(categoryResources) do
-        if GetResourceState(resourceName) == 'started' then
-            Debug(string.format("Detected %s (%s) for %s category", key, resourceName, category))
+    for _, entry in ipairs(categoryResources) do
+        if GetResourceState(entry.resource) == 'started' then
+            Debug(string.format("Detected %s (%s) for %s category", entry.key, entry.resource, category))
 
             FM.adapters.cache[category] = {
-                key = key,
-                resource = resourceName
+                key = entry.key,
+                resource = entry.resource
             }
             return FM.adapters.cache[category]
         end
