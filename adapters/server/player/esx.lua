@@ -3,6 +3,11 @@
 ]]
 
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function string.split(str, delimiter)
     local result = {}

@@ -3,9 +3,14 @@
 ]]
 
 local adapter = {}
+local resourceName  -- Store the resource name
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.openWardrobe(propertyId)
-    exports['fivem-appearance']:openWardrobe()
+    exports[resourceName]:openWardrobe()
 end
 
 function adapter.setOutfit(clothingData)
@@ -47,8 +52,8 @@ function adapter.setOutfit(clothingData)
         }
     end
 
-    exports['fivem-appearance']:setPedProps(playerPed, props)
-    exports['fivem-appearance']:setPedComponents(playerPed, components)
+    exports[resourceName]:setPedProps(playerPed, props)
+    exports[resourceName]:setPedComponents(playerPed, components)
 end
 
 FM_Adapter_client_appearance_fivem = adapter

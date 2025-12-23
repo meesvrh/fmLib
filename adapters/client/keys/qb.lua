@@ -3,6 +3,11 @@
 ]]
 
 local adapter = {}
+local resourceName  -- Store the resource name
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.give(vehicle)
     if not vehicle then return end
@@ -20,7 +25,7 @@ end
 function adapter.has(vehicle)
     if not vehicle then return end
     local plate = FM.framework.getPlate(vehicle)
-    return exports['qb-vehiclekeys']:hasKey(plate)
+    return exports[resourceName]:hasKey(plate)
 end
 
 FM_Adapter_client_keys_qb = adapter

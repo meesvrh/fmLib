@@ -23,10 +23,14 @@ function BaseAdapter:init()
     end
 
     self.adapterName = detected.key
+    self.resourceName = detected.resource
     local adapterGlobalName = ('FM_Adapter_%s_%s_%s'):format(self.side, self.category, self.adapterName)
     local adapter = _G[adapterGlobalName]
 
     if adapter then
+        if adapter.init then
+            adapter.init(self.resourceName)
+        end
         self.currentAdapter = adapter
         Debug(('Loaded %s adapter: %s'):format(self.category, self.adapterName))
         return true

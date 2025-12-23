@@ -1,8 +1,13 @@
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.getInventory(src)
     local inventory = {}
-    local items = exports['core_inventory']:getInventory(src)
+    local items = exports[resourceName]:getInventory(src)
 
     for _, item in pairs(items) do
         inventory[item.slot] = {
@@ -17,15 +22,15 @@ function adapter.getInventory(src)
 end
 
 function adapter.getMetaDataBySlot(inv, slot)
-    return exports['core_inventory']:getItemBySlot(inv, slot)?.metadata
+    return exports[resourceName]:getItemBySlot(inv, slot)?.metadata
 end
 
 function adapter.getSlotIDByItem(inv, itemName)
-    return exports['core_inventory']:getFirstSlotByItem(inv, itemName)
+    return exports[resourceName]:getFirstSlotByItem(inv, itemName)
 end
 
 function adapter.setMetaDataBySlot(inv, slot, metadata)
-    return exports['core_inventory']:setMetadata(inv, slot, metadata)
+    return exports[resourceName]:setMetadata(inv, slot, metadata)
 end
 
 FM_Adapter_server_inventory_core = adapter

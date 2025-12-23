@@ -1,11 +1,16 @@
 local adapter = {}
+local resourceName  -- Store the resource name
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.show(text)
-    JGTextUI:DrawText(text)
+    exports[resourceName]:DrawText(text)
 end
 
 function adapter.hide()
-    JGTextUI:HideText()
+    exports[resourceName]:HideText()
 end
 
 FM_Adapter_client_textui_jg = adapter

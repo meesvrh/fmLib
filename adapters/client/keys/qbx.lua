@@ -3,20 +3,25 @@
 ]]
 
 local adapter = {}
+local resourceName  -- Store the resource name
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.give(vehicle)
     if not vehicle then return end
-    exports['qbx_vehiclekeys']:GiveKeys(vehicle)
+    exports[resourceName]:GiveKeys(vehicle)
 end
 
 function adapter.remove(vehicle)
     if not vehicle then return end
-    exports['qbx_vehiclekeys']:RemoveKeys(vehicle)
+    exports[resourceName]:RemoveKeys(vehicle)
 end
 
 function adapter.has(vehicle)
     if not vehicle then return end
-    return exports['qbx_vehiclekeys']:HasKeys(vehicle)
+    return exports[resourceName]:HasKeys(vehicle)
 end
 
 FM_Adapter_client_keys_qbx = adapter

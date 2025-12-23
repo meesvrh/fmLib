@@ -3,6 +3,11 @@
 ]]
 
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.openWardrobe(propertyId)
     TriggerEvent("illenium-appearance:client:openOutfitMenu")
@@ -47,8 +52,8 @@ function adapter.setOutfit(clothingData)
         }
     end
 
-    exports['illenium-appearance']:setPedProps(playerPed, props)
-    exports['illenium-appearance']:setPedComponents(playerPed, components)
+    exports[resourceName]:setPedProps(playerPed, props)
+    exports[resourceName]:setPedComponents(playerPed, components)
 end
 
 function adapter.loadSkin()

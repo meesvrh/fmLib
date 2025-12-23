@@ -1,13 +1,18 @@
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.addItem(src, item, amount, metadata)
-    exports['tgiann-inventory']:AddItem(src, item, amount, nil, metadata)
+    exports[resourceName]:AddItem(src, item, amount, nil, metadata)
     return true
 end
 
 function adapter.getInventory(src)
     local inventory = {}
-    local items = exports['tgiann-inventory']:GetPlayerItems(src)
+    local items = exports[resourceName]:GetPlayerItems(src)
 
     for _, item in pairs(items) do
         inventory[item.slot] = {

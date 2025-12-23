@@ -1,4 +1,9 @@
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 local function isNewQBInv()
     local version = GetResourceMetadata('qb-inventory', 'version', 0)
@@ -15,21 +20,21 @@ end
 
 function adapter.canCarryItem(src, item, amount)
     if isNewQBInv() then
-        return exports['qb-inventory']:CanAddItem(src, item, amount)
+        return exports[resourceName]:CanAddItem(src, item, amount)
     end
     return true
 end
 
 function adapter.getMetaDataBySlot(inv, slot)
-    return exports['qb-inventory']:GetItemBySlot(inv, slot)?.info
+    return exports[resourceName]:GetItemBySlot(inv, slot)?.info
 end
 
 function adapter.getSlotIDByItem(inv, itemName)
-    return exports['qb-inventory']:GetFirstSlotByItem(QB.Functions.GetPlayer(inv).PlayerData.Items, itemName)
+    return exports[resourceName]:GetFirstSlotByItem(QB.Functions.GetPlayer(inv).PlayerData.Items, itemName)
 end
 
 function adapter.setMetaDataBySlot(inv, slot, metadata)
-    return exports['qb-inventory']:SetMetaData(inv, slot, metadata)
+    return exports[resourceName]:SetMetaData(inv, slot, metadata)
 end
 
 FM_Adapter_server_inventory_qb = adapter

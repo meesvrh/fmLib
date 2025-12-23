@@ -1,4 +1,9 @@
 local adapter = {}
+local resourceName
+
+function adapter.init(resource)
+    resourceName = resource
+end
 
 function adapter.openStash(stashId, owner, weight, slots)
     if not stashId then
@@ -6,12 +11,12 @@ function adapter.openStash(stashId, owner, weight, slots)
         return
     end
 
-    OXInv:openInventory('stash', { id = stashId, owner = owner })
+    exports[resourceName]:openInventory('stash', { id = stashId, owner = owner })
 end
 
 function adapter.getItems()
     local inventory = {}
-    local items = OXInv:GetPlayerItems()
+    local items = exports[resourceName]:GetPlayerItems()
 
     for slot, item in pairs(items) do
         inventory[slot] = {
@@ -25,11 +30,11 @@ function adapter.getItems()
 end
 
 function adapter.displayMetadata(metadata)
-    OXInv:displayMetadata(metadata)
+    exports[resourceName]:displayMetadata(metadata)
 end
 
 function adapter.setWeaponWheel(state)
-    OXInv:weaponWheel(state)
+    exports[resourceName]:weaponWheel(state)
 end
 
 FM_Adapter_client_inventory_ox = adapter
