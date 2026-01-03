@@ -159,6 +159,8 @@ function FM.vehicle.storeInGarage(garageId)
         TriggerEvent("codem-garage:storeVehicle", garageId)
     elseif CDGarage then
         TriggerEvent('cd_garage:StoreVehicle_Main', 1, false, false)
+    elseif GetResourceState('op-garages') == 'started' then
+        exports['op-garages']:OpenGarageHere(coords, true)
     else
         FM.console.err("No garage resource found")
     end
@@ -179,6 +181,8 @@ function FM.vehicle.openGarage(garageId, coords)
         -- Choose either 'quick' or 'inside' in the 1st argument.
         -- Replace nil with '10cargarage_shell' or '40cargarage_shell' in the 2nd argument.
         TriggerEvent('cd_garage:PropertyGarage', 'quick', nil)
+    elseif GetResourceState('op-garages') == 'started' then
+        exports['op-garages']:OpenGarageHere(coords, true)
     else
         FM.console.err("No garage resource found")
     end
