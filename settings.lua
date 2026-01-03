@@ -79,6 +79,7 @@ AdapterResources = {
         { key = 'jg',    resource = 'jg-advancedgarages' },
         { key = 'codem', resource = 'mGarage' },
         { key = 'rx',    resource = 'RxGarages' },
+        { key = 'op',    resource = 'op-garages' },
     },
 
     fuel = {
