@@ -121,4 +121,8 @@ AdapterResources = {
         { key = 'esxaddon',     resource = 'esx_addonaccount' },
         { key = 'qbmanagement', resource = 'qb-management' },
     },
+
+    licenses = {
+        { key = 'esx', resource = 'esx_license' },
+    }
 }
