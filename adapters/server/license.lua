@@ -3,7 +3,7 @@
 ]]
 
 FM = FM or {}
-FM.account = FM.account or {}
+FM.license = FM.license or {}
 
 local licenseAdapter = BaseAdapter:new('license', 'server')
 
