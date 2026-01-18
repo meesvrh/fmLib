@@ -50,6 +50,7 @@ Resources = {
     JPRInv = { name = 'jpr-inventory', export = 'all' },
     CODEMInv = { name = 'codem-inventory', export = 'all' },
     ORIGEN_INVENTORY = { name = 'origen_inventory', export = 'all' },
+    JAKSAM_INV = { name = 'jaksam_inventory', export = 'all' },
 
     -- Banking/Accounts
     RX_BANKING = { name = 'RxBanking', export = 'all' },

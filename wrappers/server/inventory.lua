@@ -30,6 +30,8 @@ function FM.inventory.getItemLabel(item)
 
             return cachedItemLabels[item]
         end
+    elseif JAKSAM_INV then
+        return JAKSAM_INV:getItemLabel(item)
     elseif ESX then return ESX.GetItemLabel(item)
     elseif QB then return QB.Shared.Items[item].label end
 end
@@ -44,7 +46,11 @@ function FM.inventory.getMetaDataBySlot(inv, slot)
         for _, item in pairs(items) do
             if item.slot == slot then return item.info end
         end
-    elseif QBInv then return QBInv:GetItemBySlot(inv, slot)?.info end
+    elseif QBInv then return QBInv:GetItemBySlot(inv, slot)?.info
+    elseif JAKSAM_INV then
+        local item = JAKSAM_INV:getItemFromSlot(inv, slot)
+        return item and item.metadata or nil
+    end
 
     Debug('(inventory.getMetaDataBySlot) Missing compatibility')
 end
@@ -70,6 +76,9 @@ function FM.inventory.getSlotIDByItem(inv, itemName)
                 end
             end
         end
+    elseif JAKSAM_INV then
+        local item, slotId = JAKSAM_INV:getItemByName(inv, itemName)
+        return slotId
     end
 
     Debug('(inventory.getSlotIDByItem) Missing compatibility')
@@ -83,7 +92,8 @@ function FM.inventory.setMetaDataBySlot(inv, slot, metadata)
     elseif COREInv then return COREInv:setMetadata(inv, slot, metadata)
     elseif QSInv then return QSInv:SetItemMetadata(inv, slot, metadata)
     elseif QBInv then return QBInv:SetMetaData(inv, slot, metadata) 
-    elseif ORIGEN_INVENTORY then return exports.origen_inventory:setMetadata(inv, slot, metadata) end
+    elseif ORIGEN_INVENTORY then return exports.origen_inventory:setMetadata(inv, slot, metadata)
+    elseif JAKSAM_INV then return JAKSAM_INV:setItemMetadataInSlot(inv, slot, metadata) end
     Debug('(inventory.setMetaDataBySlot) Missing compatibility')
 end
 

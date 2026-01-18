@@ -49,6 +49,8 @@ function FM.inventory.openStash(stashId, owner, weight, slots)
 
     if OXInv then
         OXInv:openInventory('stash', { id = stashId, owner = owner })
+    elseif JAKSAM_INV then
+        JAKSAM_INV:openInventory(stashId)
     elseif QBInv or QSInv or PSInv or CODEMInv then
         if (QBInv and isNewQBInv()) or (PSInv and isNewPSInv()) then
             TriggerServerEvent('fm:internal:openStash', stashId, owner, weight, slots)
@@ -98,6 +100,17 @@ function FM.inventory.getItems()
                 amount = item.count
             }
         end
+    elseif JAKSAM_INV then
+        local playerInv = JAKSAM_INV:getInventory()
+        if playerInv and playerInv.items then
+            for slotId, item in pairs(playerInv.items) do
+                inventory[slotId] = {
+                    name = item.name,
+                    label = JAKSAM_INV:getItemLabel(item.name) or item.name,
+                    amount = item.amount
+                }
+            end
+        end
     elseif ESX then
         local items = ESX.GetPlayerData().inventory
         for slot, item in pairs(items) do
@@ -132,6 +145,8 @@ end
 function FM.inventory.setWeaponWheel(state)
     if OXInv then
         OXInv:weaponWheel(state)
+    elseif JAKSAM_INV then
+        JAKSAM_INV:setWeaponWheel(state)
     elseif QSInv then
         QSInv:WeaponWheel(state)
     end
@@ -142,6 +157,8 @@ function FM.inventory.hasItem(item)
     if ESX then
         local has = ESX.SearchInventory(item, 1)
         return has and has > 0
+    elseif JAKSAM_INV then
+        return JAKSAM_INV:getTotalItemAmount(item) > 0
     elseif QB then
         return QB.Functions.HasItem(item)
     end
