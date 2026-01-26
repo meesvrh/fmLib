@@ -49,6 +49,7 @@ AdapterResources = {
         { key = 'jpr',    resource = 'jpr-inventory' },
         { key = 'codem',  resource = 'codem-inventory' },
         { key = 'origen', resource = 'origen_inventory' },
+        { key = 'jaksam', resource = 'jaksam_inventory' },
     },
 
     banking = {
