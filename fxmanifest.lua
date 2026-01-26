@@ -11,7 +11,7 @@ games { 'gta5' }
 author 'meesvrh'
 repository 'fmLib'
 description 'A library for FiveM developers that wraps multiple frameworks, resources and modules.'
-version '1.15.3'
+version '2.0.0'
 lua54 'yes'
 
 shared_script {
@@ -27,10 +27,10 @@ client_scripts {
   'modules/cl_overrides.lua',
   'modules/**/client.lua',
   'modules/web/client/*.lua',
-  'wrappers/client/*.lua',    -- Load wrappers first to create FM.vehicle
-  'adapters/client/**/*.lua', -- Load individual adapters
-  'adapters/client/*.lua',    -- Then load base adapters (which add backwards compat)
-  'api.lua',                  -- API/export system (loads last)
+  'wrappers/client/*.lua',
+  'adapters/client/**/*.lua',
+  'adapters/client/*.lua',
+  'api.lua',
 }
 
 server_scripts {
@@ -38,9 +38,9 @@ server_scripts {
   'versioncontrol.lua',
   'modules/**/server.lua',
   'wrappers/server/*.lua',
-  'adapters/server/**/*.lua', -- Load individual adapters
-  'adapters/server/*.lua',    -- Then load base adapters
-  'api.lua',                  -- API/export system (loads last)
+  'adapters/server/**/*.lua',
+  'adapters/server/*.lua',
+  'api.lua',
 }
 
 ui_page 'web/build/index.html'

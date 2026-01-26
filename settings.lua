@@ -8,13 +8,11 @@
 ---@class Settings
 Settings = {
     ---@type boolean Whether or not to print debug messages
-    debug = true,
+    debug = false,
     ---@type boolean Whether or not to print warning messages
-    warning = true,
+    warning = false,
     ---@type boolean Whether or not to use sfx for web modules (overrides sfx = true in modules)
     useSfx = true,
-    ---@type boolean Whether or not to ignore resource initialized logs
-    ignoreResourceInitializedLogs = false,
 }
 
 ---@enum Defaults
