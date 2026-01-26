@@ -1,5 +1,3 @@
-![ForgeM](web/assets/images/forgem.png)
-
 # fmLib - A Multi-Framework Utility Library
 
 [![Downloads](https://img.shields.io/github/downloads/meesvrh/fmLib/total?style=flat-square&logo=github)](https://github.com/meesvrh/fmLib/releases)
@@ -133,7 +131,7 @@ The v2 release brings a completely redesigned architecture:
 ## Supported Resources
 
 ### Inventories
-ox_inventory, qb-inventory, qs-inventory, ps-inventory, codem-inventory, jpr-inventory, tgiann-inventory, chezza inventory, core_inventory, origen_inventory
+ox_inventory, qb-inventory, qs-inventory, ps-inventory, codem-inventory, jpr-inventory, tgiann-inventory, chezza inventory, core_inventory, origen_inventory, jaksam_inventory
 
 ### Vehicle Keys
 qb-vehiclekeys, qs-vehiclekeys, Renewed-Vehiclekeys, wasabi_carlock, tgiann-hotwire, mm_carkeys, MrNewbVehicleKeys, is_vehiclekeys, fast-vehiclekeys, filo_vehiclekey, qbx_vehiclekeys
