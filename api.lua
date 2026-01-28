@@ -18,7 +18,7 @@ for category, _ in pairs(AdapterResources) do
 end
 
 -- Register exports for modules (manual list)
-local modules = {'callback', 'console', 'animation', 'dialog', 'pin', 'loading', 'progress' }
+local modules = {'callback', 'console', 'animation', 'dialog', 'pin', 'loading', 'progress', 'anim', 'cb' }
 for _, module in ipairs(modules) do
     if FM[module] then
         for funcName, func in pairs(FM[module]) do
@@ -34,7 +34,7 @@ for _, module in ipairs(modules) do
 end
 
 -- Register exports for backwards compatibility categories (not in AdapterResources)
-local backwardsCompatCategories = {'vehicle', 'utils', 'player'}
+local backwardsCompatCategories = {'vehicle', 'utils', 'player', 'acc', 'p', 'inv'}
 for _, category in ipairs(backwardsCompatCategories) do
     if FM[category] then
         for funcName, func in pairs(FM[category]) do
@@ -68,7 +68,7 @@ for category, _ in pairs(AdapterResources) do
 end
 
 -- Create proxy for modules
-local pModules = {'callback', 'console', 'animation', 'dialog', 'pin', 'loading', 'progress' }
+local pModules = {'callback', 'console', 'animation', 'dialog', 'pin', 'loading', 'progress', 'anim', 'cb' }
 for _, module in ipairs(pModules) do
     if FM[module] then
         proxy[module] = {}
@@ -83,7 +83,7 @@ for _, module in ipairs(pModules) do
 end
 
 -- Create proxy for backwards compatibility categories
-local pBackwardsCompatCategories = {'vehicle', 'utils', 'player'}
+local pBackwardsCompatCategories = {'vehicle', 'utils', 'player', 'acc', 'p', 'inv'}
 for _, category in ipairs(pBackwardsCompatCategories) do
     if FM[category] then
         proxy[category] = {}
