@@ -36,4 +36,8 @@ function adapter.openStash(stashId, owner, weight, slots)
     end
 end
 
+function adapter.getImgDirectory()
+    return 'qb-inventory/html/images/'
+end
+
 FM_Adapter_client_inventory_qb = adapter

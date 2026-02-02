@@ -19,4 +19,8 @@ function adapter.setWeaponWheel(state)
     QSInv:WeaponWheel(state)
 end
 
+function adapter.getImgDirectory()
+    return 'qs-inventory/html/images/'
+end
+
 FM_Adapter_client_inventory_qs = adapter

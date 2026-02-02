@@ -37,4 +37,8 @@ function adapter.setWeaponWheel(state)
     exports[resourceName]:weaponWheel(state)
 end
 
+function adapter.getImgDirectory()
+    return 'ox_inventory/web/images/'
+end
+
 FM_Adapter_client_inventory_ox = adapter

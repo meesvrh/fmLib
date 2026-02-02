@@ -74,5 +74,9 @@ function FM.inventory.hasItem(item)
     end
 end
 
+function FM.inventory.getImgDirectory()
+    return inventoryAdapter:call('getImgDirectory')
+end
+
 -- Backwards compatibility alias
 FM.inv = FM.inventory
