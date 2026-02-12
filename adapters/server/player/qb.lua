@@ -110,6 +110,18 @@ function adapter.getPlayerBySrc(src)
     end
 
     p.getGang = function()
+        if GetResourceState('arketype_GangBuilder') == 'started' then
+            local info = exports['arketype_GangBuilder']:getGang(_fwp.source)
+            if info then
+                return {
+                    name = info.gangplayer_name,
+                    label = info.gangplayer_label,
+                    grade = info.gangplayer_rank,
+                    gradeLabel = info.gangrank_label
+                }
+            end
+        end
+
         return {
             name = _fwp.PlayerData.gang.name,
             label = _fwp.PlayerData.gang.label,

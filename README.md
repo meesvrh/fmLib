@@ -25,6 +25,7 @@ The v2 adapter system automatically detects and integrates with 40+ popular reso
 - **TextUI Libraries** - ox_lib, jg-textui, okokTextUI support
 - **Appearance Systems** - Character customization across systems
 - **Banking/Accounts** - Society account management
+- **Gang Systems** - To retrieve gangs for players
 
 ### ⚡ Powerful Player Object
 Server-side player object with 20+ methods for common operations:
@@ -150,6 +151,9 @@ fivem-appearance, illenium-appearance, qb-clothing, esx_skin, crm-appearance, 17
 
 ### Accounts/Banking
 esx_addonaccount, qb-management, RxBanking (optional integration)
+
+### Gang Systems
+arketype_GangBuilder
 
 ## Documentation
 
