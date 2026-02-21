@@ -99,6 +99,9 @@ AdapterResources = {
         { key = 'lj',       resource = 'lj-fuel' },
         { key = 'melons',   resource = 'melons_fuel' },
         { key = 'hrs',      resource = 'hrs_fuel' },
+        { key = 'okok',    resource = 'okokFuel' },
+        { key = 'ti',      resource = 'ti_fuel' },
+        { key = 'x',    resource = 'x-fuel' },
     },
 
     textui = {
