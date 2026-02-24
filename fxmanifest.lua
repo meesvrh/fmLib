@@ -20,7 +20,6 @@ shared_script {
   'modules/**/shared.lua',
   'adapters/base.lua',
   'adapters/detector.lua',
-  'autodetect.lua',
 }
 
 client_scripts {
