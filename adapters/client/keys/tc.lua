@@ -9,8 +9,8 @@ function adapter.init(resource)
     resourceName = resource
     if not exports[resourceName]:ClientExportsEnabled() then 
         Error('Please ensure that Config.EnableClientAddKeys is set to true.') 
-    return
-end
+        return
+    end
 end
 
 function adapter.give(vehicle)
