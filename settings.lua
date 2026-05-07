@@ -70,6 +70,7 @@ AdapterResources = {
         { key = 'fast',    resource = 'fast-vehiclekeys' },
         { key = 'filo',    resource = 'filo_vehiclekey' },
         { key = 'qbx',     resource = 'qbx_vehiclekeys' },
+        { key = 'tc',      resource = 'tc_keys' },
     },
 
     garage = {
