@@ -10,4 +10,28 @@ function adapter.has(src, license)
     return p.PlayerData.metadata.licenses[license]
 end
 
+function adapter.give(src, license)
+    local p = QB.Functions.GetPlayer(src)
+    if not p then return false end
+
+    local licenses = p.PlayerData.metadata.licenses or {}
+    if licenses[license] then return false end
+
+    licenses[license] = true
+    p.Functions.SetMetaData('licenses', licenses)
+    return true
+end
+
+function adapter.remove(src, license)
+    local p = QB.Functions.GetPlayer(src)
+    if not p then return false end
+
+    local licenses = p.PlayerData.metadata.licenses or {}
+    if not licenses[license] then return false end
+
+    licenses[license] = false
+    p.Functions.SetMetaData('licenses', licenses)
+    return true
+end
+
 FM_Adapter_server_license_qb = adapter

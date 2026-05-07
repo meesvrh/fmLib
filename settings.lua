@@ -124,7 +124,7 @@ AdapterResources = {
         { key = 'qbmanagement', resource = 'qb-management' },
     },
 
-    licenses = {
+    license = {
         { key = 'esx', resource = 'esx_license' },
     }
 }
