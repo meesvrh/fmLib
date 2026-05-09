@@ -7,18 +7,18 @@ end
 
 function adapter.has(src, license)
     local p = QB.Functions.GetPlayer(src)
-    return p.PlayerData.metadata.licenses[license]
+    return p.PlayerData.metadata.licences[license]
 end
 
 function adapter.give(src, license)
     local p = QB.Functions.GetPlayer(src)
     if not p then return false end
 
-    local licenses = p.PlayerData.metadata.licenses or {}
+    local licenses = p.PlayerData.metadata.licences or {}
     if licenses[license] then return false end
 
     licenses[license] = true
-    p.Functions.SetMetaData('licenses', licenses)
+    p.Functions.SetMetaData('licences', licenses)
     return true
 end
 
@@ -26,11 +26,11 @@ function adapter.remove(src, license)
     local p = QB.Functions.GetPlayer(src)
     if not p then return false end
 
-    local licenses = p.PlayerData.metadata.licenses or {}
+    local licenses = p.PlayerData.metadata.licences or {}
     if not licenses[license] then return false end
 
     licenses[license] = false
-    p.Functions.SetMetaData('licenses', licenses)
+    p.Functions.SetMetaData('licences', licenses)
     return true
 end
 
