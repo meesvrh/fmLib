@@ -80,6 +80,15 @@ function FM.adapters.detect(category)
         return FM.adapters.cache[category]
     end
 
+    -- Special handling for license category - check framework instead if no standalone license system found
+    if category == 'license' then
+        local frameworkDetected = FM.adapters.detect('framework')
+        if frameworkDetected then
+            FM.adapters.cache[category] = frameworkDetected
+            return frameworkDetected
+        end
+    end
+
     Debug(string.format("No %s system detected", category))
     return nil
 end
