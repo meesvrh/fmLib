@@ -64,7 +64,7 @@ function adapter.getItemInfo(item)
         stack = def.stack or false,
         weight = def.weight or 0,
         description = def.description or "",
-        image = ("nui://%s/web/images/%s.png"):format(resourceName, item)
+        image = def.image and ("nui://%s/web/images/%s):format(def.image) or ("nui://%s/web/images/%s.png):format(resourceName, item)
     }
 end
 
