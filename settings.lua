@@ -50,6 +50,7 @@ AdapterResources = {
         { key = 'codem',  resource = 'codem-inventory' },
         { key = 'origen', resource = 'origen_inventory' },
         { key = 'jaksam', resource = 'jaksam_inventory' },
+        { key = 'one',    resource = 'one_inventory' },
     },
 
     banking = {
