@@ -32,6 +32,10 @@ function adapter.getItems()
     return inventory
 end
 
+function adapter.getImgDirectory()
+    return 'jaksam_inventory/_images/'
+end
+
 function adapter.setWeaponWheel(state)
     exports[resourceName]:setWeaponWheel(state)
 end

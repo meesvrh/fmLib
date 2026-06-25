@@ -39,6 +39,7 @@ AdapterResources = {
     },
 
     inventory = {
+        { key = 'one',    resource = 'one_inventory' },
         { key = 'ox',     resource = 'ox_inventory' },
         { key = 'qb',     resource = 'qb-inventory' },
         { key = 'qs',     resource = 'qs-inventory' },
