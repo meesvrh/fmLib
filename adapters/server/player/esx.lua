@@ -267,6 +267,21 @@ function adapter.getPlayerBySrc(src)
         _fwp.setJob(gangName, gangGrade)
     end
 
+    p.getCharInfo = function()
+        local data = _fwp.variables
+        local charinfo = {
+            height = tostring(data.height),
+            dateofbirth = data.dateofbirth,
+            gender = data.sex == "m" and "male" or "female",
+
+            lastname = data.lastName,
+            firstname = data.firstName,
+            middlename = data.middleName or false,
+        }
+
+        return charinfo
+    end
+
     return p
 end
 

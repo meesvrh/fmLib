@@ -252,6 +252,21 @@ function adapter.getPlayerBySrc(src)
         _fwp.Functions.SetGang(gangName, gangGrade)
     end
 
+    p.getCharInfo = function()
+        local data = _fwp.PlayerData.charinfo
+        local retval = {
+            dateofbirth = data.birthdate,
+            height = tostring(data.height),
+            gender = data.gender == 0 and "male" or "female",
+
+            lastname = data.lastname,
+            firstname = data.firstname,
+            middlename = data.middlename or false,
+        }
+
+        return retval
+    end
+
     return p
 end
 
